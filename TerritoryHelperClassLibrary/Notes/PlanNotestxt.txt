@@ -1,0 +1,8 @@
+﻿--MODELS
+
+--Paths
+1) Download all existing addresses exported and the notes and place the results into 3 separate divisions... 
+	A) In exported data but NOT in Notes
+	B) In Exported Data AND in Notes
+	C) NOT in Exported Data BUT IN Notes
+

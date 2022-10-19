@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperConsole", "TerritoryHelperConsole\TerritoryHelperConsole.csproj", "{F6346480-631B-446A-A534-9D295D827CB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperClassLibrary", "TerritoryHelperClassLibrary\TerritoryHelperClassLibrary.csproj", "{584CFBCD-8583-49AC-96B9-B545A57BA501}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6346480-631B-446A-A534-9D295D827CB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6346480-631B-446A-A534-9D295D827CB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6346480-631B-446A-A534-9D295D827CB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6346480-631B-446A-A534-9D295D827CB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7B97780-168F-415E-80C8-5DE4DD4D0CE2}
+	EndGlobalSection
+EndGlobal
