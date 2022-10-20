@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!--BaseStylesheet-->
+	<link rel="stylesheet" type="text/css" href="./css/leafletStyle.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!--Leaflet CSS-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <!--Leaflet Geoman Drawing Library CSS-->
+   <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />  
+   
+    <title>Spanish Territories Map</title>
+  </head>
+  <body>
+      <!--Spanish Territory Header-->
+      <div class="container-fluid USCimage">
+          <img src="./img/UofSCEnergyManagement.png" alt="University of South Carolina: Energy Management" class="img-mainbanner" />
+      </div>
+      <!--Jumbotron Header-->
+      <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+              <h1>Spanish Territories Map</h1>
+              <h3>INSTRUCTIONS:</h3>
+              <P>Please click on the Layer Icon on the top right corner of the map to see a list of possible layers to show.  Then you can click on any present object to look up any attribute information.</P>
+          </div>
+      </div>
+      <!--Map-->
+      <h3 class="text-center">Spanish West Columbia Territory Map</h3>
+      <div id="map"></div>
+      <!--Table Item Information-->
+      <!--Information Table-->
+      <div class="container-fluid table-parcel-section p-3" id="table-information-section">
+          <div class="m-6">
+              <h2 class="text-center"><strong>Item Information Table</strong></h2>
+              <p class="text-center" id="SummaryTitle">This is a table displaying information about the item clicked</p>
+          </div>
+          <div>
+              <table class="table table-bordered table-striped table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th scope="col">Field</th>
+                          <th scope="col">Value</th>
+                      </tr>
+                  </thead>
+                  <tbody id="InformationTableBody">
+                      <!--Dynamically Load valvues from Javascript Here-->
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <!--Footer-->
+      <footer class="container-fluid bg-4 text-center">
+          <p>Territory Map</p>
+          <p>© Copyright 2021. All Rights Reserved</p>
+      </footer>
+      <!-- Leaflet JavaScript Package -->
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+              integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+              crossorigin=""></script>
+
+      <!--Load Raw Data-->
+
+      <!--Load Territories-->
+      <script src="./js/information/Territories/territories.js"></script>
+      <!--Load Existing Addresses-->
+      <script src="./js/information/Addresses/existingAddresses.js"></script>
+      <!--Load New Addresses-->
+      <script src="./js/information/Addresses/newAddresses.js"></script>
+
+      <!--Leaflet Provider Tiles-->
+      <script src="http://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+      <!--Leaflet Drawing Library Geoman js (Must be included right after leaflet-->
+      <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+      <!--Leaflet JavaSript File-->
+      <script src="./js/leaflet.js"></script>
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

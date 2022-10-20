@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Output\" />
+    <Folder Include="Input\AtoZDatabase\AddressXLSXFiles\" />
+    <Folder Include="Input\AtoZDatabase\TerritoryBoundary\" />
+    <Folder Include="Output\Map\js\information\Addresses\" />
   </ItemGroup>
 
 </Project>
