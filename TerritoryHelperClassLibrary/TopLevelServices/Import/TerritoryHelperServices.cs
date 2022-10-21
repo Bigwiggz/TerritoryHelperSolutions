@@ -174,7 +174,7 @@ public class TerritoryHelperServices
         await excelFileProcessing.SaveExcelMasterFile(finalModelList, outputExcelFile);
 
         //Save all results
-        FileInfo congregationTerritoriesFile = new FileInfo(config.FileSavedOutputLocation);
+        FileInfo congregationTerritoriesFile = new FileInfo(config.CongregationCurrentTerritoryBoundariesFilePath);
 
         var existingSpanishAddressGeoJSON = await FileServices.CreateExistingAddressGeoJSON(existingSpanishAddressFile);
         var newSpanishAddressGeoJSON = FileServices.CreateNewAddressGeoJSON(boundaryFilteredMasterList);
