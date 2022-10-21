@@ -119,7 +119,7 @@ public class TerritoryHelperServices
         {
             if (file.Extension == ".xls" && allFiles.Length > 0)
             {
-                excelConverter.ConvertXLStoXLSX(file, config.AtoZXLSXFilesPath);
+                excelConverter.FreeSpireConvertXLStoXLSX(file, config.AtoZXLSXFilesPath);
             }
 
         }
@@ -152,10 +152,10 @@ public class TerritoryHelperServices
         var masterRecordList = FileServices.CreateMasterRecordsList(allImportedRecords, newSpanishAddressList);
 
         //Filter on whole of territory boundary
-        var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, config.TerritoryBoundaryFilePath);
+        var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, config.CongregationCurrentTerritoryBoundariesFilePath);
 
         //Find out which territory each address is in
-        FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, config.CongregationCurrentTerritoryBoundariesFilePath);
+        FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, config.TerritoryBoundaryFilePath);
 
         boundaryFilteredMasterList = boundaryFilteredMasterList.Where(x => x.TerritoryType != "G0").ToList();
 
@@ -174,7 +174,7 @@ public class TerritoryHelperServices
         await excelFileProcessing.SaveExcelMasterFile(finalModelList, outputExcelFile);
 
         //Save all results
-        FileInfo congregationTerritoriesFile = new FileInfo(config.CongregationCurrentTerritoryBoundariesFilePath);
+        FileInfo congregationTerritoriesFile = new FileInfo(config.FileSavedOutputLocation);
 
         var existingSpanishAddressGeoJSON = await FileServices.CreateExistingAddressGeoJSON(existingSpanishAddressFile);
         var newSpanishAddressGeoJSON = FileServices.CreateNewAddressGeoJSON(boundaryFilteredMasterList);

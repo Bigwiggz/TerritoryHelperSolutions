@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spire.Xls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,13 @@ namespace TerritoryHelperClassLibrary.BaseServices.FileTransformations;
 
 public class ExcelConverterService
 {
-    public string ConvertXLStoXLSX(FileInfo file, string newFilePath)
+    public string FreeSpireConvertXLStoXLSX(FileInfo file, string newFilePath)
     {
-        var app = new Microsoft.Office.Interop.Excel.Application();
-        var xlsFile = file.FullName;
-        var wb = app.Workbooks.Open(xlsFile);
+        Workbook workbook=new Workbook();
+        workbook.LoadFromFile(file.FullName);
         var xlsxFileName = file.Name + "x";
         var fullxlsxFile = Path.Combine(newFilePath, xlsxFileName);
-        wb.SaveAs(Filename: fullxlsxFile, FileFormat: Microsoft.Office.Interop.Excel.XlFileFormat.xlOpenXMLWorkbook);
-        wb.Close();
-        app.Quit();
+        workbook.SaveToFile(fullxlsxFile, ExcelVersion.Version2016);
         return fullxlsxFile;
     }
 }
