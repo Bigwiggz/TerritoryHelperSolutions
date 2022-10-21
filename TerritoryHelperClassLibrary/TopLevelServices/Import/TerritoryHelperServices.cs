@@ -108,17 +108,9 @@ public class TerritoryHelperServices
     {
         Console.WriteLine("Starting Address Parsing...");
 
-        string aToZDatabaseFilesPath = "";
-        string aToZXLSXFilesPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\AtoZxlsx\";
-        string spanishLastNamesPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\SpanishLastNames\SpanishLastNames.xlsx";
-        string existingSpanishAddressesFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\CurrentTerritoryHelperAddresses\SpanishWestColumbiaDirecciones.xlsx";
-        string territoryBoundaryFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\TerritoryBoundary\CongregationTerritoryBoundary.json";
-        string congregationCurrentTerritoriesFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\CurrentTerritories\SpanishWestColumbiaTerritory.json";
-        string outputDirectoryPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Output\";
-
         var FileServices = new GeoFileProcessing();
 
-        var allFiles = FileServices.GetFiles(aToZDatabaseFilesPath);
+        var allFiles = FileServices.GetFiles(config.AtoZDatbaseFilesPath);
 
         //Convert excel files from xls to xlsx
         var excelConverter = new ExcelConverterService();
@@ -127,13 +119,13 @@ public class TerritoryHelperServices
         {
             if (file.Extension == ".xls" && allFiles.Length > 0)
             {
-                excelConverter.ConvertXLStoXLSX(file, aToZXLSXFilesPath);
+                excelConverter.ConvertXLStoXLSX(file, config.AtoZXLSXFilesPath);
             }
 
         }
 
         //Extract all records from all files into one single object
-        var allxlsxFiles = FileServices.GetFiles(aToZXLSXFilesPath);
+        var allxlsxFiles = FileServices.GetFiles(config.AtoZXLSXFilesPath);
 
         var allImportedRecords = await FileServices.AggregateListOfAllRecordsPerFile(allxlsxFiles);
 
@@ -142,7 +134,7 @@ public class TerritoryHelperServices
         //Check for Spanish Last Names
         var excelFileProcessing = new ExcelBaseService();
 
-        var spanishLastNamesFile = new FileInfo(spanishLastNamesPath);
+        var spanishLastNamesFile = new FileInfo(config.SpanishLastNamesPath);
 
         var listOfSpanishLastNames = await excelFileProcessing.LoadSpanishLastNames(spanishLastNamesFile);
 
@@ -152,7 +144,7 @@ public class TerritoryHelperServices
         var spanishOnlyList = FileServices.FilterOnSpanishNamesOnly(allImportedRecords);
 
         //Filter out existing addresses
-        FileInfo existingSpanishAddressFile = new FileInfo(existingSpanishAddressesFilePath);
+        FileInfo existingSpanishAddressFile = new FileInfo(config.ExistingSpanishAddressesFilePath);
 
         var newSpanishAddressList = await FileServices.FilterOnlyNewSpanishAddresses(spanishOnlyList, existingSpanishAddressFile);
 
@@ -160,10 +152,10 @@ public class TerritoryHelperServices
         var masterRecordList = FileServices.CreateMasterRecordsList(allImportedRecords, newSpanishAddressList);
 
         //Filter on whole of territory boundary
-        var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, territoryBoundaryFilePath);
+        var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, config.TerritoryBoundaryFilePath);
 
         //Find out which territory each address is in
-        FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, congregationCurrentTerritoriesFilePath);
+        FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, config.CongregationCurrentTerritoryBoundariesFilePath);
 
         boundaryFilteredMasterList = boundaryFilteredMasterList.Where(x => x.TerritoryType != "G0").ToList();
 
@@ -177,12 +169,12 @@ public class TerritoryHelperServices
         //Save address list to spreadsheet
         string outputFileName = $"NewAddressImport{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";
 
-        var outputExcelFile = new FileInfo(Path.Combine(outputDirectoryPath, outputFileName));
+        var outputExcelFile = new FileInfo(Path.Combine(config.FileSavedOutputLocation, outputFileName));
 
         await excelFileProcessing.SaveExcelMasterFile(finalModelList, outputExcelFile);
 
         //Save all results
-        FileInfo congregationTerritoriesFile = new FileInfo(congregationCurrentTerritoriesFilePath);
+        FileInfo congregationTerritoriesFile = new FileInfo(config.CongregationCurrentTerritoryBoundariesFilePath);
 
         var existingSpanishAddressGeoJSON = await FileServices.CreateExistingAddressGeoJSON(existingSpanishAddressFile);
         var newSpanishAddressGeoJSON = FileServices.CreateNewAddressGeoJSON(boundaryFilteredMasterList);
