@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.BaseServices.AddressVerification;
 using TerritoryHelperClassLibrary.BaseServices.Excel;
+using TerritoryHelperClassLibrary.BaseServices.FileTransformations;
+using TerritoryHelperClassLibrary.BaseServices.GeoMapping;
 using TerritoryHelperClassLibrary.BaseServices.RecordCleanup;
 using TerritoryHelperClassLibrary.BaseServices.WebScraping;
 using TerritoryHelperClassLibrary.Models;
@@ -77,6 +79,11 @@ public class TerritoryHelperServices
         addressVerificationService.VerifyAddress(territoryHelperANDTerritoryNotes, config);
         addressVerificationService.VerifyAddress(territoryNotesNOTTerritoryHelper, config);
 
+        //5)Finish Address Master Record information
+        recordCleanup.AddOtherMasterRecordProperties(territoryHelperNOTTerritoryNotes);
+        recordCleanup.AddOtherMasterRecordProperties(territoryHelperANDTerritoryNotes);
+        recordCleanup.AddOtherMasterRecordProperties(territoryNotesNOTTerritoryHelper);
+
         //6) Export all the data to an excel file
         Console.WriteLine("Exporting all data to Excel");
         var excelOutputFileName = $"MasterExcelOutput{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";
@@ -97,5 +104,91 @@ public class TerritoryHelperServices
         throw new NotImplementedException();
     }
 
+    public async Task ImportAtoZDatabaseAddresses(TerritoryHelperConfiguration config)
+    {
+        Console.WriteLine("Starting Address Parsing...");
 
+        string aToZDatabaseFilesPath = "";
+        string aToZXLSXFilesPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\AtoZxlsx\";
+        string spanishLastNamesPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\SpanishLastNames\SpanishLastNames.xlsx";
+        string existingSpanishAddressesFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\CurrentTerritoryHelperAddresses\SpanishWestColumbiaDirecciones.xlsx";
+        string territoryBoundaryFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\TerritoryBoundary\CongregationTerritoryBoundary.json";
+        string congregationCurrentTerritoriesFilePath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Input\CurrentTerritories\SpanishWestColumbiaTerritory.json";
+        string outputDirectoryPath = @"D:\Documents\Spritual Documents\Territorios-West Columbia\TerritoryProcessing\TerritoryHelperScripts\TerritoryHelperConsole\Output\";
+
+        var FileServices = new GeoFileProcessing();
+
+        var allFiles = FileServices.GetFiles(aToZDatabaseFilesPath);
+
+        //Convert excel files from xls to xlsx
+        var excelConverter = new ExcelConverterService();
+
+        foreach (var file in allFiles)
+        {
+            if (file.Extension == ".xls" && allFiles.Length > 0)
+            {
+                excelConverter.ConvertXLStoXLSX(file, aToZXLSXFilesPath);
+            }
+
+        }
+
+        //Extract all records from all files into one single object
+        var allxlsxFiles = FileServices.GetFiles(aToZXLSXFilesPath);
+
+        var allImportedRecords = await FileServices.AggregateListOfAllRecordsPerFile(allxlsxFiles);
+
+        FileServices.AddIdEnumeration(allImportedRecords);
+
+        //Check for Spanish Last Names
+        var excelFileProcessing = new ExcelBaseService();
+
+        var spanishLastNamesFile = new FileInfo(spanishLastNamesPath);
+
+        var listOfSpanishLastNames = await excelFileProcessing.LoadSpanishLastNames(spanishLastNamesFile);
+
+        FileServices.AddIsSpanish(allImportedRecords, listOfSpanishLastNames);
+
+        //Filter on Spanish Names only
+        var spanishOnlyList = FileServices.FilterOnSpanishNamesOnly(allImportedRecords);
+
+        //Filter out existing addresses
+        FileInfo existingSpanishAddressFile = new FileInfo(existingSpanishAddressesFilePath);
+
+        var newSpanishAddressList = await FileServices.FilterOnlyNewSpanishAddresses(spanishOnlyList, existingSpanishAddressFile);
+
+        //Create master Record List
+        var masterRecordList = FileServices.CreateMasterRecordsList(allImportedRecords, newSpanishAddressList);
+
+        //Filter on whole of territory boundary
+        var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, territoryBoundaryFilePath);
+
+        //Find out which territory each address is in
+        FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, congregationCurrentTerritoriesFilePath);
+
+        boundaryFilteredMasterList = boundaryFilteredMasterList.Where(x => x.TerritoryType != "G0").ToList();
+
+        //Add Address Verification
+        var finalModelList = FileServices.CreateFinalModelList(boundaryFilteredMasterList);
+
+        var addressVerifierService = new AddressVerificationService();
+
+        addressVerifierService.VerifyAddress(finalModelList,config);
+
+        //Save address list to spreadsheet
+        string outputFileName = $"NewAddressImport{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";
+
+        var outputExcelFile = new FileInfo(Path.Combine(outputDirectoryPath, outputFileName));
+
+        await excelFileProcessing.SaveExcelMasterFile(finalModelList, outputExcelFile);
+
+        //Save all results
+        FileInfo congregationTerritoriesFile = new FileInfo(congregationCurrentTerritoriesFilePath);
+
+        var existingSpanishAddressGeoJSON = await FileServices.CreateExistingAddressGeoJSON(existingSpanishAddressFile);
+        var newSpanishAddressGeoJSON = FileServices.CreateNewAddressGeoJSON(boundaryFilteredMasterList);
+        await FileServices.CreateJavascriptTerritoriesAndLocationsFiles(config, newSpanishAddressGeoJSON, existingSpanishAddressGeoJSON, congregationTerritoriesFile);
+
+
+        Console.WriteLine("End Program");
+    }
 }

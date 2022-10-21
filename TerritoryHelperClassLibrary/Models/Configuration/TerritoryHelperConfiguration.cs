@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,4 +29,17 @@ public class TerritoryHelperConfiguration
     public string BatchID { get; set; }
     public string USPSAPISite { get; set; }
     public int APICallDelayinMiliseconds { get; set; }
+
+    //Imported AtoZ Database file paths
+    public string AtoZDatbaseFilesPath { get; set; }
+    public string AtoZXLSXFilesPath { get; set; }
+    public string SpanishLastNamesPath { get; set; }
+    public string ExistingSpanishAddressesFilePath { get; set; }
+    public string TerritoryBoundaryFilePath { get; set; }
+    public string CongregationCurrentTerritoryBoundariesFilePath { get; set; } 
+
+    //Imported AtoZ Database file Javascript Paths 
+    public string AtoZTerritoriesJSFilePath { get; set; }
+    public string AtoZExistingAddressesJSFilePath { get; set; }
+    public string AtoZNewAddressesJSFilePath { get; set; }
 }

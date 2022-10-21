@@ -25,6 +25,15 @@ public class RecordCleanupService
         }
     }
 
+    public void AddOtherMasterRecordProperties(List<AddressMasterRecord> addressMasterRecordList)
+    {
+        foreach (var address in addressMasterRecordList)
+        {
+            address.Id = new Guid();
+            address.DateUpdated = DateTime.Now;
+        }
+    }
+
     public void ReplaceNullsWithEmpty<T>(List<T> spanishAddressImports)
     {
         foreach (var record in spanishAddressImports)
