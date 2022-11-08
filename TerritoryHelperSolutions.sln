@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperConsole", "TerritoryHelperConsole\TerritoryHelperConsole.csproj", "{F6346480-631B-446A-A534-9D295D827CB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerritoryHelperConsole", "TerritoryHelperConsole\TerritoryHelperConsole.csproj", "{F6346480-631B-446A-A534-9D295D827CB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperClassLibrary", "TerritoryHelperClassLibrary\TerritoryHelperClassLibrary.csproj", "{584CFBCD-8583-49AC-96B9-B545A57BA501}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerritoryHelperClassLibrary", "TerritoryHelperClassLibrary\TerritoryHelperClassLibrary.csproj", "{584CFBCD-8583-49AC-96B9-B545A57BA501}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelMigration", "ExcelMigration\ExcelMigration.csproj", "{2CC756C7-05E9-43D6-9327-1A678BDADC16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperTestClassLibrary", "TerritoryHelperTestClassLibrary\TerritoryHelperTestClassLibrary.csproj", "{40379D71-4CB7-4838-928B-229107718435}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperTestConsole", "TerritoryHelperTestConsole\TerritoryHelperTestConsole.csproj", "{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{584CFBCD-8583-49AC-96B9-B545A57BA501}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC756C7-05E9-43D6-9327-1A678BDADC16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC756C7-05E9-43D6-9327-1A678BDADC16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC756C7-05E9-43D6-9327-1A678BDADC16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC756C7-05E9-43D6-9327-1A678BDADC16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40379D71-4CB7-4838-928B-229107718435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40379D71-4CB7-4838-928B-229107718435}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40379D71-4CB7-4838-928B-229107718435}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40379D71-4CB7-4838-928B-229107718435}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

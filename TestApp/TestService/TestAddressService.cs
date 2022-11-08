@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TestApp.Models;
 
-namespace TerritoryHelperClassLibrary.BaseServices.AddressVerification;
+namespace TestApp.TestService;
 
-public class AddressVerificationService
+public class TestAddressService
 {
-    public async Task VerifyAddress(List<AddressMasterRecord> addressMasterRecord, TerritoryHelperConfiguration config)
+    public async Task VerifyAddress(List<TestAddress> addressMasterRecord, TerritoryHelperConfiguration config)
     {
         //Create HttpClient
-        HttpClient client=new HttpClient();
+        HttpClient client = new HttpClient();
         //Grab Excel file with information
         int i = 0;
         foreach (var item in addressMasterRecord)
         {
             string aptNumber;
             string streetNumberandName;
-            if (item.LocationType == "Mobile home" || item.LocationType == "Casa móvil")
+            if (item.LocationType == "Mobile home")
             {
                 if (!item.Number.Contains("Lot"))
                 {
@@ -34,7 +34,7 @@ public class AddressVerificationService
                 }
                 streetNumberandName = $"{item.Street}";
             }
-            else if (item.LocationType == "Apartment"|| item.LocationType== "Apartamentos")
+            else if (item.LocationType == "Apartment")
             {
                 if (!item.Number.Contains("Apt"))
                 {
@@ -71,15 +71,15 @@ public class AddressVerificationService
 
             try
             {
+                //Delay 
+                Thread.Sleep(config.APICallDelayinMiliseconds);
+
                 var url = "http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=" + requestXml;
-                using HttpResponseMessage responseMessage= await client.GetAsync(url);  
-                using HttpContent content=responseMessage.Content;
+                using HttpResponseMessage responseMessage = await client.GetAsync(url);
+                using HttpContent content = responseMessage.Content;
                 var response = await content.ReadAsStringAsync();
                 responseMessage.Dispose();
                 content.Dispose();
-
-                //Delay 
-                Thread.Sleep(config.APICallDelayinMiliseconds);
 
                 var xdoc = XDocument.Parse(response.ToString());
 

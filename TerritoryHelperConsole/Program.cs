@@ -1,4 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using ExcelMigration.ExcelInterop;
+using System.Diagnostics;
+using TerritoryHelperClassLibrary.BaseServices.GeoMapping;
 using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.TopLevelServices.Import;
 
@@ -26,28 +29,72 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
     APIType = "Verify",
     BatchID = "1",
     USPSAPISite = "http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=",
-    APICallDelayinMiliseconds = 0,
+    APICallDelayinMiliseconds = 100,
 
     //Imported AtoZ File Paths
     AtoZDatbaseFilesPath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\AddressImportFiles\",
-    AtoZXLSXFilesPath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\AddressXLSXFiles\",
-    SpanishLastNamesPath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\SpanishLastNames\SpanishLastNames.xlsx",
-    ExistingSpanishAddressesFilePath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\CurrentTerritoryHelperAddresses\TerritoryHelperAddresses.xlsx",
-    TerritoryBoundaryFilePath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\CurrentTerritories\SpanishWestColumbiaTerritory.json",
-    CongregationCurrentTerritoryBoundariesFilePath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\TerritoryBoundary\CongregationTerritoryBoundary.json",
+    AtoZXLSXFilesPath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\AddressXLSXFiles\",
+    SpanishLastNamesPath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\SpanishLastNames\SpanishLastNames.xlsx",
+    ExistingSpanishAddressesFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\CurrentTerritoryHelperAddresses\TerritoryHelperAddresses.xlsx",
+    TerritoriesFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\CurrentTerritories\SpanishWestColumbiaTerritory.json",
+    CongregationCurrentTerritoryBoundariesFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\TerritoryBoundary\CongregationTerritoryBoundary.json",
+    EditedTerritoryHelperMasterAddressForImportFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\EditedTerritoryHelperMasterAddressForImport\TerritoryInformationForImport.xlsx",
 
     //Imported AtoZ Database JS file paths
-    AtoZTerritoriesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\territories.js",
+    AtoZTerritoriesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\Territories\territories.js",
     AtoZExistingAddressesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\Addresses\existingAddresses.js",
-    AtoZNewAddressesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\Addresses\newAddresses.js"
+    AtoZNewAddressesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\Addresses\newAddresses.js",
+
+    //Territory Notes
+    TerritoryNotesPath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\TerritorySpecificInformation\TerritorySpecialNotes.json"
 };
 
 //Call your Top level services here
 var territoryHelperService = new TerritoryHelperServices();
 
+/*
+ IMPORT ALL RECORDS FROM TERRITORY HELPER
+ */
 //Call this service to Import all records from territory helper
-//await territoryHelperService.ImportDataFromTerritoryHelper(westColumbiaTerritoryHelperConfig, "TerritoryHelperAddresses.xlsx");
+//await territoryHelperService.ImportDataFromTerritoryHelper(westColumbiaTerritoryHelperConfig);
+
+/*
+ * EXPORT ALL RECORDS TO TERRITORY HELPER
+ */
+//Call this service to export all changes to Territory Helper
+await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+
+/*
+ * IMPORT ALL RECORDS FROM ATOZ DATABASE
+ */
 
 //Call this Service to 
-await territoryHelperService.ImportAtoZDatabaseAddresses(westColumbiaTerritoryHelperConfig);
+//Bring in excel interop
 
+/*
+Stopwatch stopWatch = new Stopwatch();
+stopWatch.Start();
+
+if(Directory.GetFiles(westColumbiaTerritoryHelperConfig.AtoZDatbaseFilesPath).Length!= Directory.GetFiles(westColumbiaTerritoryHelperConfig.AtoZXLSXFilesPath).Length 
+    && Directory.GetFiles(westColumbiaTerritoryHelperConfig.AtoZXLSXFilesPath).Length>0)
+{
+    var excelConverterService = new ExcelInteropConverterService();
+
+    var FileServices = new GeoFileProcessing();
+
+    var allFiles = FileServices.GetFiles(westColumbiaTerritoryHelperConfig.AtoZDatbaseFilesPath);
+
+    foreach (var file in allFiles)
+    {
+        if (file.Extension == ".xls" && allFiles.Length > 0)
+        {
+            excelConverterService.ConvertXLStoXLSX(file, westColumbiaTerritoryHelperConfig.AtoZXLSXFilesPath);
+        }
+    }
+}
+await territoryHelperService.ImportAtoZDatabaseAddresses(westColumbiaTerritoryHelperConfig);
+stopWatch.Stop();
+TimeSpan ts = stopWatch.Elapsed;
+string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds / 10);
+Console.WriteLine("RunTime " + elapsedTime);
+*/

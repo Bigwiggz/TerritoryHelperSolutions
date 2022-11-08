@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.Models;
+using TerritoryHelperClassLibrary.Models.Configuration;
+using System.Text.Json;
+using TerritoryHelperClassLibrary.Models.AtoZDatabaseModels;
 
 namespace TerritoryHelperClassLibrary.BaseServices.RecordCleanup;
 
@@ -27,10 +30,13 @@ public class RecordCleanupService
 
     public void AddOtherMasterRecordProperties(List<AddressMasterRecord> addressMasterRecordList)
     {
+        int i = 1;
         foreach (var address in addressMasterRecordList)
         {
-            address.Id = new Guid();
+            address.Id = Guid.NewGuid();
+            address.Order = i;
             address.DateUpdated = DateTime.Now;
+            i++;
         }
     }
 

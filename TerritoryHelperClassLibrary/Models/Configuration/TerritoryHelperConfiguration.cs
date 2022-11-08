@@ -35,11 +35,15 @@ public class TerritoryHelperConfiguration
     public string AtoZXLSXFilesPath { get; set; }
     public string SpanishLastNamesPath { get; set; }
     public string ExistingSpanishAddressesFilePath { get; set; }
-    public string TerritoryBoundaryFilePath { get; set; }
+    public string TerritoriesFilePath { get; set; }
     public string CongregationCurrentTerritoryBoundariesFilePath { get; set; } 
+    public string EditedTerritoryHelperMasterAddressForImportFilePath { get; set; }
 
     //Imported AtoZ Database file Javascript Paths 
     public string AtoZTerritoriesJSFilePath { get; set; }
     public string AtoZExistingAddressesJSFilePath { get; set; }
     public string AtoZNewAddressesJSFilePath { get; set; }
+
+    //TerritoryNotes
+    public string TerritoryNotesPath { get; set; }
 }

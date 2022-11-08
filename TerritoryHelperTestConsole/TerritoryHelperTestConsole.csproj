@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GeoAPI.Core" Version="1.7.5" />
+    <PackageReference Include="ProjNet" Version="2.0.0" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TerritoryHelperClassLibrary\TerritoryHelperClassLibrary.csproj" />
+    <ProjectReference Include="..\TerritoryHelperTestClassLibrary\TerritoryHelperTestClassLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Output\" />
+    <Folder Include="Reports\" />
+  </ItemGroup>
+
+</Project>

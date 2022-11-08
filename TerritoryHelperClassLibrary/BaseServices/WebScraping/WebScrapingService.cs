@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TextCopy;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
@@ -16,19 +17,19 @@ namespace TerritoryHelperClassLibrary.BaseServices.WebScraping;
 
 public class WebScrapingService
 {
-    public List<ModelRTFRecord> GetExistingTableTerritoryInformation(TerritoryHelperConfiguration territoryHelperConfiguration)
+    public List<ModelRTFRecord> GetExistingTableTerritoryInformation(TerritoryHelperConfiguration config)
     {
 
         new DriverManager().SetUpDriver(new ChromeConfig());
         IWebDriver driver = new ChromeDriver();
 
-        driver.Navigate().GoToUrl(territoryHelperConfiguration.LoginUrl);
+        driver.Navigate().GoToUrl(config.LoginUrl);
 
         var userNameTextBox = driver.FindElement(By.Id("Email"));
-        userNameTextBox.SendKeys(territoryHelperConfiguration.UserName);
+        userNameTextBox.SendKeys(config.UserName);
 
         var passwordTextBox = driver.FindElement(By.Id("Password"));
-        passwordTextBox.SendKeys(territoryHelperConfiguration.Password);
+        passwordTextBox.SendKeys(config.Password);
 
         var submitButton = driver.FindElement(By.XPath("//*[@id=\"login\"]/div[7]/input"));
         submitButton.Click();
@@ -55,7 +56,7 @@ public class WebScrapingService
         for (int i = 0; i < territoryElements.Count; i++)
         {
             //Go to the Territory Page
-            var territoryUrl = $"{territoryHelperConfiguration.TerritoryRecordBaseUrl}/{territoryElements[i]}";
+            var territoryUrl = $"{config.TerritoryRecordBaseUrl}/{territoryElements[i]}";
             driver.Navigate().GoToUrl(territoryUrl);
             var tableRows = driver.FindElements(By.XPath("//*[@id=\"territory_notes\"]//tr")).ToList();
 
@@ -67,7 +68,7 @@ public class WebScrapingService
                     var tableColumns = row.FindElements(By.XPath("./td")).ToList();
 
                     string Address = ScrubHtml(tableColumns[0].GetAttribute("innerText")) ?? "";
-                    if (Address is not "Dirección" && Address is not "" && Address is not null && tableColumns.Count == territoryHelperConfiguration.NumberOfTableRows)
+                    if (Address is not "Dirección" && Address is not "" && Address is not null && tableColumns.Count == config.NumberOfTableRows)
                     {
                         var rtfRecord = new ModelRTFRecord
                         {
@@ -145,5 +146,208 @@ public class WebScrapingService
         var step1 = Regex.Replace(value, @"<[^>]+>|&nbsp;", "").Trim();
         var step2 = Regex.Replace(step1, @"\s{2,}", " ");
         return step2;
+    }
+
+    public void PasteTerritoryTables(TerritoryHelperConfiguration config, List<AddressMasterRecord> masterRecordList)
+    {
+        new DriverManager().SetUpDriver(new ChromeConfig());
+        IWebDriver driver = new ChromeDriver();
+
+        driver.Navigate().GoToUrl(config.LoginUrl);
+
+        var userNameTextBox = driver.FindElement(By.Id("Email"));
+        userNameTextBox.SendKeys(config.UserName);
+
+        var passwordTextBox = driver.FindElement(By.Id("Password"));
+        passwordTextBox.SendKeys(config.Password);
+
+        var submitButton = driver.FindElement(By.XPath("//*[@id=\"login\"]/div[7]/input"));
+        submitButton.Click();
+
+        //Select Congregation
+        var selectCongregation = driver.FindElement(By.XPath("//*[@id=\"login\"]/div[2]/div/div/div[1]"));
+        selectCongregation.Click();
+
+        //Click on Assignments
+        var assignmentsButton = driver.FindElement(By.XPath("//*[@id=\"topbar\"]/div[2]/div[1]/div[7]/a"));
+        assignmentsButton.Click();
+
+        //Get list of territory elements
+        var territoryElements = driver.FindElements(By.ClassName("territory"))
+            .Select(x => x.GetAttribute("id").ToString().Remove(0, 17)).ToList();
+
+        //Get innerText
+        var territoryNumbers = driver.FindElements(By.ClassName("number"))
+            .Select(x => x.GetAttribute("innerText").Split(' ')[1]).ToList();
+
+        //Create a string builder to store existing rtf text
+        StringBuilder sb = new StringBuilder();
+        sb.Append($"--Text File of existing RTF text gathered on {DateTime.Now.ToString("MM/dd/yyyy hh: mm")}\n");
+
+        for (int i = 0; i < territoryElements.Count; i++)
+        {
+            //Go to the Territory Page
+            var territoryUrl = $"{config.TerritoryRecordBaseUrl}/{territoryElements[i]}";
+            driver.Navigate().GoToUrl(territoryUrl);
+
+            //Click the edit button
+            var editTableButton = driver.FindElement(By.Id("territory_notes_toggle"));
+            editTableButton.Click();
+
+            //Wait for page load
+            Thread.Sleep(2000);
+
+            //Click the "More" or ... button
+            var moreButton = driver.FindElement(By.XPath("//button[@title='More...']"));
+            moreButton.Click();
+
+            //Wait for page load
+            Thread.Sleep(2000);
+
+            //Click on Source code button
+            var sourceCodeButton = driver.FindElement(By.XPath("//button[@title='Source code']"));
+            sourceCodeButton.Click();
+
+            //Wait for page load
+            Thread.Sleep(1000);
+
+            //select code text box
+            var codeMirrorExisting = driver.FindElement(By.ClassName("CodeMirror"));
+
+            //bring code line into focus
+            var codeLineExisting = codeMirrorExisting.FindElements(By.ClassName("CodeMirror-line")).FirstOrDefault();
+            codeMirrorExisting.Click();
+
+            //Add text into textbox
+            var rtfTextElement = codeMirrorExisting.FindElement(By.CssSelector("textarea"));
+
+            //Add text into textbox
+            rtfTextElement.SendKeys(Keys.Control + "a");
+            rtfTextElement.SendKeys(Keys.Control + "x");
+
+            //var existingRTFText = rtfTextElement.GetAttribute("value");
+            sb.Append("--------------------------------------------\n");
+            sb.Append($"Territory Number: {territoryNumbers[i]}\n");
+            sb.Append($"{ClipboardService.GetText()}\n");
+
+            Console.WriteLine($"{ClipboardService.GetText()}");
+
+            //Clear clipboard
+            ClipboardService.SetText("");
+
+            //Get territory addresses for the group 
+            var territoryAddressListByTerritoryNumber = masterRecordList.Where(x => x.TerritoryNumber == territoryNumbers[i]).ToList();
+
+            //TODO: Input for Territory Notes here
+            if (territoryAddressListByTerritoryNumber is not null && territoryAddressListByTerritoryNumber.Count() > 0)
+            {
+
+                //Create table for input
+                var tableInputText = GenerateTextTableForEachTerritory(territoryAddressListByTerritoryNumber);
+
+                //Use clipboard service
+                ClipboardService.SetText(tableInputText);
+
+                //select code text box
+                var codeMirror = driver.FindElement(By.ClassName("CodeMirror"));
+
+                //bring code line into focus
+                var codeLine = codeMirror.FindElement(By.ClassName("CodeMirror-lines"));
+                codeLine.Click();
+
+                //Add text into textbox
+                var textBox = codeMirror.FindElement(By.CssSelector("textarea"));
+                textBox.SendKeys(Keys.Control + "v");
+
+                //Clear clipboard
+                ClipboardService.SetText("");
+            }
+
+            //Save text
+            var saveButton = driver.FindElement(By.XPath("//button[@title='Save']"));
+            saveButton.Click();
+
+            //Save rich text formate edits
+            var saveRTFEditButton = driver.FindElement(By.Id("territory_notes_save_btn"));
+            saveRTFEditButton.Click();
+
+            //Close window if needed
+        }
+
+        //existing String
+        var finalExistingString = sb.ToString();
+        string backupFileName = $"backupTableData-{DateTime.Now.ToString("MM-dd-yyyy")}.txt";
+        var fullbackupPath = Path.Combine(config.FileSavedOutputLocation, backupFileName);
+        File.WriteAllTextAsync(fullbackupPath, finalExistingString);
+
+        //Get territory RTF information
+        driver.Quit();
+    }
+
+    private string GenerateTextTableForEachTerritory(List<AddressMasterRecord> territorySpecificAddressList)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        if (territorySpecificAddressList is not null && territorySpecificAddressList.Count() > 0)
+        {
+
+            if (!String.IsNullOrEmpty(territorySpecificAddressList[0].TerritoryName))
+            {
+                sb.Append($"<p><strong>Territory Name:</strong>  {territorySpecificAddressList[0].TerritoryName}</p>");
+            }
+            if (!String.IsNullOrEmpty(territorySpecificAddressList[0].TerritorySpecialNotes))
+            {
+                sb.Append($"<p><strong>Special Notes:</strong>  {territorySpecificAddressList[0].TerritoryName}</p>");
+            }
+            sb.Append(@"
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <table dir=""ltr"" border=""1"" cellspacing=""0"" cellpadding=""0""><colgroup><col width=""172"" /><col width=""158"" /><col width=""102"" /><col width=""242"" /></colgroup>
+                <tbody>
+                <tr>
+                <td style=""text-align: center;"" data-sheets-value=""{""><strong>Direcci&oacute;n</strong></td>
+                <td style=""text-align: center;"" data-sheets-value=""{""><strong>Nombres</strong></td>
+                <td style=""text-align: center;"" data-sheets-value=""{""><strong>N&uacute;mero Telef&oacute;nico</strong></td>
+                <td style=""text-align: center;"" data-sheets-value=""{""><strong>Notas</strong></td>
+                </tr>
+                ");
+
+            foreach (var record in territorySpecificAddressList)
+            {
+                if (territorySpecificAddressList.Count > 0)
+                {
+                    if (record.LocationType == "Do not Call" || record.LocationType == "NO VISITAR")
+                    {
+                        sb.Append($@"
+                            <tr>
+                            <td data-sheets-value=""{{"">{record.CompleteAddress}</td>
+                            <td data-sheets-value=""{{""><span style=""color: #ba372a;"">NO VISITAR</span></td>
+                            <td data-sheets-value=""{{""><span style=""color: #ba372a;"">NO VISITAR</span></td>
+                            <td data-sheets-value=""{{""><span style=""color: #ba372a;"">NO VISITAR</span></td>
+                            </tr>
+                            ");
+                    }
+                    else
+                    {
+                        sb.Append($@"
+                            <tr>
+                            <td data-sheets-value=""{{"">{record.CompleteAddress}</td>
+                            <td data-sheets-value=""{{"">{record.NamesList}</td>
+                            <td data-sheets-value=""{{"">{record.PhoneNumbers}</td>
+                            <td data-sheets-value=""{{"">{record.Notes}</td>
+                            </tr>
+                            ");
+                    }
+                }
+            }
+
+            sb.Append($@"
+                </tbody>
+                </table>
+                <p>&nbsp;</p>
+                <p><strong><span style=""font-size: 8pt;"">Reconciliado {DateTime.Now.ToString("MM/dd/yyyy")}</span></strong></p>
+                ");
+        }
+        return sb.ToString();
     }
 }

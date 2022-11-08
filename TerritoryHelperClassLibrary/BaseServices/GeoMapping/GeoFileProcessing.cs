@@ -487,12 +487,14 @@ public class GeoFileProcessing
     public List<AddressMasterRecord> CreateFinalModelList(List<MasterRecord> masterRecordList)
     {
         List<AddressMasterRecord> spanishAddressImportList = new();
-
+        int i = 1;
         foreach (var record in masterRecordList)
         {
+            
             var spanishAddressImport = new AddressMasterRecord
             {
-                Id = new Guid(),
+                Id = Guid.NewGuid(),
+                Order = i,
                 TerritoryType = record.TerritoryType,
                 TerritoryNumber = record.TerritoryNumber,
                 LocationType = record.LocationType,
@@ -515,8 +517,62 @@ public class GeoFileProcessing
             };
 
             spanishAddressImportList.Add(spanishAddressImport);
+            i++;
         }
 
         return spanishAddressImportList;
+    }
+
+    public void AddTerritoryNotes(List<AddressMasterRecord> addressMasterRecordList, TerritoryHelperConfiguration config)
+    {
+        var territoryNotestText = File.ReadAllText(config.TerritoryNotesPath);
+
+        var territorySpecialNotesList = JsonSerializer.Deserialize<List<TerritorySpecificNote>>(territoryNotestText);
+
+        foreach (var address in addressMasterRecordList)
+        {
+            foreach (var territory in territorySpecialNotesList)
+            {
+                if (address.TerritoryNumber == territory.TerritoryNumbers)
+                {
+                    address.TerritorySpecialNotes = territory.TerritorySpecialNotes;
+                    address.TerritoryName = territory.TerritoryDescription;
+                }
+            }
+        }
+
+    }
+
+    public List<TerritoryHelperAddress> CreateTerritoryHelperImportAddressRecordList(List<AddressMasterRecord> addressMasterRecordList)
+    {
+        List<TerritoryHelperAddress> territoryHelperAddressList = new();
+
+        foreach (var record in addressMasterRecordList)
+        {
+            TerritoryHelperAddress territoryHelperAddress = new TerritoryHelperAddress
+            {
+                TerritoryType = record.TerritoryType,
+                TerritoryNumber = record.TerritoryNumber,
+                LocationType = record.LocationType,
+                Status = record.Status,
+                Latitude = record.Latitude,
+                Longitude = record.Longitude,
+                CompleteAddress = record.CompleteAddress,
+                Number = record.Number,
+                Street = record.Street,
+                Apartment = record.Apartment,
+                Floor = record.Floor,
+                City = record.City,
+                County = record.County,
+                PostalCode = record.PostalCode,
+                State = record.State,
+                CountryCode = record.CountryCode
+            };
+
+            territoryHelperAddressList.Add(territoryHelperAddress);
+
+        }
+
+        return territoryHelperAddressList;
     }
 }

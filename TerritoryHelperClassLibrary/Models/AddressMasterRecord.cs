@@ -10,7 +10,7 @@ public class AddressMasterRecord:TerritoryHelperAddress
 {
     //Order
     public Guid Id { get; set; }
-    public int Order { get; set; }
+    public int? Order { get; set; }
 
     //Table Notes
     public string PhoneNumbers { get; set; }

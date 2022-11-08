@@ -20,47 +20,6 @@ public class ExcelBaseService
         ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
     }
 
-    public async Task<List<AddressMasterRecord>> LoadTerritoryHelperAddresses(FileInfo fileInfo)
-    {
-        List<AddressMasterRecord> territoryHelperAddressList = new List<AddressMasterRecord>();
-
-        CultureInfo provider= new CultureInfo("en-US");
-
-        using var package= new ExcelPackage(fileInfo);
-
-        await package.LoadAsync(fileInfo);
-
-        var ws = package.Workbook.Worksheets[0];
-        int row = 2;
-        int col = 1;
-
-        while (string.IsNullOrWhiteSpace(ws.Cells[row, col].Value?.ToString()) == false)
-        {
-            AddressMasterRecord p = new();
-            p.TerritoryType = ws.Cells[row,col].Value.ToString();
-            p.TerritoryNumber = ws.Cells[row, col + 1].Value.ToString();
-            p.LocationType = ws.Cells[row, col + 2].Value.ToString();
-            p.Status = ws.Cells[row, col + 3].Value.ToString();
-            p.Latitude = decimal.Parse((ws.Cells[row, col + 4].Value??"0").ToString());
-            p.Longitude = decimal.Parse((ws.Cells[row, col + 5].Value ?? "0").ToString());
-            p.CompleteAddress = ws.Cells[row, col + 6].Value.ToString();
-            p.Number = ws.Cells[row, col + 7].Value.ToString();
-            p.Street = ws.Cells[row, col + 8].Value.ToString();
-            p.Apartment = (ws.Cells[row, col + 9].Value ?? "").ToString();
-            p.Floor = (ws.Cells[row, col + 10].Value ?? "").ToString();
-            p.City = ws.Cells[row, col + 11].Value.ToString();
-            p.County = ws.Cells[row, col + 12].Value.ToString();
-            p.PostalCode = ws.Cells[row, col + 15].Value.ToString();
-            p.State = ws.Cells[row, col + 13].Value.ToString();
-            p.CountryCode = ws.Cells[row, col + 14].Value.ToString();
-
-            territoryHelperAddressList.Add(p);
-            row += 1;
-        }
-
-        return territoryHelperAddressList;
-    }
-
     public async Task SaveExcelFileReconciliation(
             List<AddressMasterRecord> formattedDataRecords,
             List<AddressMasterRecord> tableScrapedRecords,
@@ -82,7 +41,7 @@ public class ExcelBaseService
         //First Worksheet: All Records
         var ws = package.Workbook.Worksheets.Add("FormattedDataRecords");
 
-        var range = ws.Cells["A2"].LoadFromCollection(formattedDataRecords, true);
+        var range = ws.Cells["A1"].LoadFromCollection(formattedDataRecords, true);
         range.AutoFitColumns();
 
         // Formats the header
@@ -93,7 +52,7 @@ public class ExcelBaseService
         //Second Worksheet:  Address Import
         var ws2 = package.Workbook.Worksheets.Add("TableScrapedRecords");
 
-        var range2 = ws2.Cells["A2"].LoadFromCollection(tableScrapedRecords, true);
+        var range2 = ws2.Cells["A1"].LoadFromCollection(tableScrapedRecords, true);
         range2.AutoFitColumns();
 
         // Formats the header
@@ -115,7 +74,7 @@ public class ExcelBaseService
         //Fourth Worksheet:  Address Import
         var ws4 = package.Workbook.Worksheets.Add("TableANDFormatted");
 
-        var range4 = ws4.Cells["A2"].LoadFromCollection(tableANDONLYDataRecords, true);
+        var range4 = ws4.Cells["A1"].LoadFromCollection(tableANDONLYDataRecords, true);
         range4.AutoFitColumns();
 
         // Formats the header
@@ -126,7 +85,7 @@ public class ExcelBaseService
         //Fifth Worksheet:  Address Import
         var ws5 = package.Workbook.Worksheets.Add("FormattedNOTTabled");
 
-        var range5 = ws5.Cells["A2"].LoadFromCollection(dataRecordsbutNOTTableRecords, true);
+        var range5 = ws5.Cells["A1"].LoadFromCollection(dataRecordsbutNOTTableRecords, true);
         range4.AutoFitColumns();
 
         // Formats the header
@@ -200,7 +159,7 @@ public class ExcelBaseService
         while (string.IsNullOrWhiteSpace(ws.Cells[row, col].Value?.ToString()) == false)
         {
             AddressMasterRecord p = new();
-            p.Id = new Guid();
+            p.Id = Guid.NewGuid();
             p.Order = row - 1;
             p.TerritoryType = (ws.Cells[row, col].Value ?? "").ToString();
             p.TerritoryNumber = (ws.Cells[row, col + 1].Value ?? "").ToString();
@@ -228,7 +187,7 @@ public class ExcelBaseService
 
     }
 
-    public async Task SaveExcelMasterFile(List<AddressMasterRecord> importObjectList, FileInfo file)
+    public async Task SaveExcelMasterFile(List<AddressMasterRecord> importObjectList, List<TerritoryHelperAddress> territoryHelperAddressList, FileInfo file)
     {
         if (file.Exists)
         {
@@ -243,7 +202,7 @@ public class ExcelBaseService
         //First Worksheet: All Records
         var ws = package.Workbook.Worksheets.Add("AllRecords");
 
-        var range = ws.Cells["A2"].LoadFromCollection(importObjectList, true);
+        var range = ws.Cells["A1"].LoadFromCollection(importObjectList, true);
         range.AutoFitColumns();
 
         // Formats the header
@@ -255,7 +214,7 @@ public class ExcelBaseService
 
         var ws2 = package.Workbook.Worksheets.Add("ImportRecords");
 
-        var range2 = ws2.Cells["A2"].LoadFromCollection(importObjectList, true);
+        var range2 = ws2.Cells["A1"].LoadFromCollection(territoryHelperAddressList, true);
         range2.AutoFitColumns();
 
         // Formats the header
@@ -417,5 +376,97 @@ public class ExcelBaseService
         }
 
         return spanishLastNamesList;
+    }
+
+    public async Task<List<AddressMasterRecord>> LoadEditedAndUpdatedMasterFileForTerritoryHelperImport(FileInfo file)
+    {
+        List<AddressMasterRecord> existingSpanishAddressList = new();
+
+        CultureInfo provider = new CultureInfo("en-US");
+
+        using var package = new ExcelPackage(file);
+
+        await package.LoadAsync(file);
+
+        var ws = package.Workbook.Worksheets[0];
+
+        int row = 2;
+        int col = 1;
+
+        while (string.IsNullOrWhiteSpace(ws.Cells[row, col].Value?.ToString()) == false)
+        {
+            AddressMasterRecord p = new();
+            //Order Information
+            p.Id = new Guid((ws.Cells[row, col].Value ?? "").ToString());
+            p.Order = int.Parse((ws.Cells[row, col+1].Value ?? "0").ToString());
+
+            //Address Notes Information
+            p.PhoneNumbers = (ws.Cells[row, col + 2].Value ?? "").ToString();
+            p.NamesList= (ws.Cells[row, col + 3].Value ?? "").ToString();
+            p.Notes= (ws.Cells[row, col + 4].Value ?? "").ToString();
+
+            //Address Verification Information
+            p.DeliveryPoint= (ws.Cells[row, col + 5].Value ?? "").ToString();
+            p.CarrierRoute= (ws.Cells[row, col + 6].Value ?? "").ToString();
+            p.DPVConfirmation= (ws.Cells[row, col + 7].Value ?? "").ToString();
+            p.DPVCMRA= (ws.Cells[row, col + 8].Value ?? "").ToString();
+            p.DPVFootnotes= (ws.Cells[row, col + 9].Value ?? "").ToString();
+            p.Business= (ws.Cells[row, col + 10].Value ?? "").ToString();
+            p.CentralDeliveryPoint= (ws.Cells[row, col + 11].Value ?? "").ToString();
+            p.Vacant= (ws.Cells[row, col + 12].Value ?? "").ToString();
+            p.HttpError= (ws.Cells[row, col + 13].Value ?? "").ToString();
+
+            //Territory Notes Information
+            p.TerritoryName= (ws.Cells[row, col + 14].Value ?? "").ToString();
+            p.TerritorySpecialNotes= (ws.Cells[row, col + 15].Value ?? "").ToString();
+            p.DateUpdated= DateTime.FromOADate(double.Parse((ws.Cells[row, col + 16].Value ?? "0").ToString()));
+            p.UniqueIdentifierCreation= (ws.Cells[row, col + 17].Value ?? "").ToString();
+
+            //Territory Helper Specific Information
+            p.TerritoryType = (ws.Cells[row, col+18].Value ?? "").ToString();
+            p.TerritoryNumber = (ws.Cells[row, col + 19].Value ?? "").ToString();
+            p.LocationType = (ws.Cells[row, col + 20].Value ?? "").ToString();
+            p.Status = (ws.Cells[row, col + 21].Value ?? "").ToString();
+            p.Latitude = decimal.Parse((ws.Cells[row, col + 22].Value ?? "").ToString());
+            p.Longitude = decimal.Parse((ws.Cells[row, col + 23].Value ?? "").ToString());
+            p.CompleteAddress = (ws.Cells[row, col + 24].Value ?? "").ToString();
+            p.Number = (ws.Cells[row, col + 25].Value ?? "").ToString();
+            p.Street = (ws.Cells[row, col + 26].Value ?? "").ToString();
+            p.Apartment = (ws.Cells[row, col + 27].Value ?? "").ToString();
+            p.Floor = (ws.Cells[row, col + 28].Value ?? "").ToString();
+            p.City = (ws.Cells[row, col + 29].Value ?? "").ToString();
+            p.County = (ws.Cells[row, col + 30].Value ?? "").ToString();
+            p.PostalCode = (ws.Cells[row, col + 31].Value ?? "").ToString();
+            p.State = (ws.Cells[row, col + 32].Value ?? "").ToString();
+            p.CountryCode = (ws.Cells[row, col + 33].Value ?? "").ToString();
+
+            existingSpanishAddressList.Add(p);
+            row += 1;
+        }
+
+        return existingSpanishAddressList;
+    }
+
+    public async Task ExportAddressMasterRecordToExcel(List<AddressMasterRecord> importObjectList, FileInfo file)
+    {
+        if (file.Exists)
+        {
+            file.Delete();
+        }
+
+        using var package = new ExcelPackage(file);
+
+        //First Worksheet: All Records
+        var ws = package.Workbook.Worksheets.Add("AllRecords");
+
+        var range = ws.Cells["A1"].LoadFromCollection(importObjectList, true);
+        range.AutoFitColumns();
+
+        // Formats the header
+        ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        ws.Row(1).Style.Font.Size = 11;
+        ws.Row(1).Style.Font.Bold = true;
+
+        await package.SaveAsync();
     }
 }
