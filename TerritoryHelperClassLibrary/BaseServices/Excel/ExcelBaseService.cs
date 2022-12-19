@@ -440,6 +440,9 @@ public class ExcelBaseService
             p.State = (ws.Cells[row, col + 32].Value ?? "").ToString();
             p.CountryCode = (ws.Cells[row, col + 33].Value ?? "").ToString();
 
+            //Master Record Order
+            p.MasterRecordRoutePlanOrder= int.Parse((ws.Cells[row, col + 23].Value ?? "").ToString());
+
             existingSpanishAddressList.Add(p);
             row += 1;
         }
@@ -447,7 +450,7 @@ public class ExcelBaseService
         return existingSpanishAddressList;
     }
 
-    public async Task ExportAddressMasterRecordToExcel(List<AddressMasterRecord> importObjectList, FileInfo file)
+    public async Task ExportMasterListToExcel(List<AddressMasterRecord> importObjectList, FileInfo file)
     {
         if (file.Exists)
         {
@@ -466,6 +469,40 @@ public class ExcelBaseService
         ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
         ws.Row(1).Style.Font.Size = 11;
         ws.Row(1).Style.Font.Bold = true;
+
+        await package.SaveAsync();
+    }
+
+    public async Task ExportAddressMasterRecordToExcel(List<AddressMasterRecord> importObjectList, List<AddressMasterRecord> excludedObjectList,FileInfo file)
+    {
+        if (file.Exists)
+        {
+            file.Delete();
+        }
+
+        using var package = new ExcelPackage(file);
+
+        //First Worksheet: All Records
+        var ws = package.Workbook.Worksheets.Add("AddedRecords");
+
+        var range = ws.Cells["A1"].LoadFromCollection(importObjectList, true);
+        range.AutoFitColumns();
+
+        // Formats the header
+        ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        ws.Row(1).Style.Font.Size = 11;
+        ws.Row(1).Style.Font.Bold = true;
+
+        //First Worksheet: All Records
+        var ws1 = package.Workbook.Worksheets.Add("ExcludedRecords");
+
+        var range1 = ws1.Cells["A1"].LoadFromCollection(excludedObjectList, true);
+        range1.AutoFitColumns();
+
+        // Formats the header
+        ws1.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        ws1.Row(1).Style.Font.Size = 11;
+        ws1.Row(1).Style.Font.Bold = true;
 
         await package.SaveAsync();
     }

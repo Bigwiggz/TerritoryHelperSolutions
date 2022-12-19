@@ -46,7 +46,15 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
     AtoZNewAddressesJSFilePath = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Output\Map\js\information\Addresses\newAddresses.js",
 
     //Territory Notes
-    TerritoryNotesPath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\TerritorySpecificInformation\TerritorySpecialNotes.json"
+    TerritoryNotesPath= @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\AtoZDatabase\TerritorySpecificInformation\TerritorySpecialNotes.json",
+
+    //Kingdom Hall Location Information
+    KindgomHallAddress="3679 Leaphart Rd, West Columbia SC, 29169",
+    KingdomHallLocationLatitude= 34.00261402946795,
+    KingdomHallLocationLongitude=-81.13513616286949,
+
+    //Azure Maps Primary Security Key
+    MicrosoftAzureMapsPrimarySecurityKey= "Os3ZX-degSXhpK1I6TNVFIAJ_ch_XA2UBLGYpd6QF6Y"
 };
 
 //Call your Top level services here
@@ -62,16 +70,13 @@ var territoryHelperService = new TerritoryHelperServices();
  * EXPORT ALL RECORDS TO TERRITORY HELPER
  */
 //Call this service to export all changes to Territory Helper
-await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+//await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
 
 /*
  * IMPORT ALL RECORDS FROM ATOZ DATABASE
  */
 
-//Call this Service to 
-//Bring in excel interop
 
-/*
 Stopwatch stopWatch = new Stopwatch();
 stopWatch.Start();
 
@@ -97,4 +102,3 @@ stopWatch.Stop();
 TimeSpan ts = stopWatch.Elapsed;
 string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds / 10);
 Console.WriteLine("RunTime " + elapsedTime);
-*/

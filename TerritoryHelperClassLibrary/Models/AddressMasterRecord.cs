@@ -37,4 +37,7 @@ public class AddressMasterRecord:TerritoryHelperAddress
 
     //Internal Processing
     public string UniqueIdentifierCreation { get; set; }
+
+    //Route Plan Order
+    public int MasterRecordRoutePlanOrder { get; set; }
 }

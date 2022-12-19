@@ -156,7 +156,13 @@ public class TerritoryHelperServices
         var excludedRecords = editedTerritoryRecordsListForImport.Where(x => x.Order == 0).ToList();
 
         //5d) Make records list of all records added and excluded
+        string outputFileName = $"ExportedListToTerritoryHelper-{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";
 
+        var outputExcelFile = new FileInfo(Path.Combine(config.FileSavedOutputLocation, outputFileName));
+
+        var excelFileProcessing = new ExcelBaseService();
+        
+        await excelFileProcessing.ExportAddressMasterRecordToExcel(orderedTerritoryRecordsListForImport, excludedRecords, outputExcelFile);
 
         //6) Paste Information in Territory Tables
         var webScraperService = new WebScrapingService();

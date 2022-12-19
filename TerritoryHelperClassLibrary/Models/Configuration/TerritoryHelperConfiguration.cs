@@ -46,4 +46,12 @@ public class TerritoryHelperConfiguration
 
     //TerritoryNotes
     public string TerritoryNotesPath { get; set; }
+
+    // Kingdom Hall Location
+    public string KindgomHallAddress { get; set; }
+    public double KingdomHallLocationLatitude { get; set; }
+    public double KingdomHallLocationLongitude { get; set; }
+
+    //Microsoft Azure Maps Primary Security Key
+    public string MicrosoftAzureMapsPrimarySecurityKey { get; set; }
 }
