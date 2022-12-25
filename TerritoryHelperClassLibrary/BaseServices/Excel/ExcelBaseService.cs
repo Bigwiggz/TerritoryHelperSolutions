@@ -441,7 +441,7 @@ public class ExcelBaseService
             p.CountryCode = (ws.Cells[row, col + 33].Value ?? "").ToString();
 
             //Master Record Order
-            p.MasterRecordRoutePlanOrder= int.Parse((ws.Cells[row, col + 23].Value ?? "").ToString());
+            //p.MasterRecordRoutePlanOrder= int.Parse((ws.Cells[row, col + 23].Value ?? "").ToString());
 
             existingSpanishAddressList.Add(p);
             row += 1;

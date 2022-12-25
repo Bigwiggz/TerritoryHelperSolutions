@@ -55,6 +55,8 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
 
     //Azure Maps Primary Security Key
     MicrosoftAzureMapsPrimarySecurityKey= "Os3ZX-degSXhpK1I6TNVFIAJ_ch_XA2UBLGYpd6QF6Y"
+
+
 };
 
 //Call your Top level services here
@@ -70,13 +72,13 @@ var territoryHelperService = new TerritoryHelperServices();
  * EXPORT ALL RECORDS TO TERRITORY HELPER
  */
 //Call this service to export all changes to Territory Helper
-//await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
 
 /*
  * IMPORT ALL RECORDS FROM ATOZ DATABASE
  */
 
-
+/*
 Stopwatch stopWatch = new Stopwatch();
 stopWatch.Start();
 
@@ -102,3 +104,4 @@ stopWatch.Stop();
 TimeSpan ts = stopWatch.Elapsed;
 string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds / 10);
 Console.WriteLine("RunTime " + elapsedTime);
+*/

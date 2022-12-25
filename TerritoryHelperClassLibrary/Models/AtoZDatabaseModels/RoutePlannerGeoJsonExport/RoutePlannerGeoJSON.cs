@@ -9,7 +9,7 @@ namespace TerritoryHelperClassLibrary.Models.AtoZDatabaseModels.RoutePlannerGeoJ
 public class RoutePlannerGeoJSON
 {
     public string type { get; set; } = "FeatureCollection";
-    public List<RoutePlannerFeature> features { get; set; }
+    public List<RoutePlannerFeature> features { get; set; } = new List<RoutePlannerFeature>();
 }
 
 public class RoutePlannerFeature
@@ -23,7 +23,7 @@ public class RoutePlannerProperties
 {
     public string TerritoryType { get; set; } = "G0";
     public string TerritoryNumber { get; set; } = "00";
-    public string LineColor { get; set; } = "#a83232";
+    public string LineColor { get; set; } = "#0000cc";
     public int NumberOfAddresses { get; set; }  
     public List<RoutePlannerAddress> AddressesList { get; set; }= new List<RoutePlannerAddress>();
     public RoutePlannerSummaryResults SummaryResults { get; set; }

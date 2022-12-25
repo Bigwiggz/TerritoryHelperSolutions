@@ -12,6 +12,7 @@ using TerritoryHelperClassLibrary.BaseServices.WebScraping;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.AtoZDatabaseModels;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TerritoryHelperClassLibrary.BaseServices.RoutePlanner;
 
 namespace TerritoryHelperClassLibrary.TopLevelServices.Import;
 
@@ -163,6 +164,15 @@ public class TerritoryHelperServices
         var excelFileProcessing = new ExcelBaseService();
         
         await excelFileProcessing.ExportAddressMasterRecordToExcel(orderedTerritoryRecordsListForImport, excludedRecords, outputExcelFile);
+        /*
+        //TEST
+        var routePlannerService = new RoutePlannerService();
+        var testResult = await routePlannerService.GetRouteDirectionsPerTerritory(orderedTerritoryRecordsListForImport, config);
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+        var geoJSONText = JsonSerializer.Serialize(testResult.Item2, jsonOptions);
+        var testFilePath = Path.Combine(config.FileSavedOutputLocation, "testGeoJSONPaths.json");
+        await File.WriteAllTextAsync(testFilePath, geoJSONText);
+        */
 
         //6) Paste Information in Territory Tables
         var webScraperService = new WebScrapingService();
