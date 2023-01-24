@@ -17,6 +17,8 @@
     <Folder Include="Input\AtoZDatabase\AddressXLSXFiles\" />
     <Folder Include="Input\AtoZDatabase\EditedTerritoryHelperMasterAddressForImport\" />
     <Folder Include="Input\AtoZDatabase\TerritoryBoundary\" />
+    <Folder Include="Output\Map\js\information\Addresses\" />
+    <Folder Include="Output\Map\js\information\Territories\" />
   </ItemGroup>
 
 </Project>

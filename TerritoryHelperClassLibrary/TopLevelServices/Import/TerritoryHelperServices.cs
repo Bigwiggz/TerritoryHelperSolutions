@@ -179,6 +179,80 @@ public class TerritoryHelperServices
         webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
     }
 
+    public async Task UpdateCENSOTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config)
+    {
+        //1) Verify all addresses are in
+        Console.WriteLine("RUN CHECK");
+        Console.WriteLine("1) Did you make all edits to the territory database information/hard file information? (Y/N)");
+        Console.WriteLine("2) Are you sure the order of the territory database information/hard file has not changed and was downloaded in ENGLISH? (Y/N)");
+        Console.WriteLine("3) Is everything in the correct file with the correct name? (Y/N)");
+        Console.WriteLine("4) Did you export the territory helper addresses and put it in the folder Input/CurrentTerritoryHelperAddresses with the name \"TerritoryHelperAddresses.xlsx\"? (Y/N)");
+        Console.WriteLine("5) Did you check to make sure all existing territory notes are");
+
+        //2) Import territory helper information for order of addresses
+        Console.WriteLine("Importing Territory Helper Information");
+        var excelService = new ExcelBaseService();
+        FileInfo fileInfo = new FileInfo(config.ExistingSpanishAddressesFilePath);
+        var territoryHelperAddressList = await excelService.LoadExistingSpanishAddreessesExcelFile(fileInfo);
+
+        //2a) Create Unique Identifier for eacy record
+        var recordCleanup = new RecordCleanupService();
+        recordCleanup.CreateUniqueIdentifierFromList(territoryHelperAddressList);
+
+        //3) Import Territory Edited Records
+        FileInfo editedterritoryRecordsFileInfo = new FileInfo(config.EditedTerritoryHelperMasterAddressForImportFilePath);
+        var editedTerritoryRecordsListForImport = await excelService.LoadEditedAndUpdatedMasterFileForTerritoryHelperImport(editedterritoryRecordsFileInfo);
+
+        //4) Import Territory Notes
+        var territoryNotesText = await File.ReadAllTextAsync(config.TerritoryNotesPath);
+        var territoryNotesList = JsonSerializer.Deserialize<List<TerritorySpecificNote>>(territoryNotesText);
+
+        //5a) Import Territory Special Notes and Reorder the territory list
+        int i = 1;
+        foreach (var record in editedTerritoryRecordsListForImport)
+        {
+            record.Order = i;
+
+            foreach (var territory in territoryNotesList)
+            {
+                if (record.TerritoryNumber == territory.TerritoryNumbers)
+                {
+                    record.TerritorySpecialNotes = territory.TerritorySpecialNotes;
+                    record.TerritoryName = territory.TerritoryDescription;
+                }
+            }
+            i++;
+        }
+
+        //5b) Order by descending and keep only records that are from the original territory List
+        var orderedTerritoryRecordsListForImport = editedTerritoryRecordsListForImport.Where(x => x.Order >= 0).OrderBy(x => x.Order).ToList();
+
+        //5c) Get Excluded Records
+        var excludedRecords = editedTerritoryRecordsListForImport.Where(x => x.Order == 0).ToList();
+
+        //5d) Make records list of all records added and excluded
+        string outputFileName = $"ExportedListToTerritoryHelper-{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";
+
+        var outputExcelFile = new FileInfo(Path.Combine(config.FileSavedOutputLocation, outputFileName));
+
+        var excelFileProcessing = new ExcelBaseService();
+
+        await excelFileProcessing.ExportAddressMasterRecordToExcel(orderedTerritoryRecordsListForImport, excludedRecords, outputExcelFile);
+        /*
+        //TEST
+        var routePlannerService = new RoutePlannerService();
+        var testResult = await routePlannerService.GetRouteDirectionsPerTerritory(orderedTerritoryRecordsListForImport, config);
+        var jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+        var geoJSONText = JsonSerializer.Serialize(testResult.Item2, jsonOptions);
+        var testFilePath = Path.Combine(config.FileSavedOutputLocation, "testGeoJSONPaths.json");
+        await File.WriteAllTextAsync(testFilePath, geoJSONText);
+        */
+
+        //6) Paste Information in Territory Tables
+        var webScraperService = new WebScrapingService();
+        webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
+    }
+
     public async Task ImportAtoZDatabaseAddresses(TerritoryHelperConfiguration config)
     {
         Console.WriteLine("Starting Address Parsing...");

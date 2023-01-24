@@ -12,7 +12,7 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
 {
     //Territory Helper Information
     UserName = "bigwiggz@live.com",
-    Password = "SpanishTerr1914",
+    Password = "SpanishCenso1914",
     TerritoryRecordBaseUrl = "https://www.territoryhelper.com/en/View/Territory",
     LoginUrl = "https://www.territoryhelper.com/",
 
@@ -72,7 +72,13 @@ var territoryHelperService = new TerritoryHelperServices();
  * EXPORT ALL RECORDS TO TERRITORY HELPER
  */
 //Call this service to export all changes to Territory Helper
-await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+//await territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+
+/*
+ * EXPORT ALL RECORDS TO TERRITORY HELPER TO CENSO
+ */
+//Call this service to export all changes to Territory Helper CENSO
+await territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
 
 /*
  * IMPORT ALL RECORDS FROM ATOZ DATABASE
