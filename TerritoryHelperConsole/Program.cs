@@ -11,8 +11,8 @@ Console.WriteLine("Hello, World!");
 var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
 {
     //Territory Helper Information
-    UserName = "bigwiggz@live.com",
-    Password = "SpanishCenso1914",
+    UserName = "[TerritoryHelperUserNameHere]",
+    Password = "[TerritoryHelperPasswordHere]",
     TerritoryRecordBaseUrl = "https://www.territoryhelper.com/en/View/Territory",
     LoginUrl = "https://www.territoryhelper.com/",
 
@@ -25,7 +25,7 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
     FileInputLocation = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Input\",
 
     //Address Verification Information
-    AddressVerificationUserId = "388PALME4313",
+    AddressVerificationUserId = "[AddressVerificationUserIdHere]",
     APIType = "Verify",
     BatchID = "1",
     USPSAPISite = "http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=",
@@ -54,7 +54,7 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
     KingdomHallLocationLongitude=-81.13513616286949,
 
     //Azure Maps Primary Security Key
-    MicrosoftAzureMapsPrimarySecurityKey= "Os3ZX-degSXhpK1I6TNVFIAJ_ch_XA2UBLGYpd6QF6Y"
+    MicrosoftAzureMapsPrimarySecurityKey= "[MS Azure Maps Key Here]"
 
 
 };
