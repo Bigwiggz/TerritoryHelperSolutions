@@ -1,6 +1,8 @@
 using FontAwesome.Sharp;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using TerritoryHelperClassLibrary.Models.Configuration;
+using TerritoryHelperClassLibrary.TopLevelServices.Import;
 using TerritoryHelperSolutionsWinForm.ChildForms;
 
 namespace TerritoryHelperSolutionsWinForm
@@ -10,6 +12,11 @@ namespace TerritoryHelperSolutionsWinForm
         //Fields
         private IconButton currentBtn;
         private Form currentChildForm;
+
+        //Data Fields
+        public static TerritoryHelperConfiguration territoryHelperConfiguration;
+        public static TerritoryHelperServices territoryHelperService;
+
 
         public panelSideMenu()
         {
@@ -56,7 +63,7 @@ namespace TerritoryHelperSolutionsWinForm
             {
                 DisableButton();
                 currentBtn = (IconButton)senderBtn;
-                currentBtn.BackColor = Color.FromArgb(0, 206, 208);
+                currentBtn.BackColor = Color.FromArgb(47, 79, 79);
                 currentBtn.ForeColor = Color.Gainsboro;
                 currentBtn.TextAlign = ContentAlignment.MiddleCenter;
                 currentBtn.IconColor = Color.Gainsboro;
@@ -81,14 +88,14 @@ namespace TerritoryHelperSolutionsWinForm
             }
 
             currentChildForm = childForm;
-            childForm.TopLevel = true;
+            childForm.TopLevel = false;
+            childForm.TopMost = true;
             childForm.FormBorderStyle=FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
-            panelMain.Controls.Add(childForm);
-            panelMain.Tag=childForm;
-            panelMain.BringToFront();
-            panelMain.Show();
-            lblTitleChildForm.Text = childForm.Text;
+            panelDesktop.Controls.Add(childForm);
+            panelDesktop.Tag=childForm;
+            childForm.BringToFront();
+            childForm.Show();
         }
 
         private void btnInstructions_Click(object sender, EventArgs e)
@@ -100,6 +107,7 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnConfiguration_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new lblAddressVerificationUserId());
         }
 
         private void btnGetTerritoryInformation_Click(object sender, EventArgs e)
@@ -164,6 +172,28 @@ namespace TerritoryHelperSolutionsWinForm
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void lblMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                WindowState=FormWindowState.Maximized;
+            }
+            else
+            {
+                WindowState = FormWindowState.Normal;
+            }
+        }
+
+        private void lblExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void lblMinimize_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
         }
     }
 }

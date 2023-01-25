@@ -40,14 +40,19 @@
             this.btnHome1 = new System.Windows.Forms.Label();
             this.btnHome2 = new System.Windows.Forms.Label();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.panelMain = new System.Windows.Forms.Panel();
+            this.panelDesktop = new System.Windows.Forms.Panel();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.lblMinimize = new System.Windows.Forms.Label();
+            this.lblMaximize = new System.Windows.Forms.Label();
+            this.lblExit = new System.Windows.Forms.Label();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
-            this.panelMain.SuspendLayout();
+            this.panelBottom.SuspendLayout();
+            this.panelDesktop.SuspendLayout();
             this.panelTitleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +81,7 @@
             this.btnHelp.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnHelp.FlatAppearance.BorderSize = 0;
             this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnHelp.IconChar = FontAwesome.Sharp.IconChar.QuestionCircle;
             this.btnHelp.IconColor = System.Drawing.Color.White;
             this.btnHelp.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -96,6 +102,7 @@
             // 
             this.btnUpdateCensusTerritories.FlatAppearance.BorderSize = 0;
             this.btnUpdateCensusTerritories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateCensusTerritories.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnUpdateCensusTerritories.IconChar = FontAwesome.Sharp.IconChar.LocationDot;
             this.btnUpdateCensusTerritories.IconColor = System.Drawing.Color.White;
             this.btnUpdateCensusTerritories.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -116,6 +123,7 @@
             // 
             this.btnSearchAToZDB.FlatAppearance.BorderSize = 0;
             this.btnSearchAToZDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchAToZDB.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSearchAToZDB.IconChar = FontAwesome.Sharp.IconChar.Searchengin;
             this.btnSearchAToZDB.IconColor = System.Drawing.Color.White;
             this.btnSearchAToZDB.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -136,6 +144,7 @@
             // 
             this.btnSaveTerritoryInformation.FlatAppearance.BorderSize = 0;
             this.btnSaveTerritoryInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveTerritoryInformation.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSaveTerritoryInformation.IconChar = FontAwesome.Sharp.IconChar.Upload;
             this.btnSaveTerritoryInformation.IconColor = System.Drawing.Color.White;
             this.btnSaveTerritoryInformation.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -156,6 +165,7 @@
             // 
             this.btnGetTerritoryInformation.FlatAppearance.BorderSize = 0;
             this.btnGetTerritoryInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetTerritoryInformation.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnGetTerritoryInformation.IconChar = FontAwesome.Sharp.IconChar.Download;
             this.btnGetTerritoryInformation.IconColor = System.Drawing.Color.White;
             this.btnGetTerritoryInformation.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -177,6 +187,7 @@
             this.btnConfiguration.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnConfiguration.FlatAppearance.BorderSize = 0;
             this.btnConfiguration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfiguration.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnConfiguration.IconChar = FontAwesome.Sharp.IconChar.Gear;
             this.btnConfiguration.IconColor = System.Drawing.Color.White;
             this.btnConfiguration.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -198,6 +209,7 @@
             this.btnInstructions.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnInstructions.FlatAppearance.BorderSize = 0;
             this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInstructions.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnInstructions.IconChar = FontAwesome.Sharp.IconChar.BookOpen;
             this.btnInstructions.IconColor = System.Drawing.Color.White;
             this.btnInstructions.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -250,25 +262,30 @@
             // panelBottom
             // 
             this.panelBottom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.panelBottom.Controls.Add(this.label1);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(250, 521);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(684, 40);
             this.panelBottom.TabIndex = 1;
             // 
-            // panelMain
+            // panelDesktop
             // 
-            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.panelMain.Controls.Add(this.panelTitleBar);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(250, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(684, 521);
-            this.panelMain.TabIndex = 2;
+            this.panelDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.panelDesktop.Controls.Add(this.panelTitleBar);
+            this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelDesktop.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.panelDesktop.Location = new System.Drawing.Point(250, 0);
+            this.panelDesktop.Name = "panelDesktop";
+            this.panelDesktop.Size = new System.Drawing.Size(684, 521);
+            this.panelDesktop.TabIndex = 2;
             // 
             // panelTitleBar
             // 
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.panelTitleBar.Controls.Add(this.lblMinimize);
+            this.panelTitleBar.Controls.Add(this.lblMaximize);
+            this.panelTitleBar.Controls.Add(this.lblExit);
             this.panelTitleBar.Controls.Add(this.lblTitleChildForm);
             this.panelTitleBar.Controls.Add(this.iconCurrentChildForm);
             this.panelTitleBar.Dock = System.Windows.Forms.DockStyle.Top;
@@ -278,13 +295,53 @@
             this.panelTitleBar.TabIndex = 2;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
+            // lblMinimize
+            // 
+            this.lblMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMinimize.AutoSize = true;
+            this.lblMinimize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMinimize.ForeColor = System.Drawing.Color.White;
+            this.lblMinimize.Location = new System.Drawing.Point(597, 7);
+            this.lblMinimize.Name = "lblMinimize";
+            this.lblMinimize.Size = new System.Drawing.Size(20, 25);
+            this.lblMinimize.TabIndex = 4;
+            this.lblMinimize.Text = "_";
+            this.lblMinimize.Click += new System.EventHandler(this.lblMinimize_Click);
+            // 
+            // lblMaximize
+            // 
+            this.lblMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMaximize.AutoSize = true;
+            this.lblMaximize.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblMaximize.ForeColor = System.Drawing.Color.White;
+            this.lblMaximize.Location = new System.Drawing.Point(627, 7);
+            this.lblMaximize.Name = "lblMaximize";
+            this.lblMaximize.Size = new System.Drawing.Size(29, 25);
+            this.lblMaximize.TabIndex = 3;
+            this.lblMaximize.Text = "▢";
+            this.lblMaximize.Click += new System.EventHandler(this.lblMaximize_Click);
+            // 
+            // lblExit
+            // 
+            this.lblExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblExit.AutoSize = true;
+            this.lblExit.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblExit.ForeColor = System.Drawing.Color.White;
+            this.lblExit.Location = new System.Drawing.Point(657, 7);
+            this.lblExit.Name = "lblExit";
+            this.lblExit.Size = new System.Drawing.Size(24, 25);
+            this.lblExit.TabIndex = 2;
+            this.lblExit.Text = "X";
+            this.lblExit.Click += new System.EventHandler(this.lblExit_Click);
+            // 
             // lblTitleChildForm
             // 
             this.lblTitleChildForm.AutoSize = true;
+            this.lblTitleChildForm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitleChildForm.ForeColor = System.Drawing.Color.White;
-            this.lblTitleChildForm.Location = new System.Drawing.Point(42, 12);
+            this.lblTitleChildForm.Location = new System.Drawing.Point(42, 8);
             this.lblTitleChildForm.Name = "lblTitleChildForm";
-            this.lblTitleChildForm.Size = new System.Drawing.Size(40, 15);
+            this.lblTitleChildForm.Size = new System.Drawing.Size(56, 21);
             this.lblTitleChildForm.TabIndex = 1;
             this.lblTitleChildForm.Text = "Home";
             // 
@@ -312,12 +369,23 @@
             this.iconSplitButton1.Size = new System.Drawing.Size(23, 23);
             this.iconSplitButton1.Text = "iconSplitButton1";
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(588, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Version:  1.0.0";
+            // 
             // panelSideMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 561);
-            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(950, 600);
@@ -326,7 +394,9 @@
             this.panel1.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
-            this.panelMain.ResumeLayout(false);
+            this.panelBottom.ResumeLayout(false);
+            this.panelBottom.PerformLayout();
+            this.panelDesktop.ResumeLayout(false);
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
@@ -339,7 +409,7 @@
         private Panel panel1;
         private Panel panelLogo;
         private Panel panelBottom;
-        private Panel panelMain;
+        private Panel panelDesktop;
         private FontAwesome.Sharp.IconButton btnInstructions;
         private FontAwesome.Sharp.IconButton btnHelp;
         private FontAwesome.Sharp.IconButton btnUpdateCensusTerritories;
@@ -353,5 +423,9 @@
         private Label lblTitleChildForm;
         private FontAwesome.Sharp.IconPictureBox iconCurrentChildForm;
         private FontAwesome.Sharp.IconSplitButton iconSplitButton1;
+        private Label lblExit;
+        private Label lblMinimize;
+        private Label lblMaximize;
+        private Label label1;
     }
 }
