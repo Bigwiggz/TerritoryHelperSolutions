@@ -1,6 +1,6 @@
 ﻿namespace TerritoryHelperSolutionsWinForm.ChildForms
 {
-    partial class lblAddressVerificationUserId
+    partial class formConfiguration
     {
         /// <summary>
         /// Required designer variable.
@@ -75,6 +75,8 @@
             this.lblOutputFolderDirectoryPath = new System.Windows.Forms.Label();
             this.btnSelectFolderOutput = new FontAwesome.Sharp.IconButton();
             this.label15 = new System.Windows.Forms.Label();
+            this.btnSaveConfiguration = new FontAwesome.Sharp.IconButton();
+            this.label16 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSelectInputFolder
@@ -595,22 +597,52 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label15.ForeColor = System.Drawing.Color.Coral;
-            this.label15.Location = new System.Drawing.Point(48, 887);
+            this.label15.Location = new System.Drawing.Point(48, 942);
             this.label15.MaximumSize = new System.Drawing.Size(600, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(564, 38);
             this.label15.TabIndex = 46;
-            this.label15.Text = "4) Below are the USPS Address Verification API Settings.  This API will verify al" +
-    "l addresses processed in the scripts.  Please do not change the settings unless " +
-    "there is a need to do so.";
+            this.label15.Text = "NOTE: Click the button below to save all the configuration information.  This wil" +
+    "l create the necessary input and output folders for the scipt to run.";
             // 
-            // lblAddressVerificationUserId
+            // btnSaveConfiguration
+            // 
+            this.btnSaveConfiguration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSaveConfiguration.ForeColor = System.Drawing.Color.Coral;
+            this.btnSaveConfiguration.IconChar = FontAwesome.Sharp.IconChar.Lock;
+            this.btnSaveConfiguration.IconColor = System.Drawing.Color.Coral;
+            this.btnSaveConfiguration.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnSaveConfiguration.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveConfiguration.Location = new System.Drawing.Point(215, 995);
+            this.btnSaveConfiguration.Name = "btnSaveConfiguration";
+            this.btnSaveConfiguration.Size = new System.Drawing.Size(186, 51);
+            this.btnSaveConfiguration.TabIndex = 47;
+            this.btnSaveConfiguration.Text = "Lock Configuration";
+            this.btnSaveConfiguration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveConfiguration.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSaveConfiguration.UseVisualStyleBackColor = true;
+            this.btnSaveConfiguration.Click += new System.EventHandler(this.btnSaveConfiguration_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(66, 896);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(309, 32);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "Lock Configuration Settings";
+            // 
+            // formConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.btnSaveConfiguration);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lblOutputFolderDirectoryPath);
             this.Controls.Add(this.btnSelectFolderOutput);
@@ -656,7 +688,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblInputFolderPath);
             this.Controls.Add(this.btnSelectInputFolder);
-            this.Name = "lblAddressVerificationUserId";
+            this.Name = "formConfiguration";
             this.Text = "API Delay(ms)";
             this.Load += new System.EventHandler(this.lblAddressVerificationUserId_Load);
             this.ResumeLayout(false);
@@ -713,5 +745,7 @@
         private Label lblOutputFolderDirectoryPath;
         private FontAwesome.Sharp.IconButton btnSelectFolderOutput;
         private Label label15;
+        private FontAwesome.Sharp.IconButton btnSaveConfiguration;
+        private Label label16;
     }
 }

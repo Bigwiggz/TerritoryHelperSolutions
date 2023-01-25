@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TerritoryHelperSolutionsWinForm;
 
+
 namespace TerritoryHelperSolutionsWinForm.ChildForms
 {
-    public partial class lblAddressVerificationUserId : Form
+    public partial class formConfiguration : Form
     {
         public static string folderInputDirectory = null;
         public static string folderOutputDirectory= null;
 
-        public lblAddressVerificationUserId()
+        public formConfiguration()
         {
             InitializeComponent();
         }
@@ -68,6 +69,11 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 lblOutputFolderDirectoryPath.Text = fileDirectory;
                 folderOutputDirectory = fileDirectory;
             }
+        }
+
+        private void btnSaveConfiguration_Click(object sender, EventArgs e)
+        {
+            panelSideMenu.testInput = "TestValue";
         }
     }
 }

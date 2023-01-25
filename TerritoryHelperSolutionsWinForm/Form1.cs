@@ -16,7 +16,7 @@ namespace TerritoryHelperSolutionsWinForm
         //Data Fields
         public static TerritoryHelperConfiguration territoryHelperConfiguration;
         public static TerritoryHelperServices territoryHelperService;
-
+        public static string testInput = "";
 
         public panelSideMenu()
         {
@@ -107,7 +107,7 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnConfiguration_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
-            OpenChildForm(new lblAddressVerificationUserId());
+            OpenChildForm(new formConfiguration());
         }
 
         private void btnGetTerritoryInformation_Click(object sender, EventArgs e)
