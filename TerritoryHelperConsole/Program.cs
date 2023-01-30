@@ -56,8 +56,6 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
 
     //Azure Maps Primary Security Key
     MicrosoftAzureMapsPrimarySecurityKey= "[MS Azure Maps Key Here]"
-
-
 };
 
 //Call Progress
