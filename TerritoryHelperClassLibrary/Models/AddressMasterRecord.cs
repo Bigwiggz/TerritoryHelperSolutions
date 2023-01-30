@@ -39,5 +39,5 @@ public class AddressMasterRecord:TerritoryHelperAddress
     public string UniqueIdentifierCreation { get; set; }
 
     //Route Plan Order
-    public int MasterRecordRoutePlanOrder { get; set; } = 0;
+    //public int MasterRecordRoutePlanOrder { get; set; } = 0;
 }

@@ -13,36 +13,75 @@ using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.AtoZDatabaseModels;
 using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.BaseServices.RoutePlanner;
+using TerritoryHelperClassLibrary.Models.UtilityModels;
 
 namespace TerritoryHelperClassLibrary.TopLevelServices.Import;
 
 public class TerritoryHelperServices
 {
+    //Fields
+    public ProgressReportModel report;
+    public LowerLeverProgressReportModel lowerReport;
+
     public TerritoryHelperServices()
     {
-        
+        report = new ProgressReportModel();
+        lowerReport= new LowerLeverProgressReportModel();
     }
 
-    public async Task ImportDataFromTerritoryHelper(TerritoryHelperConfiguration config)
+    public async Task ImportDataFromTerritoryHelper(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
+
         //1) Import territory helper information
         Console.WriteLine("Importing Territory Helper Information");
 
         var excelService = new ExcelBaseService();
         FileInfo fileInfo=new FileInfo(config.ExistingSpanishAddressesFilePath);
         var territoryHelperAddressList = await excelService.LoadExistingSpanishAddreessesExcelFile(fileInfo);
+        
+        //Report
+        report.TopLevelProgressMessage = "STAGE 1: Loading Existing Spanish Address Excel File...";
+        report.TopLevelPercentComplete = 2;
+        progress.Report(report);
 
         //2) Web scrape territory helper for notes
         Console.WriteLine("Webscraping for Territory Notes");
-        var webScraper = new WebScrapingService();
-        var territoryHelperNotesList = webScraper.GetExistingTableTerritoryInformation(config);
-        var territoryHelperNotesRecordsMaster = webScraper.ConvertRTFRecordtoSpanishImportList(territoryHelperNotesList);
+
+        //Report
+        report.TopLevelProgressMessage = "STAGE 2: Initializing RTF Note Service.  This task will take time to complete...";
+        report.TopLevelPercentComplete = 5;
+        progress.Report(report);
+
+        var territoryHelperNotesRecordsMaster = new List<AddressMasterRecord>();
+
+        await Task.Run(() => 
+        {
+            var webScraper = new WebScrapingService();
+            var territoryHelperNotesList = webScraper.GetExistingTableTerritoryInformation(config, lowerProgress);
+            territoryHelperNotesRecordsMaster = webScraper.ConvertRTFRecordtoSpanishImportList(territoryHelperNotesList);
+        });
+
+        //Report
+        report.TopLevelProgressMessage = "STAGE 3: Converting Territory RTF/imported records to Master List...";
+        report.TopLevelPercentComplete = 62;
+        progress.Report(report);
 
         //3) Do Record cleanup
         Console.WriteLine("Cleaning up Territory Records");
+
+        //Report
+        report.TopLevelProgressMessage = "STAGE 4: Cleaning Territory Records and Creating unique identifiers";
+        report.TopLevelPercentComplete = 67;
+        progress.Report(report);
+
         var recordCleanup = new RecordCleanupService();
         recordCleanup.CreateUniqueIdentifierFromList(territoryHelperAddressList);
         recordCleanup.CreateUniqueIdentifierFromList(territoryHelperNotesRecordsMaster);
+
+        //Report
+        report.TopLevelProgressMessage = "Cleaning Territory Record null and empty information...";
+        report.TopLevelPercentComplete = 70;
+        progress.Report(report);
 
         recordCleanup.ReplaceNullsWithEmpty<AddressMasterRecord>(territoryHelperAddressList);
         recordCleanup.ReplaceNullsWithEmpty<AddressMasterRecord>(territoryHelperNotesRecordsMaster);
@@ -50,6 +89,11 @@ public class TerritoryHelperServices
         //3A) Add other properties
         recordCleanup.AddOtherMasterRecordProperties(territoryHelperAddressList);
         recordCleanup.AddOtherMasterRecordProperties(territoryHelperNotesRecordsMaster);
+
+        //Report
+        report.TopLevelProgressMessage = "STAGE 5: Combining Territory Records and creating difference lists...";
+        report.TopLevelPercentComplete = 72;
+        progress.Report(report);
 
         //A) In TerritoryHelper but NOT in Territory Notes
         Console.WriteLine("Splitting Territory Records i 3 categories");
@@ -76,12 +120,22 @@ public class TerritoryHelperServices
             .Where(x => !territoryHelperAddressList
             .Any(y => y.UniqueIdentifierCreation == x.UniqueIdentifierCreation)).ToList();
 
+        //Report
+        report.TopLevelProgressMessage = "STAGE 6: Starting Territory Address Verification...";
+        report.TopLevelPercentComplete = 75;
+        progress.Report(report);
+
         //4) Verify all addresses
         Console.WriteLine("Verifying all addresses");
         var addressVerificationService = new AddressVerificationService();
-        await addressVerificationService.VerifyAddress(territoryHelperNOTTerritoryNotes,config);
-        await addressVerificationService.VerifyAddress(territoryHelperANDTerritoryNotes, config);
-        await addressVerificationService.VerifyAddress(territoryNotesNOTTerritoryHelper, config);
+        await addressVerificationService.VerifyAddress(territoryHelperNOTTerritoryNotes,config, lowerProgress);
+        await addressVerificationService.VerifyAddress(territoryHelperANDTerritoryNotes, config, lowerProgress);
+        await addressVerificationService.VerifyAddress(territoryNotesNOTTerritoryHelper, config, lowerProgress);
+
+        //Report
+        report.TopLevelProgressMessage = "STAGE 7: Writing Results To Excel File...";
+        report.TopLevelPercentComplete = 95;
+        progress.Report(report);
 
         //5) Export all the data to an excel file
         Console.WriteLine("Exporting all data to Excel");
@@ -96,9 +150,14 @@ public class TerritoryHelperServices
             territoryHelperANDTerritoryNotes,
             territoryHelperNOTTerritoryNotes,
             fileInfoExcelOutput);
+
+        //Report
+        report.TopLevelProgressMessage = "Script Completed";
+        report.TopLevelPercentComplete = 100;
+        progress.Report(report);
     }
 
-    public async Task UpdateTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config)
+    public async Task UpdateTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //1) Verify all addresses are in
         Console.WriteLine("RUN CHECK");
@@ -174,12 +233,14 @@ public class TerritoryHelperServices
         await File.WriteAllTextAsync(testFilePath, geoJSONText);
         */
 
+        //TODO: Add progress, change webscraping service to territory notes service change
+
         //6) Paste Information in Territory Tables
         var webScraperService = new WebScrapingService();
         webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
     }
 
-    public async Task UpdateCENSOTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config)
+    public async Task UpdateCENSOTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //1) Verify all addresses are in
         Console.WriteLine("RUN CHECK");
@@ -253,7 +314,7 @@ public class TerritoryHelperServices
         webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
     }
 
-    public async Task ImportAtoZDatabaseAddresses(TerritoryHelperConfiguration config)
+    public async Task ImportAtoZDatabaseAddresses(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         Console.WriteLine("Starting Address Parsing...");
 
@@ -299,7 +360,7 @@ public class TerritoryHelperServices
 
         var addressVerifierService = new AddressVerificationService();
 
-        await addressVerifierService.VerifyAddress(finalModelList,config);
+        await addressVerifierService.VerifyAddress(finalModelList,config,lowerProgress);
 
         //Add in Territory Notes
         FileServices.AddTerritoryNotes(finalModelList, config);

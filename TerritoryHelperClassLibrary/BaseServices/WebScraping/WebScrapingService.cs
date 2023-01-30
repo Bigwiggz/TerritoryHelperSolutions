@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TerritoryHelperClassLibrary.Models.UtilityModels;
 using TextCopy;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
@@ -17,9 +18,21 @@ namespace TerritoryHelperClassLibrary.BaseServices.WebScraping;
 
 public class WebScrapingService
 {
-    public List<ModelRTFRecord> GetExistingTableTerritoryInformation(TerritoryHelperConfiguration config)
-    {
+    //Fields
+    public LowerLeverProgressReportModel lowerReport;
 
+    public WebScrapingService()
+    {
+        lowerReport = new LowerLeverProgressReportModel();
+    }
+
+    public List<ModelRTFRecord> GetExistingTableTerritoryInformation(TerritoryHelperConfiguration config, IProgress<LowerLeverProgressReportModel> lowerProgress)
+    {
+        //Report
+        lowerReport.LowerLevelProcessPercentComplete = 0;
+        lowerReport.LowerLevelProcessMessage = $"Retrieving Territory RTF Records...";
+        lowerProgress.Report(lowerReport);
+        
         new DriverManager().SetUpDriver(new ChromeConfig());
         IWebDriver driver = new ChromeDriver();
 
@@ -59,6 +72,13 @@ public class WebScrapingService
             var territoryUrl = $"{config.TerritoryRecordBaseUrl}/{territoryElements[i]}";
             driver.Navigate().GoToUrl(territoryUrl);
             var tableRows = driver.FindElements(By.XPath("//*[@id=\"territory_notes\"]//tr")).ToList();
+
+            //Report
+            int reportCount = i + 1;
+            string territoryReport = ScrubHtml(territoryElements[i]);
+            lowerReport.LowerLevelProcessPercentComplete = reportCount*100 / territoryElements.Count;
+            lowerReport.LowerLevelProcessMessage = $"Processing Territory Id {territoryReport}: Record {reportCount} of {territoryElements.Count}...";
+            lowerProgress.Report(lowerReport);
 
             //TODO: Remove Table Headers with "Dirección, Nombres, Número Telefónico, Notas"
             if (tableRows.Count > 0)

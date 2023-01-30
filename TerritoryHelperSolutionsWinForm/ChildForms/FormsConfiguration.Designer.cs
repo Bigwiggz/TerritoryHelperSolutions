@@ -65,18 +65,18 @@
             this.lblKingdomHallLatitude = new System.Windows.Forms.Label();
             this.tbKingdomHallLatitude = new System.Windows.Forms.TextBox();
             this.lblKingdomHallAddress = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbKingdomHallAddress = new System.Windows.Forms.TextBox();
             this.lblBrowserSetup = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.btnSelectFolderInput = new FontAwesome.Sharp.IconButton();
             this.lblFolderInputDirectoryPath = new System.Windows.Forms.Label();
             this.lblOutputFolderDirectoryPath = new System.Windows.Forms.Label();
-            this.btnSelectFolderOutput = new FontAwesome.Sharp.IconButton();
             this.label15 = new System.Windows.Forms.Label();
             this.btnSaveConfiguration = new FontAwesome.Sharp.IconButton();
             this.label16 = new System.Windows.Forms.Label();
+            this.lblNumberofTableRows = new System.Windows.Forms.Label();
+            this.tbNumberofTableRows = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnSelectInputFolder
@@ -96,7 +96,6 @@
             this.btnSelectInputFolder.Text = "Select Input Folder";
             this.btnSelectInputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSelectInputFolder.UseVisualStyleBackColor = true;
-            this.btnSelectInputFolder.Click += new System.EventHandler(this.btnSelectInputFolder_Click);
             // 
             // lblInputFolderPath
             // 
@@ -184,7 +183,6 @@
             this.btnSelectOutputFolder.Text = "Select Output Folder";
             this.btnSelectOutputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSelectOutputFolder.UseVisualStyleBackColor = true;
-            this.btnSelectOutputFolder.Click += new System.EventHandler(this.btnSelectOutputFolder_Click);
             // 
             // lblFileSetup
             // 
@@ -228,7 +226,6 @@
             this.tbTerritoryHelperUrlLogin.Name = "tbTerritoryHelperUrlLogin";
             this.tbTerritoryHelperUrlLogin.Size = new System.Drawing.Size(243, 23);
             this.tbTerritoryHelperUrlLogin.TabIndex = 11;
-            this.tbTerritoryHelperUrlLogin.Text = "https://territoryhelper.com/";
             // 
             // lblTerritoryHelperUrlLogin
             // 
@@ -259,7 +256,6 @@
             this.tbTerritoryHelperUrlTerritoryRecords.Name = "tbTerritoryHelperUrlTerritoryRecords";
             this.tbTerritoryHelperUrlTerritoryRecords.Size = new System.Drawing.Size(287, 23);
             this.tbTerritoryHelperUrlTerritoryRecords.TabIndex = 13;
-            this.tbTerritoryHelperUrlTerritoryRecords.Text = "https://www.territoryhelper.com/en/View/Territory";
             // 
             // label7
             // 
@@ -290,7 +286,6 @@
             this.tbAPIType.Name = "tbAPIType";
             this.tbAPIType.Size = new System.Drawing.Size(287, 23);
             this.tbAPIType.TabIndex = 19;
-            this.tbAPIType.Text = "Verify";
             // 
             // label10
             // 
@@ -310,7 +305,6 @@
             this.tbAddressVerificationUserId.Name = "tbAddressVerificationUserId";
             this.tbAddressVerificationUserId.Size = new System.Drawing.Size(243, 23);
             this.tbAddressVerificationUserId.TabIndex = 17;
-            this.tbAddressVerificationUserId.Text = "388PALME4313";
             // 
             // lblUSPSAPISite
             // 
@@ -330,7 +324,6 @@
             this.tbUSPSAPISite.Name = "tbUSPSAPISite";
             this.tbUSPSAPISite.Size = new System.Drawing.Size(396, 23);
             this.tbUSPSAPISite.TabIndex = 23;
-            this.tbUSPSAPISite.Text = "http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML=";
             // 
             // lblBatchId
             // 
@@ -350,7 +343,6 @@
             this.tbBatchId.Name = "tbBatchId";
             this.tbBatchId.Size = new System.Drawing.Size(243, 23);
             this.tbBatchId.TabIndex = 21;
-            this.tbBatchId.Text = "1";
             // 
             // lblAPIDelayMS
             // 
@@ -370,7 +362,6 @@
             this.tbAPIDelayMS.Name = "tbAPIDelayMS";
             this.tbAPIDelayMS.Size = new System.Drawing.Size(396, 23);
             this.tbAPIDelayMS.TabIndex = 25;
-            this.tbAPIDelayMS.Text = "100";
             // 
             // lblKingdomHallInformation
             // 
@@ -440,7 +431,6 @@
             this.tbKingdomHallLongitude.Name = "tbKingdomHallLongitude";
             this.tbKingdomHallLongitude.Size = new System.Drawing.Size(215, 23);
             this.tbKingdomHallLongitude.TabIndex = 36;
-            this.tbKingdomHallLongitude.Text = "-81.13513616286949";
             // 
             // lblKingdomHallLatitude
             // 
@@ -460,7 +450,6 @@
             this.tbKingdomHallLatitude.Name = "tbKingdomHallLatitude";
             this.tbKingdomHallLatitude.Size = new System.Drawing.Size(215, 23);
             this.tbKingdomHallLatitude.TabIndex = 34;
-            this.tbKingdomHallLatitude.Text = "34.00261402946795";
             // 
             // lblKingdomHallAddress
             // 
@@ -473,14 +462,13 @@
             this.lblKingdomHallAddress.TabIndex = 33;
             this.lblKingdomHallAddress.Text = "Kingdom Hall Address";
             // 
-            // textBox3
+            // tbKingdomHallAddress
             // 
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.Location = new System.Drawing.Point(242, 698);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(274, 23);
-            this.textBox3.TabIndex = 32;
-            this.textBox3.Text = "3679 Leaphart Rd, West Columbia, SC 29169";
+            this.tbKingdomHallAddress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbKingdomHallAddress.Location = new System.Drawing.Point(242, 698);
+            this.tbKingdomHallAddress.Name = "tbKingdomHallAddress";
+            this.tbKingdomHallAddress.Size = new System.Drawing.Size(274, 23);
+            this.tbKingdomHallAddress.TabIndex = 32;
             // 
             // lblBrowserSetup
             // 
@@ -501,10 +489,9 @@
             this.label8.Location = new System.Drawing.Point(48, 41);
             this.label8.MaximumSize = new System.Drawing.Size(600, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(517, 19);
+            this.label8.Size = new System.Drawing.Size(403, 19);
             this.label8.TabIndex = 39;
-            this.label8.Text = "1) Please select the input file directory where files will be placed for scriptin" +
-    "g below. ";
+            this.label8.Text = "1) Below is the input file directory where all input files are placed.";
             // 
             // label9
             // 
@@ -525,37 +512,16 @@
             this.label14.Location = new System.Drawing.Point(48, 108);
             this.label14.MaximumSize = new System.Drawing.Size(600, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(531, 19);
+            this.label14.Size = new System.Drawing.Size(427, 19);
             this.label14.TabIndex = 41;
-            this.label14.Text = "2)  Please select the output file directory where files will be placed for script" +
-    "ing below. ";
-            // 
-            // btnSelectFolderInput
-            // 
-            this.btnSelectFolderInput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFolderInput.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSelectFolderInput.ForeColor = System.Drawing.Color.Coral;
-            this.btnSelectFolderInput.IconChar = FontAwesome.Sharp.IconChar.Folder;
-            this.btnSelectFolderInput.IconColor = System.Drawing.Color.Coral;
-            this.btnSelectFolderInput.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnSelectFolderInput.IconSize = 28;
-            this.btnSelectFolderInput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectFolderInput.Location = new System.Drawing.Point(68, 67);
-            this.btnSelectFolderInput.Name = "btnSelectFolderInput";
-            this.btnSelectFolderInput.Size = new System.Drawing.Size(156, 33);
-            this.btnSelectFolderInput.TabIndex = 42;
-            this.btnSelectFolderInput.Text = "Select Input Folder";
-            this.btnSelectFolderInput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectFolderInput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSelectFolderInput.UseVisualStyleBackColor = true;
-            this.btnSelectFolderInput.Click += new System.EventHandler(this.btnSelectFolderInput_Click);
+            this.label14.Text = "2)  Below is the output file directory where all output files are placed.";
             // 
             // lblFolderInputDirectoryPath
             // 
             this.lblFolderInputDirectoryPath.AutoSize = true;
             this.lblFolderInputDirectoryPath.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblFolderInputDirectoryPath.ForeColor = System.Drawing.Color.Coral;
-            this.lblFolderInputDirectoryPath.Location = new System.Drawing.Point(230, 77);
+            this.lblFolderInputDirectoryPath.Location = new System.Drawing.Point(93, 77);
             this.lblFolderInputDirectoryPath.Name = "lblFolderInputDirectoryPath";
             this.lblFolderInputDirectoryPath.Size = new System.Drawing.Size(146, 13);
             this.lblFolderInputDirectoryPath.TabIndex = 43;
@@ -566,38 +532,18 @@
             this.lblOutputFolderDirectoryPath.AutoSize = true;
             this.lblOutputFolderDirectoryPath.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblOutputFolderDirectoryPath.ForeColor = System.Drawing.Color.Coral;
-            this.lblOutputFolderDirectoryPath.Location = new System.Drawing.Point(230, 145);
+            this.lblOutputFolderDirectoryPath.Location = new System.Drawing.Point(93, 145);
             this.lblOutputFolderDirectoryPath.Name = "lblOutputFolderDirectoryPath";
             this.lblOutputFolderDirectoryPath.Size = new System.Drawing.Size(156, 13);
             this.lblOutputFolderDirectoryPath.TabIndex = 45;
             this.lblOutputFolderDirectoryPath.Text = "Folder Output Directory Path";
-            // 
-            // btnSelectFolderOutput
-            // 
-            this.btnSelectFolderOutput.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelectFolderOutput.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnSelectFolderOutput.ForeColor = System.Drawing.Color.Coral;
-            this.btnSelectFolderOutput.IconChar = FontAwesome.Sharp.IconChar.Folder;
-            this.btnSelectFolderOutput.IconColor = System.Drawing.Color.Coral;
-            this.btnSelectFolderOutput.IconFont = FontAwesome.Sharp.IconFont.Solid;
-            this.btnSelectFolderOutput.IconSize = 28;
-            this.btnSelectFolderOutput.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectFolderOutput.Location = new System.Drawing.Point(68, 135);
-            this.btnSelectFolderOutput.Name = "btnSelectFolderOutput";
-            this.btnSelectFolderOutput.Size = new System.Drawing.Size(156, 33);
-            this.btnSelectFolderOutput.TabIndex = 44;
-            this.btnSelectFolderOutput.Text = "Select Output Folder";
-            this.btnSelectFolderOutput.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectFolderOutput.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnSelectFolderOutput.UseVisualStyleBackColor = true;
-            this.btnSelectFolderOutput.Click += new System.EventHandler(this.btnSelectFolderOutput_Click);
             // 
             // label15
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label15.ForeColor = System.Drawing.Color.Coral;
-            this.label15.Location = new System.Drawing.Point(48, 942);
+            this.label15.Location = new System.Drawing.Point(48, 953);
             this.label15.MaximumSize = new System.Drawing.Size(600, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(564, 38);
@@ -613,9 +559,9 @@
             this.btnSaveConfiguration.IconColor = System.Drawing.Color.Coral;
             this.btnSaveConfiguration.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnSaveConfiguration.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveConfiguration.Location = new System.Drawing.Point(215, 995);
+            this.btnSaveConfiguration.Location = new System.Drawing.Point(174, 1006);
             this.btnSaveConfiguration.Name = "btnSaveConfiguration";
-            this.btnSaveConfiguration.Size = new System.Drawing.Size(186, 51);
+            this.btnSaveConfiguration.Size = new System.Drawing.Size(264, 51);
             this.btnSaveConfiguration.TabIndex = 47;
             this.btnSaveConfiguration.Text = "Lock Configuration";
             this.btnSaveConfiguration.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -628,11 +574,30 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label16.ForeColor = System.Drawing.Color.White;
-            this.label16.Location = new System.Drawing.Point(66, 896);
+            this.label16.Location = new System.Drawing.Point(66, 907);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(309, 32);
             this.label16.TabIndex = 48;
             this.label16.Text = "Lock Configuration Settings";
+            // 
+            // lblNumberofTableRows
+            // 
+            this.lblNumberofTableRows.AutoSize = true;
+            this.lblNumberofTableRows.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblNumberofTableRows.ForeColor = System.Drawing.Color.Coral;
+            this.lblNumberofTableRows.Location = new System.Drawing.Point(66, 882);
+            this.lblNumberofTableRows.Name = "lblNumberofTableRows";
+            this.lblNumberofTableRows.Size = new System.Drawing.Size(145, 19);
+            this.lblNumberofTableRows.TabIndex = 50;
+            this.lblNumberofTableRows.Text = "Number of Table Rows";
+            // 
+            // tbNumberofTableRows
+            // 
+            this.tbNumberofTableRows.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tbNumberofTableRows.Location = new System.Drawing.Point(243, 881);
+            this.tbNumberofTableRows.Name = "tbNumberofTableRows";
+            this.tbNumberofTableRows.Size = new System.Drawing.Size(274, 23);
+            this.tbNumberofTableRows.TabIndex = 49;
             // 
             // formConfiguration
             // 
@@ -641,13 +606,13 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.lblNumberofTableRows);
+            this.Controls.Add(this.tbNumberofTableRows);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.btnSaveConfiguration);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.lblOutputFolderDirectoryPath);
-            this.Controls.Add(this.btnSelectFolderOutput);
             this.Controls.Add(this.lblFolderInputDirectoryPath);
-            this.Controls.Add(this.btnSelectFolderInput);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -657,7 +622,7 @@
             this.Controls.Add(this.lblKingdomHallLatitude);
             this.Controls.Add(this.tbKingdomHallLatitude);
             this.Controls.Add(this.lblKingdomHallAddress);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.tbKingdomHallAddress);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
@@ -690,7 +655,7 @@
             this.Controls.Add(this.btnSelectInputFolder);
             this.Name = "formConfiguration";
             this.Text = "API Delay(ms)";
-            this.Load += new System.EventHandler(this.lblAddressVerificationUserId_Load);
+            this.Load += new System.EventHandler(this.formConfiguration_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -735,17 +700,17 @@
         private Label lblKingdomHallLatitude;
         private TextBox tbKingdomHallLatitude;
         private Label lblKingdomHallAddress;
-        private TextBox textBox3;
+        private TextBox tbKingdomHallAddress;
         private Label lblBrowserSetup;
         private Label label8;
         private Label label9;
         private Label label14;
-        private FontAwesome.Sharp.IconButton btnSelectFolderInput;
         private Label lblFolderInputDirectoryPath;
         private Label lblOutputFolderDirectoryPath;
-        private FontAwesome.Sharp.IconButton btnSelectFolderOutput;
         private Label label15;
         private FontAwesome.Sharp.IconButton btnSaveConfiguration;
         private Label label16;
+        private Label lblNumberofTableRows;
+        private TextBox tbNumberofTableRows;
     }
 }

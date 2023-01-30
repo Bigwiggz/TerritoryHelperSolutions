@@ -3,6 +3,7 @@ using ExcelMigration.ExcelInterop;
 using System.Diagnostics;
 using TerritoryHelperClassLibrary.BaseServices.GeoMapping;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TerritoryHelperClassLibrary.Models.UtilityModels;
 using TerritoryHelperClassLibrary.TopLevelServices.Import;
 
 Console.WriteLine("Hello, World!");
@@ -59,6 +60,10 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
 
 };
 
+//Call Progress
+var progress = new Progress<ProgressReportModel>();
+var lowerProgress = new Progress<LowerLeverProgressReportModel>();
+
 //Call your Top level services here
 var territoryHelperService = new TerritoryHelperServices();
 
@@ -78,7 +83,7 @@ var territoryHelperService = new TerritoryHelperServices();
  * EXPORT ALL RECORDS TO TERRITORY HELPER TO CENSO
  */
 //Call this service to export all changes to Territory Helper CENSO
-await territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig);
+await territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig, progress, lowerProgress);
 
 /*
  * IMPORT ALL RECORDS FROM ATOZ DATABASE

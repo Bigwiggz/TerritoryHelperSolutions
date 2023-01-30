@@ -7,12 +7,21 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.Configuration;
+using TerritoryHelperClassLibrary.Models.UtilityModels;
 
 namespace TerritoryHelperClassLibrary.BaseServices.AddressVerification;
 
 public class AddressVerificationService
 {
-    public async Task VerifyAddress(List<AddressMasterRecord> addressMasterRecord, TerritoryHelperConfiguration config)
+    //Fields
+    public LowerLeverProgressReportModel lowerReport;
+
+    public AddressVerificationService()
+    {
+        lowerReport= new LowerLeverProgressReportModel();
+    }
+
+    public async Task VerifyAddress(List<AddressMasterRecord> addressMasterRecord, TerritoryHelperConfiguration config, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //Create HttpClient
         HttpClient client=new HttpClient();
@@ -20,6 +29,12 @@ public class AddressVerificationService
         int i = 0;
         foreach (var item in addressMasterRecord)
         {
+            //Report
+            int reportCount = i + 1;
+            lowerReport.LowerLevelProcessPercentComplete=reportCount*100/addressMasterRecord.Count;
+            lowerReport.LowerLevelProcessMessage = $"Processing Address Verification: {item.CompleteAddress}; Record {reportCount} of {addressMasterRecord.Count}";
+            lowerProgress.Report(lowerReport);
+
             string aptNumber;
             string streetNumberandName;
             if (item.LocationType == "Mobile home" || item.LocationType == "Casa móvil")

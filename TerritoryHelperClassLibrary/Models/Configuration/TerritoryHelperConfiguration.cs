@@ -54,4 +54,7 @@ public class TerritoryHelperConfiguration
 
     //Microsoft Azure Maps Primary Security Key
     public string MicrosoftAzureMapsPrimarySecurityKey { get; set; }
+
+    //UI Configuration Settings
+    public bool IsConfigurationSettingsLocked { get; set; }
 }

@@ -5,6 +5,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>4bdb398f-89aa-4723-86f0-f45529f343b1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <Folder Include="Input\AtoZDatabase\TerritoryBoundary\" />
     <Folder Include="Output\Map\js\information\Addresses\" />
     <Folder Include="Output\Map\js\information\Territories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
   </ItemGroup>
 
 </Project>

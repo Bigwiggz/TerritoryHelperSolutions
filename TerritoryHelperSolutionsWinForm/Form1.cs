@@ -14,9 +14,8 @@ namespace TerritoryHelperSolutionsWinForm
         private Form currentChildForm;
 
         //Data Fields
-        public static TerritoryHelperConfiguration territoryHelperConfiguration;
-        public static TerritoryHelperServices territoryHelperService;
-        public static string testInput = "";
+        public static TerritoryHelperConfiguration territoryHelperConfiguration=new TerritoryHelperConfiguration();
+        public static TerritoryHelperServices territoryHelperService=new TerritoryHelperServices();
 
         public panelSideMenu()
         {
@@ -113,11 +112,13 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnGetTerritoryInformation_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormGetTerritoryInformation());
         }
 
         private void btnSaveTerritoryInformation_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormSaveTerritoryInformation());
         }
 
         private void btnSearchAToZDB_Click(object sender, EventArgs e)
@@ -133,6 +134,7 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnHelp_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormHelpConfiguration());
         }
 
         private void btnHome2_Click(object sender, EventArgs e)

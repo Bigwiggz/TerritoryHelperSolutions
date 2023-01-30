@@ -145,7 +145,7 @@ public class RoutePlannerService
                     routePlannerAddress.Id = address.Id;
                     routePlannerAddress.MasterRecordRoutePlanOrder= optimalIndexList.Where(x=>x.ProvidedIndex==i).Select(y=>y.OptimizedIndex).FirstOrDefault().Value; 
 
-                    address.MasterRecordRoutePlanOrder = optimalIndexList.Where(x => x.ProvidedIndex == i).Select(y => y.OptimizedIndex).FirstOrDefault().Value;
+                    //address.MasterRecordRoutePlanOrder = optimalIndexList.Where(x => x.ProvidedIndex == i).Select(y => y.OptimizedIndex).FirstOrDefault().Value;
                     routePlannerAddressList.Add(routePlannerAddress);
                     i++;
                 }
