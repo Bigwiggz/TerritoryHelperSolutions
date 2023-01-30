@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TerritoryHelperSolutionsWinForm.Models;
+using TerritoryHelperSolutionsWinForm.UtilityForms;
+using TerritoryHelperSolutionsWinForm.Validators;
 
 namespace TerritoryHelperSolutionsWinForm.ChildForms
 {
@@ -50,6 +53,42 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                     panelSideMenu.territoryHelperConfiguration.TerritoriesFilePath = openFileTerritoriesDialogInput.FileName;
                     MessageBox.Show($"{openFileTerritoriesDialogInput.SafeFileName} path \n\r saved successfully", "Territories File Path");
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnRunSaveTerritoryInformationScript_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Information Validation
+                panelSideMenu.territoryHelperConfiguration.UserName = tbTerritoryHelperEmail.Text;
+                panelSideMenu.territoryHelperConfiguration.Password = mTBTerritoryHelperPassword.Text;
+
+
+                SaveTerritoryInformationValidator saveTerritoryInformationValidator = new SaveTerritoryInformationValidator();
+                var validatedResult = saveTerritoryInformationValidator.Validate(panelSideMenu.territoryHelperConfiguration);
+                if (validatedResult.IsValid)
+                {
+                    FormProgressBar formProgresssBar = new FormProgressBar(ScriptName.SaveTerritoryInformation);
+                    formProgresssBar.Show();
+                }
+                else
+                {
+
+                    string errorList = "THERE WERE SOME ERROR(S): \r\n \r\n";
+                    foreach (var failure in validatedResult.Errors)
+                    {
+                        errorList = $"{errorList} •{failure} \r\n \r\n";
+                    }
+
+                    MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
             }
             catch (Exception ex)
             {

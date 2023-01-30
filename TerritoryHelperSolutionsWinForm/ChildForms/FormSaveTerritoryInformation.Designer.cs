@@ -130,14 +130,15 @@
             this.btnRunSaveTerritoryInformationScript.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnRunSaveTerritoryInformationScript.IconSize = 24;
             this.btnRunSaveTerritoryInformationScript.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRunSaveTerritoryInformationScript.Location = new System.Drawing.Point(213, 756);
+            this.btnRunSaveTerritoryInformationScript.Location = new System.Drawing.Point(177, 751);
             this.btnRunSaveTerritoryInformationScript.Name = "btnRunSaveTerritoryInformationScript";
-            this.btnRunSaveTerritoryInformationScript.Size = new System.Drawing.Size(203, 48);
+            this.btnRunSaveTerritoryInformationScript.Size = new System.Drawing.Size(307, 48);
             this.btnRunSaveTerritoryInformationScript.TabIndex = 79;
             this.btnRunSaveTerritoryInformationScript.Text = "Run Save Territories";
             this.btnRunSaveTerritoryInformationScript.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRunSaveTerritoryInformationScript.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRunSaveTerritoryInformationScript.UseVisualStyleBackColor = true;
+            this.btnRunSaveTerritoryInformationScript.Click += new System.EventHandler(this.btnRunSaveTerritoryInformationScript_Click);
             // 
             // label10
             // 

@@ -83,7 +83,7 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace, ex.Message);
+                MessageBox.Show(ex.StackTrace, ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
             
         }
