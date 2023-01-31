@@ -25,7 +25,11 @@ public class GetTerritoryInformationValidator:AbstractValidator<TerritoryHelperC
 			.Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper address file.")
             .NotEmpty().WithMessage("Please select a Territory Helper address file.");
 
-		RuleFor(config=>config.FileSavedOutputLocation)
+        RuleFor(config => config.TerritoriesFilePath)
+            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper territories file.")
+            .NotEmpty().WithMessage("Please select a Territory Helper territories file.");
+
+        RuleFor(config=>config.FileSavedOutputLocation)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper output location cannot be null.")
             .NotEmpty().WithMessage("Territory Helper output location cannot be empty");
 

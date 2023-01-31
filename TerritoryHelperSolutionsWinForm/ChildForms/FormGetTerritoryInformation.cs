@@ -92,5 +92,25 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
         {
             
         }
+
+        private void btnGetTerritoriesList_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileTerritoriesDialogInput.Filter = "Json Files|*.json";
+                openFileTerritoriesDialogInput.FilterIndex = 1;
+                openFileTerritoriesDialogInput.InitialDirectory = "c:\\";
+                openFileTerritoriesDialogInput.Multiselect = false;
+                if (openFileTerritoriesDialogInput.ShowDialog() == DialogResult.OK)
+                {
+                    panelSideMenu.territoryHelperConfiguration.TerritoriesFilePath = openFileTerritoriesDialogInput.FileName;
+                    MessageBox.Show($"{openFileTerritoriesDialogInput.SafeFileName} path \n\r saved successfully", "Territories File Path");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

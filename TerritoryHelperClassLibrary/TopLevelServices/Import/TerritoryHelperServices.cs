@@ -14,6 +14,7 @@ using TerritoryHelperClassLibrary.Models.AtoZDatabaseModels;
 using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.BaseServices.RoutePlanner;
 using TerritoryHelperClassLibrary.Models.UtilityModels;
+using TerritoryHelperClassLibrary.BaseServices.Parsing;
 
 namespace TerritoryHelperClassLibrary.TopLevelServices.Import;
 
@@ -53,13 +54,9 @@ public class TerritoryHelperServices
         progress.Report(report);
 
         var territoryHelperNotesRecordsMaster = new List<AddressMasterRecord>();
-
-        await Task.Run(() => 
-        {
-            var webScraper = new WebScrapingService();
-            var territoryHelperNotesList = webScraper.GetExistingTableTerritoryInformation(config, lowerProgress);
-            territoryHelperNotesRecordsMaster = webScraper.ConvertRTFRecordtoSpanishImportList(territoryHelperNotesList);
-        });
+        var xmlParser = new XMLParsingService();
+        var territoryHelperNotesList=await xmlParser.GetExistingTableTerritoryInformation(config, lowerProgress);
+        territoryHelperNotesRecordsMaster = xmlParser.ConvertRTFRecordtoSpanishImportList(territoryHelperNotesList);
 
         //Report
         report.TopLevelProgressMessage = "STAGE 3: Converting Territory RTF/imported records to Master List...";
@@ -157,6 +154,7 @@ public class TerritoryHelperServices
         progress.Report(report);
     }
 
+    //TODO: Add auto sorting based on addresses
     public async Task UpdateTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //1) Verify all addresses are in
@@ -240,6 +238,7 @@ public class TerritoryHelperServices
         webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
     }
 
+    //TODO: Add auto sorting based on addresses
     public async Task UpdateCENSOTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //1) Verify all addresses are in
