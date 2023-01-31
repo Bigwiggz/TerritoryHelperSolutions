@@ -165,23 +165,48 @@ public class TerritoryHelperServices
         Console.WriteLine("4) Did you export the territory helper addresses and put it in the folder Input/CurrentTerritoryHelperAddresses with the name \"TerritoryHelperAddresses.xlsx\"? (Y/N)");
         Console.WriteLine("5) Did you check to make sure all existing territory notes are");
 
+        //Report
+        report.TopLevelPercentComplete = 5;
+        report.TopLevelProgressMessage = "Importing Existing Spanish Address Excel File";
+        progress.Report(report);
+
         //2) Import territory helper information for order of addresses
         Console.WriteLine("Importing Territory Helper Information");
         var excelService = new ExcelBaseService();
         FileInfo fileInfo = new FileInfo(config.ExistingSpanishAddressesFilePath);
         var territoryHelperAddressList = await excelService.LoadExistingSpanishAddreessesExcelFile(fileInfo);
 
+        //Report
+        report.TopLevelPercentComplete = 15;
+        report.TopLevelProgressMessage = "Creating Unique Identifier Records...";
+        progress.Report(report);
+
         //2a) Create Unique Identifier for eacy record
         var recordCleanup = new RecordCleanupService();
         recordCleanup.CreateUniqueIdentifierFromList(territoryHelperAddressList);
+
+        //Report
+        report.TopLevelPercentComplete = 20;
+        report.TopLevelProgressMessage = "Cleaning record files...";
+        progress.Report(report);
 
         //3) Import Territory Edited Records
         FileInfo editedterritoryRecordsFileInfo = new FileInfo(config.EditedTerritoryHelperMasterAddressForImportFilePath);
         var editedTerritoryRecordsListForImport = await excelService.LoadEditedAndUpdatedMasterFileForTerritoryHelperImport(editedterritoryRecordsFileInfo);
 
+        //Report
+        report.TopLevelPercentComplete = 30;
+        report.TopLevelProgressMessage = "Importing Territory Records...";
+        progress.Report(report);
+
         //4) Import Territory Notes
         var territoryNotesText = await File.ReadAllTextAsync(config.TerritoryNotesPath);
         var territoryNotesList= JsonSerializer.Deserialize<List<TerritorySpecificNote>>(territoryNotesText);
+
+        //Report
+        report.TopLevelPercentComplete = 50;
+        report.TopLevelProgressMessage = "Importing Territory Special Notes and Reordering list...";
+        progress.Report(report);
 
         //5a) Import Territory Special Notes and Reorder the territory list
         foreach (var record in editedTerritoryRecordsListForImport)
@@ -221,6 +246,7 @@ public class TerritoryHelperServices
         var excelFileProcessing = new ExcelBaseService();
         
         await excelFileProcessing.ExportAddressMasterRecordToExcel(orderedTerritoryRecordsListForImport, excludedRecords, outputExcelFile);
+
         /*
         //TEST
         var routePlannerService = new RoutePlannerService();
@@ -231,11 +257,18 @@ public class TerritoryHelperServices
         await File.WriteAllTextAsync(testFilePath, geoJSONText);
         */
 
-        //TODO: Add progress, change webscraping service to territory notes service change
+        //Report
+        report.TopLevelPercentComplete = 75;
+        report.TopLevelProgressMessage = "Pasting Territory Information Notes Tables...";
+        progress.Report(report);
 
         //6) Paste Information in Territory Tables
-        var webScraperService = new WebScrapingService();
-        webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
+        var xmlParser = new XMLParsingService();
+        var congregationTerritoriesList=xmlParser.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport, lowerProgress);
+        var congregationTerritoriesText = JsonSerializer.Serialize(congregationTerritoriesList, new JsonSerializerOptions{WriteIndented=true });
+        string territoriesFilePath = Path.Combine(config.FileSavedOutputLocation, $"CongregationTerritoriesUpdated-{DateTime.Now.ToString("MM-dd-yyyy")}.json");
+        await File.WriteAllTextAsync(territoriesFilePath,congregationTerritoriesText);
+
     }
 
     //TODO: Add auto sorting based on addresses

@@ -84,7 +84,7 @@ public class XMLParsingService
         return rtfRecords;
     }
 
-    public async Task PasteTerritoryTables(TerritoryHelperConfiguration config, List<AddressMasterRecord> masterRecordList, IProgress<LowerLeverProgressReportModel> lowerProgress)
+    public async Task<CongregationTerritories> PasteTerritoryTables(TerritoryHelperConfiguration config, List<AddressMasterRecord> masterRecordList, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         var congregationTerritoriesText = await File.ReadAllTextAsync(config.TerritoriesFilePath);
         var congregationTerritoriesList = JsonSerializer.Deserialize<CongregationTerritories>(congregationTerritoriesText);
@@ -111,6 +111,8 @@ public class XMLParsingService
             }
             i++;
         }
+
+        return congregationTerritoriesList;
     }
 
     public List<AddressMasterRecord> ConvertRTFRecordtoSpanishImportList(List<ModelRTFRecord> rTFRecordList)

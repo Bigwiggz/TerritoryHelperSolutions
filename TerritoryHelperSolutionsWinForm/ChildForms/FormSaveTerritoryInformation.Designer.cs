@@ -55,6 +55,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.openFileTerritoriesDialogInput = new System.Windows.Forms.OpenFileDialog();
             this.label17 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.openFileTerritorySpecialNotesInput = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label15
@@ -115,11 +119,11 @@
             // mTBTerritoryHelperPassword
             // 
             this.mTBTerritoryHelperPassword.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.mTBTerritoryHelperPassword.Location = new System.Drawing.Point(197, 332);
+            this.mTBTerritoryHelperPassword.Location = new System.Drawing.Point(197, 362);
             this.mTBTerritoryHelperPassword.Name = "mTBTerritoryHelperPassword";
             this.mTBTerritoryHelperPassword.PasswordChar = '*';
             this.mTBTerritoryHelperPassword.Size = new System.Drawing.Size(287, 22);
-            this.mTBTerritoryHelperPassword.TabIndex = 80;
+            this.mTBTerritoryHelperPassword.TabIndex = 3;
             // 
             // btnRunSaveTerritoryInformationScript
             // 
@@ -130,10 +134,10 @@
             this.btnRunSaveTerritoryInformationScript.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnRunSaveTerritoryInformationScript.IconSize = 24;
             this.btnRunSaveTerritoryInformationScript.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRunSaveTerritoryInformationScript.Location = new System.Drawing.Point(177, 751);
+            this.btnRunSaveTerritoryInformationScript.Location = new System.Drawing.Point(177, 864);
             this.btnRunSaveTerritoryInformationScript.Name = "btnRunSaveTerritoryInformationScript";
             this.btnRunSaveTerritoryInformationScript.Size = new System.Drawing.Size(307, 48);
-            this.btnRunSaveTerritoryInformationScript.TabIndex = 79;
+            this.btnRunSaveTerritoryInformationScript.TabIndex = 7;
             this.btnRunSaveTerritoryInformationScript.Text = "Run Save Territories";
             this.btnRunSaveTerritoryInformationScript.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRunSaveTerritoryInformationScript.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -145,7 +149,7 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label10.ForeColor = System.Drawing.Color.Coral;
-            this.label10.Location = new System.Drawing.Point(12, 684);
+            this.label10.Location = new System.Drawing.Point(12, 797);
             this.label10.MaximumSize = new System.Drawing.Size(600, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(600, 38);
@@ -158,12 +162,12 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Coral;
-            this.label5.Location = new System.Drawing.Point(12, 652);
+            this.label5.Location = new System.Drawing.Point(12, 765);
             this.label5.MaximumSize = new System.Drawing.Size(600, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(392, 19);
             this.label5.TabIndex = 77;
-            this.label5.Text = "5) Click the button below to save the excel master regsiter file. ";
+            this.label5.Text = "6) Click the button below to save the excel master regsiter file. ";
             // 
             // btnSelectAddressFile
             // 
@@ -175,10 +179,10 @@
             this.btnSelectAddressFile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnSelectAddressFile.IconSize = 28;
             this.btnSelectAddressFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSelectAddressFile.Location = new System.Drawing.Point(20, 430);
+            this.btnSelectAddressFile.Location = new System.Drawing.Point(20, 460);
             this.btnSelectAddressFile.Name = "btnSelectAddressFile";
             this.btnSelectAddressFile.Size = new System.Drawing.Size(191, 33);
-            this.btnSelectAddressFile.TabIndex = 76;
+            this.btnSelectAddressFile.TabIndex = 4;
             this.btnSelectAddressFile.Text = "Get Master Address List";
             this.btnSelectAddressFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSelectAddressFile.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -190,7 +194,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.Coral;
-            this.label2.Location = new System.Drawing.Point(12, 188);
+            this.label2.Location = new System.Drawing.Point(12, 218);
             this.label2.MaximumSize = new System.Drawing.Size(600, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(327, 19);
@@ -202,7 +206,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Coral;
-            this.label4.Location = new System.Drawing.Point(12, 230);
+            this.label4.Location = new System.Drawing.Point(12, 260);
             this.label4.MaximumSize = new System.Drawing.Size(600, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(571, 38);
@@ -215,7 +219,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Coral;
-            this.label6.Location = new System.Drawing.Point(12, 379);
+            this.label6.Location = new System.Drawing.Point(12, 409);
             this.label6.MaximumSize = new System.Drawing.Size(600, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(556, 38);
@@ -228,7 +232,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Coral;
-            this.label3.Location = new System.Drawing.Point(12, 268);
+            this.label3.Location = new System.Drawing.Point(12, 298);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(567, 19);
             this.label3.TabIndex = 72;
@@ -240,7 +244,7 @@
             this.lblTerritoryHelperPassword.AutoSize = true;
             this.lblTerritoryHelperPassword.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTerritoryHelperPassword.ForeColor = System.Drawing.Color.Coral;
-            this.lblTerritoryHelperPassword.Location = new System.Drawing.Point(20, 332);
+            this.lblTerritoryHelperPassword.Location = new System.Drawing.Point(20, 362);
             this.lblTerritoryHelperPassword.Name = "lblTerritoryHelperPassword";
             this.lblTerritoryHelperPassword.Size = new System.Drawing.Size(166, 19);
             this.lblTerritoryHelperPassword.TabIndex = 71;
@@ -251,7 +255,7 @@
             this.lblTerritoryHelperEmail.AutoSize = true;
             this.lblTerritoryHelperEmail.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTerritoryHelperEmail.ForeColor = System.Drawing.Color.Coral;
-            this.lblTerritoryHelperEmail.Location = new System.Drawing.Point(20, 300);
+            this.lblTerritoryHelperEmail.Location = new System.Drawing.Point(20, 330);
             this.lblTerritoryHelperEmail.Name = "lblTerritoryHelperEmail";
             this.lblTerritoryHelperEmail.Size = new System.Drawing.Size(140, 19);
             this.lblTerritoryHelperEmail.TabIndex = 70;
@@ -260,17 +264,17 @@
             // tbTerritoryHelperEmail
             // 
             this.tbTerritoryHelperEmail.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.tbTerritoryHelperEmail.Location = new System.Drawing.Point(197, 299);
+            this.tbTerritoryHelperEmail.Location = new System.Drawing.Point(197, 329);
             this.tbTerritoryHelperEmail.Name = "tbTerritoryHelperEmail";
             this.tbTerritoryHelperEmail.Size = new System.Drawing.Size(287, 23);
-            this.tbTerritoryHelperEmail.TabIndex = 69;
+            this.tbTerritoryHelperEmail.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 151);
+            this.label1.Location = new System.Drawing.Point(12, 181);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 32);
             this.label1.TabIndex = 68;
@@ -324,10 +328,10 @@
             this.btnGetTerritoriesList.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnGetTerritoriesList.IconSize = 28;
             this.btnGetTerritoriesList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGetTerritoriesList.Location = new System.Drawing.Point(20, 576);
+            this.btnGetTerritoriesList.Location = new System.Drawing.Point(20, 606);
             this.btnGetTerritoriesList.Name = "btnGetTerritoriesList";
             this.btnGetTerritoriesList.Size = new System.Drawing.Size(191, 33);
-            this.btnGetTerritoriesList.TabIndex = 88;
+            this.btnGetTerritoriesList.TabIndex = 5;
             this.btnGetTerritoriesList.Text = "Get Territories List";
             this.btnGetTerritoriesList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGetTerritoriesList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -339,7 +343,7 @@
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label16.ForeColor = System.Drawing.Color.Coral;
-            this.label16.Location = new System.Drawing.Point(12, 491);
+            this.label16.Location = new System.Drawing.Point(12, 521);
             this.label16.MaximumSize = new System.Drawing.Size(600, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(597, 57);
@@ -353,10 +357,57 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(49, 826);
+            this.label17.Location = new System.Drawing.Point(49, 856);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(0, 15);
             this.label17.TabIndex = 89;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.iconButton1.ForeColor = System.Drawing.Color.Coral;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.iconButton1.IconColor = System.Drawing.Color.Coral;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.iconButton1.IconSize = 28;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(20, 703);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(191, 33);
+            this.iconButton1.TabIndex = 6;
+            this.iconButton1.Text = "Get Territory Special Notes";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label18.ForeColor = System.Drawing.Color.Coral;
+            this.label18.Location = new System.Drawing.Point(12, 656);
+            this.label18.MaximumSize = new System.Drawing.Size(600, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(419, 19);
+            this.label18.TabIndex = 90;
+            this.label18.Text = "5) Then select the territoy special notes file using the button below.";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label19.ForeColor = System.Drawing.Color.Coral;
+            this.label19.Location = new System.Drawing.Point(12, 145);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(151, 19);
+            this.label19.TabIndex = 92;
+            this.label19.Text = "•Special Territory Notes";
+            // 
+            // openFileTerritorySpecialNotesInput
+            // 
+            this.openFileTerritorySpecialNotesInput.FileName = "openFileDialog1";
             // 
             // FormSaveTerritoryInformation
             // 
@@ -365,6 +416,9 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.btnGetTerritoriesList);
             this.Controls.Add(this.label16);
@@ -424,5 +478,9 @@
         private Label label16;
         private OpenFileDialog openFileTerritoriesDialogInput;
         private Label label17;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private Label label18;
+        private Label label19;
+        private OpenFileDialog openFileTerritorySpecialNotesInput;
     }
 }

@@ -21,6 +21,11 @@ public class SaveTerritoryInformationValidator:AbstractValidator<TerritoryHelper
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper password cannot be null")
             .NotEmpty().WithMessage("Territory Helper password cannot be empty");
 
+        RuleFor(config => config.TerritoryNotesPath)
+            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper territory notes file.")
+            .NotEmpty().WithMessage("Please select a Territory Helper territory notes file.");
+
+
         RuleFor(config => config.EditedTerritoryHelperMasterAddressForImportFilePath)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper address file.")
             .NotEmpty().WithMessage("Please select a Territory Helper address file.");

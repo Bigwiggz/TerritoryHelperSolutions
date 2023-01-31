@@ -51,7 +51,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblStatus.Location = new System.Drawing.Point(298, 21);
+            this.lblStatus.Location = new System.Drawing.Point(271, 18);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(116, 21);
             this.lblStatus.TabIndex = 2;
@@ -97,7 +97,7 @@
             // lblSubTaskProcessing
             // 
             this.lblSubTaskProcessing.AutoSize = true;
-            this.lblSubTaskProcessing.Location = new System.Drawing.Point(298, 152);
+            this.lblSubTaskProcessing.Location = new System.Drawing.Point(273, 147);
             this.lblSubTaskProcessing.Name = "lblSubTaskProcessing";
             this.lblSubTaskProcessing.Size = new System.Drawing.Size(114, 15);
             this.lblSubTaskProcessing.TabIndex = 6;

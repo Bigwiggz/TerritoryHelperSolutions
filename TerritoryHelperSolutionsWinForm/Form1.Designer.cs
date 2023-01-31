@@ -50,6 +50,7 @@
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -284,6 +285,7 @@
             // panelDesktop
             // 
             this.panelDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.panelDesktop.Controls.Add(this.label2);
             this.panelDesktop.Controls.Add(this.panelTitleBar);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelDesktop.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -381,6 +383,16 @@
             this.iconSplitButton1.Size = new System.Drawing.Size(23, 23);
             this.iconSplitButton1.Text = "iconSplitButton1";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Coral;
+            this.label2.Location = new System.Drawing.Point(200, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(332, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Welcome To Territory Helper Scripts";
+            // 
             // panelSideMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -399,6 +411,7 @@
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.panelDesktop.ResumeLayout(false);
+            this.panelDesktop.PerformLayout();
             this.panelTitleBar.ResumeLayout(false);
             this.panelTitleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconCurrentChildForm)).EndInit();
@@ -429,5 +442,6 @@
         private Label lblMinimize;
         private Label lblMaximize;
         private Label label1;
+        private Label label2;
     }
 }

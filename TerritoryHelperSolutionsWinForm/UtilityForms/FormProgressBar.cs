@@ -77,14 +77,14 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
         private void LowerReportProgress(object? sender, LowerLeverProgressReportModel e)
         {
             progressBarSubTask.Value = e.LowerLevelProcessPercentComplete;
-            lblSubTaskProcessing.Text = $"Main Task Processing...{e.LowerLevelProcessPercentComplete}%";
+            lblSubTaskProcessing.Text = $"Sub Task Processing...{e.LowerLevelProcessPercentComplete}%";
             lblSubTaskMessage.Text = $"{e.LowerLevelProcessMessage}";
         }
 
         private void ReportProgress(object? sender, ProgressReportModel e)
         {
             progressBar.Value = e.TopLevelPercentComplete;
-            lblStatus.Text = $"Sub Task Processing...{e.TopLevelPercentComplete}%";
+            lblStatus.Text = $"Main Task Processing...{e.TopLevelPercentComplete}%";
             lblWorkLabel.Text = $"{e.TopLevelProgressMessage}";
 
         }
