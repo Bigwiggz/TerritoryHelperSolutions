@@ -124,6 +124,7 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnSearchAToZDB_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormSearchAtoZDatabase());    
         }
 
         private void btnUpdateCensusTerritories_Click(object sender, EventArgs e)

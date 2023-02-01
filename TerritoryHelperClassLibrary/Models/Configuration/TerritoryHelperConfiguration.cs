@@ -57,4 +57,7 @@ public class TerritoryHelperConfiguration
 
     //UI Configuration Settings
     public bool IsConfigurationSettingsLocked { get; set; }
+
+    //CENSO Account Territory Address Path
+    public string CensoTerritoryAddressPath { get; set; }
 }

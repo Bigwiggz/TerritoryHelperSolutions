@@ -72,6 +72,23 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
 
                 stopWatch.Stop();
             }
+
+            //Run A to Z Database Information Script
+            if (_scriptName == ScriptName.SearchAToZDatabaseInformation)
+            {
+                await panelSideMenu.territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
+
+                openFileDialogOutput.Filter = null;
+                openFileDialogOutput.FilterIndex = 1;
+                openFileDialogOutput.InitialDirectory = panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation;
+                openFileDialogOutput.Multiselect = false;
+                if (openFileDialogOutput.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+
+                stopWatch.Stop();
+            }
         }
 
         private void LowerReportProgress(object? sender, LowerLeverProgressReportModel e)
