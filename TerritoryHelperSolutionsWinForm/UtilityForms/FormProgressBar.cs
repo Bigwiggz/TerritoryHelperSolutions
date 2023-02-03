@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelMigration.ExcelInterop;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TerritoryHelperClassLibrary.BaseServices.GeoMapping;
 using TerritoryHelperClassLibrary.Models.UtilityModels;
 using TerritoryHelperSolutionsWinForm.Models;
 
@@ -76,7 +78,17 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
             //Run A to Z Database Information Script
             if (_scriptName == ScriptName.SearchAToZDatabaseInformation)
             {
-                await panelSideMenu.territoryHelperService.UpdateTerritoryHelperUsingMasterRecord(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
+                var config = panelSideMenu.territoryHelperConfiguration;
+                
+                //Run xls to xlsx converter
+                await Task.Run(()=>
+                { 
+                    var excelInteropService = new ExcelInteropConverterService();
+                    excelInteropService.ConverterExcelService(panelSideMenu.territoryHelperConfiguration.AtoZDatbaseFilesPath, panelSideMenu.territoryHelperConfiguration.AtoZXLSXFilesPath);
+                });
+
+                //Run main program
+                await panelSideMenu.territoryHelperService.ImportAtoZDatabaseAddresses(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
 
                 openFileDialogOutput.Filter = null;
                 openFileDialogOutput.FilterIndex = 1;

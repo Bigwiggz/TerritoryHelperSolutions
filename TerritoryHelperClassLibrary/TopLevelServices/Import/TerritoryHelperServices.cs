@@ -118,7 +118,7 @@ public class TerritoryHelperServices
             .Any(y => y.UniqueIdentifierCreation == x.UniqueIdentifierCreation)).ToList();
 
         //Report
-        report.TopLevelProgressMessage = "STAGE 6: Starting Territory Address Verification...";
+        report.TopLevelProgressMessage = "STAGE 6: Starting Territory Address Verification (This may take some time)...";
         report.TopLevelPercentComplete = 75;
         progress.Report(report);
 
@@ -346,10 +346,11 @@ public class TerritoryHelperServices
         webScraperService.PasteTerritoryTables(config, orderedTerritoryRecordsListForImport);
     }
 
-    //TODO: Add filter on CENSO Territories
     public async Task ImportAtoZDatabaseAddresses(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         Console.WriteLine("Starting Address Parsing...");
+
+
 
         var FileServices = new GeoFileProcessing();
 
@@ -359,6 +360,11 @@ public class TerritoryHelperServices
         var allImportedRecords = await FileServices.AggregateListOfAllRecordsPerFile(allxlsxFiles);
 
         FileServices.AddIdEnumeration(allImportedRecords);
+
+        //Report
+        report.TopLevelPercentComplete = 55;
+        report.TopLevelProgressMessage = "Filtering by spanish last names list....";
+        progress.Report(report);
 
         //Check for Spanish Last Names
         var excelFileProcessing = new ExcelBaseService();
@@ -372,21 +378,55 @@ public class TerritoryHelperServices
         //Filter on Spanish Names only
         var spanishOnlyList = FileServices.FilterOnSpanishNamesOnly(allImportedRecords);
 
+        //Report
+        report.TopLevelPercentComplete = 60;
+        report.TopLevelProgressMessage = "Filtering by existing addresses....";
+        progress.Report(report);
+
         //Filter out existing addresses
         FileInfo existingSpanishAddressFile = new FileInfo(config.ExistingSpanishAddressesFilePath);
 
         var newSpanishAddressList = await FileServices.FilterOnlyNewSpanishAddresses(spanishOnlyList, existingSpanishAddressFile);
 
+        //Report
+        report.TopLevelPercentComplete = 65;
+        report.TopLevelProgressMessage = "Filtering by existing CENSO records....";
+        progress.Report(report);
+
+        //Filter out CENSO addresses
+        FileInfo censoSpanishAddressFile = new FileInfo(config.CensoTerritoryAddressPath);
+        var censoFilteredSpanishAddressList = await FileServices.FilterOnlyNewSpanishAddresses(newSpanishAddressList, censoSpanishAddressFile);
+
+        //Report
+        report.TopLevelPercentComplete = 63;
+        report.TopLevelProgressMessage = "Creating master list....";
+        progress.Report(report);
+
         //Create master Record List
-        var masterRecordList = FileServices.CreateMasterRecordsList(allImportedRecords, newSpanishAddressList);
+        var masterRecordList = FileServices.CreateMasterRecordsList(allImportedRecords, censoFilteredSpanishAddressList);
+
+        //Report
+        report.TopLevelPercentComplete = 65;
+        report.TopLevelProgressMessage = "Filtering by congregation territory boundary....";
+        progress.Report(report);
 
         //Filter on whole of territory boundary
         var boundaryFilteredMasterList = FileServices.FilterTerritoriesbyBoundary(masterRecordList, config.CongregationCurrentTerritoryBoundariesFilePath);
+
+        //Report
+        report.TopLevelPercentComplete = 65;
+        report.TopLevelProgressMessage = "Matching addresses with the correct territory....";
+        progress.Report(report);
 
         //Find out which territory each address is in
         FileServices.FindTerritoryLocationPerAddress(boundaryFilteredMasterList, config.TerritoriesFilePath);
 
         boundaryFilteredMasterList = boundaryFilteredMasterList.Where(x => x.TerritoryType != "G0").ToList();
+
+        //Report
+        report.TopLevelPercentComplete = 70;
+        report.TopLevelProgressMessage = "Starting Territory Address Verification (This may take some time)....";
+        progress.Report(report);
 
         //Add Address Verification
         var finalModelList = FileServices.CreateFinalModelList(boundaryFilteredMasterList);
@@ -395,8 +435,18 @@ public class TerritoryHelperServices
 
         await addressVerifierService.VerifyAddress(finalModelList,config,lowerProgress);
 
+        //Report
+        report.TopLevelPercentComplete = 90;
+        report.TopLevelProgressMessage = "Adding Territory Notes....";
+        progress.Report(report);
+
         //Add in Territory Notes
         FileServices.AddTerritoryNotes(finalModelList, config);
+
+        //Report
+        report.TopLevelPercentComplete = 90;
+        report.TopLevelProgressMessage = "Creating Excel Spreadsheets and interactive maps....";
+        progress.Report(report);
 
         //Save address list to spreadsheet
         string outputFileName = $"NewAddressImport{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx";

@@ -32,6 +32,10 @@ public class SearchAtoZDatabaseValidator:AbstractValidator<TerritoryHelperConfig
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Congregation territory boundary json file.")
             .NotEmpty().WithMessage("Please select a Congregation territory boundary json file.");
 
+        RuleFor(config => config.TerritoryNotesPath)
+            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a territory notes json file.")
+            .NotEmpty().WithMessage("Please select a territory notes json file.");
+
         RuleFor(config => config.CensoTerritoryAddressPath)
            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper CENSO existing addresses file.")
            .NotEmpty().WithMessage("Please select a Territory Helper CENSO existing addresses file.");

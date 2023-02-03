@@ -53,7 +53,6 @@
             this.btnCongregationBoundaries = new FontAwesome.Sharp.IconButton();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.openFileDialogAllAToZFiles = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogSpanishLastNames = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogExistingAddresses = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogAllTerritories = new System.Windows.Forms.OpenFileDialog();
@@ -63,6 +62,11 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.folderBrowserDialogAtoZFiles = new System.Windows.Forms.FolderBrowserDialog();
+            this.label23 = new System.Windows.Forms.Label();
+            this.btnGetTerritoryNotes = new FontAwesome.Sharp.IconButton();
+            this.label24 = new System.Windows.Forms.Label();
+            this.openFileDialogTerritoryNotes = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label15
@@ -210,7 +214,7 @@
             this.btnSelectGetAllAtoZFiles.Location = new System.Drawing.Point(18, 359);
             this.btnSelectGetAllAtoZFiles.Name = "btnSelectGetAllAtoZFiles";
             this.btnSelectGetAllAtoZFiles.Size = new System.Drawing.Size(191, 33);
-            this.btnSelectGetAllAtoZFiles.TabIndex = 81;
+            this.btnSelectGetAllAtoZFiles.TabIndex = 1;
             this.btnSelectGetAllAtoZFiles.Text = "Get All A to Z Files";
             this.btnSelectGetAllAtoZFiles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSelectGetAllAtoZFiles.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -225,16 +229,17 @@
             this.label2.Location = new System.Drawing.Point(12, 319);
             this.label2.MaximumSize = new System.Drawing.Size(600, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(465, 19);
+            this.label2.Size = new System.Drawing.Size(527, 19);
             this.label2.TabIndex = 82;
-            this.label2.Text = "2) Select ALL the excel A to Z files by holding the ctrl or shift button below.";
+            this.label2.Text = "2) Please put all excel files in one FOLDER and select that folder using the icon" +
+    " below.";
             // 
             // btnSpanishLastNames
             // 
             this.btnSpanishLastNames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSpanishLastNames.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSpanishLastNames.ForeColor = System.Drawing.Color.Coral;
-            this.btnSpanishLastNames.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnSpanishLastNames.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             this.btnSpanishLastNames.IconColor = System.Drawing.Color.Coral;
             this.btnSpanishLastNames.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnSpanishLastNames.IconSize = 28;
@@ -242,7 +247,7 @@
             this.btnSpanishLastNames.Location = new System.Drawing.Point(18, 451);
             this.btnSpanishLastNames.Name = "btnSpanishLastNames";
             this.btnSpanishLastNames.Size = new System.Drawing.Size(191, 33);
-            this.btnSpanishLastNames.TabIndex = 83;
+            this.btnSpanishLastNames.TabIndex = 2;
             this.btnSpanishLastNames.Text = "Get Spanish Last Names";
             this.btnSpanishLastNames.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSpanishLastNames.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -266,7 +271,7 @@
             this.btnTerritories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTerritories.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnTerritories.ForeColor = System.Drawing.Color.Coral;
-            this.btnTerritories.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnTerritories.IconChar = FontAwesome.Sharp.IconChar.FileCode;
             this.btnTerritories.IconColor = System.Drawing.Color.Coral;
             this.btnTerritories.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnTerritories.IconSize = 28;
@@ -274,7 +279,7 @@
             this.btnTerritories.Location = new System.Drawing.Point(18, 672);
             this.btnTerritories.Name = "btnTerritories";
             this.btnTerritories.Size = new System.Drawing.Size(191, 33);
-            this.btnTerritories.TabIndex = 87;
+            this.btnTerritories.TabIndex = 4;
             this.btnTerritories.Text = "Get All Territories";
             this.btnTerritories.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnTerritories.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -299,7 +304,7 @@
             this.btnGetExistingTerritoryAddresses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGetExistingTerritoryAddresses.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnGetExistingTerritoryAddresses.ForeColor = System.Drawing.Color.Coral;
-            this.btnGetExistingTerritoryAddresses.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnGetExistingTerritoryAddresses.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             this.btnGetExistingTerritoryAddresses.IconColor = System.Drawing.Color.Coral;
             this.btnGetExistingTerritoryAddresses.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnGetExistingTerritoryAddresses.IconSize = 28;
@@ -307,7 +312,7 @@
             this.btnGetExistingTerritoryAddresses.Location = new System.Drawing.Point(18, 566);
             this.btnGetExistingTerritoryAddresses.Name = "btnGetExistingTerritoryAddresses";
             this.btnGetExistingTerritoryAddresses.Size = new System.Drawing.Size(191, 33);
-            this.btnGetExistingTerritoryAddresses.TabIndex = 85;
+            this.btnGetExistingTerritoryAddresses.TabIndex = 3;
             this.btnGetExistingTerritoryAddresses.Text = "Get Existing Addresses";
             this.btnGetExistingTerritoryAddresses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGetExistingTerritoryAddresses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -332,7 +337,7 @@
             this.btnCensoAddresses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCensoAddresses.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCensoAddresses.ForeColor = System.Drawing.Color.Coral;
-            this.btnCensoAddresses.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnCensoAddresses.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             this.btnCensoAddresses.IconColor = System.Drawing.Color.Coral;
             this.btnCensoAddresses.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnCensoAddresses.IconSize = 28;
@@ -340,7 +345,7 @@
             this.btnCensoAddresses.Location = new System.Drawing.Point(18, 888);
             this.btnCensoAddresses.Name = "btnCensoAddresses";
             this.btnCensoAddresses.Size = new System.Drawing.Size(191, 33);
-            this.btnCensoAddresses.TabIndex = 91;
+            this.btnCensoAddresses.TabIndex = 6;
             this.btnCensoAddresses.Text = "Get CENSO Addresses";
             this.btnCensoAddresses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCensoAddresses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -365,7 +370,7 @@
             this.btnCongregationBoundaries.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCongregationBoundaries.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnCongregationBoundaries.ForeColor = System.Drawing.Color.Coral;
-            this.btnCongregationBoundaries.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnCongregationBoundaries.IconChar = FontAwesome.Sharp.IconChar.FileCode;
             this.btnCongregationBoundaries.IconColor = System.Drawing.Color.Coral;
             this.btnCongregationBoundaries.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnCongregationBoundaries.IconSize = 28;
@@ -373,7 +378,7 @@
             this.btnCongregationBoundaries.Location = new System.Drawing.Point(18, 782);
             this.btnCongregationBoundaries.Name = "btnCongregationBoundaries";
             this.btnCongregationBoundaries.Size = new System.Drawing.Size(191, 33);
-            this.btnCongregationBoundaries.TabIndex = 89;
+            this.btnCongregationBoundaries.TabIndex = 5;
             this.btnCongregationBoundaries.Text = "Get Congregation Boundary";
             this.btnCongregationBoundaries.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCongregationBoundaries.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -405,10 +410,6 @@
             this.label19.TabIndex = 93;
             this.label19.Text = "1) Please follow the steps below.";
             // 
-            // openFileDialogAllAToZFiles
-            // 
-            this.openFileDialogAllAToZFiles.FileName = "Select File";
-            // 
             // openFileDialogSpanishLastNames
             // 
             this.openFileDialogSpanishLastNames.FileName = "Select File";
@@ -433,15 +434,15 @@
             // 
             this.btnRunGetAtoZDatabaseRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRunGetAtoZDatabaseRecords.ForeColor = System.Drawing.Color.Coral;
-            this.btnRunGetAtoZDatabaseRecords.IconChar = FontAwesome.Sharp.IconChar.Download;
+            this.btnRunGetAtoZDatabaseRecords.IconChar = FontAwesome.Sharp.IconChar.Searchengin;
             this.btnRunGetAtoZDatabaseRecords.IconColor = System.Drawing.Color.Coral;
             this.btnRunGetAtoZDatabaseRecords.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnRunGetAtoZDatabaseRecords.IconSize = 24;
             this.btnRunGetAtoZDatabaseRecords.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRunGetAtoZDatabaseRecords.Location = new System.Drawing.Point(149, 1048);
+            this.btnRunGetAtoZDatabaseRecords.Location = new System.Drawing.Point(149, 1148);
             this.btnRunGetAtoZDatabaseRecords.Name = "btnRunGetAtoZDatabaseRecords";
             this.btnRunGetAtoZDatabaseRecords.Size = new System.Drawing.Size(261, 64);
-            this.btnRunGetAtoZDatabaseRecords.TabIndex = 94;
+            this.btnRunGetAtoZDatabaseRecords.TabIndex = 7;
             this.btnRunGetAtoZDatabaseRecords.Text = "Run Get A to Z Addresses";
             this.btnRunGetAtoZDatabaseRecords.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRunGetAtoZDatabaseRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -453,7 +454,7 @@
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label20.ForeColor = System.Drawing.Color.Coral;
-            this.label20.Location = new System.Drawing.Point(18, 988);
+            this.label20.Location = new System.Drawing.Point(18, 1088);
             this.label20.MaximumSize = new System.Drawing.Size(600, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(600, 38);
@@ -466,23 +467,71 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label21.ForeColor = System.Drawing.Color.Coral;
-            this.label21.Location = new System.Drawing.Point(18, 943);
+            this.label21.Location = new System.Drawing.Point(18, 1043);
             this.label21.MaximumSize = new System.Drawing.Size(600, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(392, 19);
             this.label21.TabIndex = 95;
-            this.label21.Text = "6) Click the button below to save the excel master regsiter file. ";
+            this.label21.Text = "9) Click the button below to save the excel master regsiter file. ";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label22.ForeColor = System.Drawing.Color.Coral;
-            this.label22.Location = new System.Drawing.Point(29, 1142);
+            this.label22.Location = new System.Drawing.Point(29, 1237);
             this.label22.MaximumSize = new System.Drawing.Size(600, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(0, 19);
             this.label22.TabIndex = 97;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label23.ForeColor = System.Drawing.Color.Coral;
+            this.label23.Location = new System.Drawing.Point(298, 137);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(135, 19);
+            this.label23.TabIndex = 98;
+            this.label23.Text = "•Interactive Map File";
+            // 
+            // btnGetTerritoryNotes
+            // 
+            this.btnGetTerritoryNotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGetTerritoryNotes.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnGetTerritoryNotes.ForeColor = System.Drawing.Color.Coral;
+            this.btnGetTerritoryNotes.IconChar = FontAwesome.Sharp.IconChar.FileCode;
+            this.btnGetTerritoryNotes.IconColor = System.Drawing.Color.Coral;
+            this.btnGetTerritoryNotes.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btnGetTerritoryNotes.IconSize = 28;
+            this.btnGetTerritoryNotes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGetTerritoryNotes.Location = new System.Drawing.Point(18, 985);
+            this.btnGetTerritoryNotes.Name = "btnGetTerritoryNotes";
+            this.btnGetTerritoryNotes.Size = new System.Drawing.Size(191, 33);
+            this.btnGetTerritoryNotes.TabIndex = 99;
+            this.btnGetTerritoryNotes.Text = "Get Territory Notes";
+            this.btnGetTerritoryNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGetTerritoryNotes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnGetTerritoryNotes.UseVisualStyleBackColor = true;
+            this.btnGetTerritoryNotes.Click += new System.EventHandler(this.btnGetTerritoryNotes_Click);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label24.ForeColor = System.Drawing.Color.Coral;
+            this.label24.Location = new System.Drawing.Point(12, 948);
+            this.label24.MaximumSize = new System.Drawing.Size(600, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(530, 19);
+            this.label24.TabIndex = 100;
+            this.label24.Text = "8) Find the Territory Notes JSON file and please select the file using the button" +
+    " below.";
+            // 
+            // openFileDialogTerritoryNotes
+            // 
+            this.openFileDialogTerritoryNotes.FileName = "openFileDialog1";
             // 
             // FormSearchAtoZDatabase
             // 
@@ -491,6 +540,9 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.btnGetTerritoryNotes);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.btnRunGetAtoZDatabaseRecords);
             this.Controls.Add(this.label20);
@@ -554,7 +606,6 @@
         private FontAwesome.Sharp.IconButton btnCongregationBoundaries;
         private Label label18;
         private Label label19;
-        private OpenFileDialog openFileDialogAllAToZFiles;
         private OpenFileDialog openFileDialogSpanishLastNames;
         private OpenFileDialog openFileDialogExistingAddresses;
         private OpenFileDialog openFileDialogAllTerritories;
@@ -564,5 +615,10 @@
         private Label label20;
         private Label label21;
         private Label label22;
+        private FolderBrowserDialog folderBrowserDialogAtoZFiles;
+        private Label label23;
+        private FontAwesome.Sharp.IconButton btnGetTerritoryNotes;
+        private Label label24;
+        private OpenFileDialog openFileDialogTerritoryNotes;
     }
 }

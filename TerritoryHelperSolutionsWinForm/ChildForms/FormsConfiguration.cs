@@ -62,15 +62,11 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 panelSideMenu.territoryHelperConfiguration.KingdomHallLocationLongitude = double.Parse(tbKingdomHallLongitude.Text);
                 panelSideMenu.territoryHelperConfiguration.KindgomHallAddress = tbKingdomHallAddress.Text;
 
-                //File Input Output
-                panelSideMenu.territoryHelperConfiguration.FileInputLocation = Path.Combine(AppContext.BaseDirectory, "Input");
-                panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation = Path.Combine(AppContext.BaseDirectory, "Output");
+                //Create Directory Paths if they do not exist
+                CreateSubFoldersForInputandOutputFiles();
 
                 //Selenium Web Browser
                 panelSideMenu.territoryHelperConfiguration.NumberOfTableRows = int.Parse(tbNumberofTableRows.Text);
-
-                //Create Directory Paths if they do not exist
-                CreateSubFoldersForInputandOutputFiles();
 
                 //Change status to configuration settings indicator
                 panelSideMenu.territoryHelperConfiguration.IsConfigurationSettingsLocked = true;
@@ -108,6 +104,7 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
         {
             string fileInputDirectory= Path.Combine(AppContext.BaseDirectory, "Input");
             string fileOutputDirectory= Path.Combine(AppContext.BaseDirectory, "Output");
+            string xlsxfilesDirectory = Path.Combine(fileInputDirectory, "XLSXFiles");
 
             if(!Directory.Exists(fileInputDirectory))
             {
@@ -119,7 +116,15 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 Directory.CreateDirectory(fileOutputDirectory);
             }
 
-            panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation = fileOutputDirectory;
+            if(!Directory.Exists(xlsxfilesDirectory))
+            {
+                Directory.CreateDirectory(xlsxfilesDirectory);
+            }
+
+            //File Input Output
+            panelSideMenu.territoryHelperConfiguration.FileInputLocation = Path.Combine(AppContext.BaseDirectory, "Input");
+            panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation = Path.Combine(AppContext.BaseDirectory, "Output");
+            panelSideMenu.territoryHelperConfiguration.AtoZXLSXFilesPath = Path.Combine(fileInputDirectory, "XLSXFiles");
         }
 
 

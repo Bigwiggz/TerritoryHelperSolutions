@@ -14,7 +14,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExcelMigration\ExcelMigration.csproj" />
     <ProjectReference Include="..\TerritoryHelperClassLibrary\TerritoryHelperClassLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="StaticContents\Map\js\information\Addresses\" />
+    <Folder Include="StaticContents\Map\js\information\Territories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="StaticContents\Map\css\leafletStyle.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticContents\Map\img\existingAddressNBG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticContents\Map\img\newAddressNBG.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticContents\Map\img\UofSCEnergyManagement.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticContents\Map\js\leaflet.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

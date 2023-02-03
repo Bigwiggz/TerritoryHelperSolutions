@@ -42,7 +42,9 @@ public class ConfigurationValidator:AbstractValidator<TerritoryHelperConfigurati
         RuleFor(config => config.BatchID)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("The Batch Id cannot be null");
             //.Empty().WithMessage("The BatchId cannot be empty");
-            
+           
+        RuleFor(config=>config.AtoZXLSXFilesPath)
+            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Sorry something happened with the xlsx temp path setup.");
 
         RuleFor(config => config.APICallDelayinMiliseconds)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("The API Delay cannot be null")

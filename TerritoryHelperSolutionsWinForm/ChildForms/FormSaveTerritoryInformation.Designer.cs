@@ -174,7 +174,7 @@
             this.btnSelectAddressFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelectAddressFile.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnSelectAddressFile.ForeColor = System.Drawing.Color.Coral;
-            this.btnSelectAddressFile.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnSelectAddressFile.IconChar = FontAwesome.Sharp.IconChar.FileExcel;
             this.btnSelectAddressFile.IconColor = System.Drawing.Color.Coral;
             this.btnSelectAddressFile.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnSelectAddressFile.IconSize = 28;
@@ -323,7 +323,7 @@
             this.btnGetTerritoriesList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGetTerritoriesList.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnGetTerritoriesList.ForeColor = System.Drawing.Color.Coral;
-            this.btnGetTerritoriesList.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnGetTerritoriesList.IconChar = FontAwesome.Sharp.IconChar.FileCode;
             this.btnGetTerritoriesList.IconColor = System.Drawing.Color.Coral;
             this.btnGetTerritoriesList.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.btnGetTerritoriesList.IconSize = 28;
@@ -367,7 +367,7 @@
             this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.iconButton1.ForeColor = System.Drawing.Color.Coral;
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.FileCode;
             this.iconButton1.IconColor = System.Drawing.Color.Coral;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Solid;
             this.iconButton1.IconSize = 28;
