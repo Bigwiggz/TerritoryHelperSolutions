@@ -130,6 +130,7 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnUpdateCensusTerritories_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormUpdateCensusTerritories());   
         }
 
         private void btnHelp_Click(object sender, EventArgs e)

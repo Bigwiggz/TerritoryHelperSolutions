@@ -80,7 +80,6 @@ public class WebScrapingService
             lowerReport.LowerLevelProcessMessage = $"Processing Territory Id {territoryReport}: Record {reportCount} of {territoryElements.Count}...";
             lowerProgress.Report(lowerReport);
 
-            //TODO: Remove Table Headers with "Dirección, Nombres, Número Telefónico, Notas"
             if (tableRows.Count > 0)
             {
                 foreach (var row in tableRows)
@@ -258,7 +257,6 @@ public class WebScrapingService
             //Get territory addresses for the group 
             var territoryAddressListByTerritoryNumber = masterRecordList.Where(x => x.TerritoryNumber == territoryNumbers[i]).ToList();
 
-            //TODO: Input for Territory Notes here
             if (territoryAddressListByTerritoryNumber is not null && territoryAddressListByTerritoryNumber.Count() > 0)
             {
 

@@ -79,16 +79,41 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
             if (_scriptName == ScriptName.SearchAToZDatabaseInformation)
             {
                 var config = panelSideMenu.territoryHelperConfiguration;
-                
+
                 //Run xls to xlsx converter
                 await Task.Run(()=>
                 { 
+                    
+                    IProgress<ProgressReportModel> testProgress=new Progress<ProgressReportModel>();
+                    ProgressReportModel report = new ProgressReportModel();
+                    report.TopLevelProgressMessage = "Converting xls files to xlsx (This may take some time)...";
+                    report.TopLevelPercentComplete = 5;
+                    testProgress.Report(report);
+                    
+                    //TODO: Add in Progress Reporting
                     var excelInteropService = new ExcelInteropConverterService();
                     excelInteropService.ConverterExcelService(panelSideMenu.territoryHelperConfiguration.AtoZDatbaseFilesPath, panelSideMenu.territoryHelperConfiguration.AtoZXLSXFilesPath);
                 });
 
                 //Run main program
                 await panelSideMenu.territoryHelperService.ImportAtoZDatabaseAddresses(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
+
+                openFileDialogOutput.Filter = null;
+                openFileDialogOutput.FilterIndex = 1;
+                openFileDialogOutput.InitialDirectory = panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation;
+                openFileDialogOutput.Multiselect = false;
+                if (openFileDialogOutput.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+
+                stopWatch.Stop();
+            }
+
+            //Update CENSO Records
+            if (_scriptName == ScriptName.UpdateCensusTerritoryInformation)
+            {
+                await panelSideMenu.territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
 
                 openFileDialogOutput.Filter = null;
                 openFileDialogOutput.FilterIndex = 1;

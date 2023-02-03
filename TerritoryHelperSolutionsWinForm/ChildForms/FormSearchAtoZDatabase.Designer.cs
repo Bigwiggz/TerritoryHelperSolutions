@@ -67,6 +67,7 @@
             this.btnGetTerritoryNotes = new FontAwesome.Sharp.IconButton();
             this.label24 = new System.Windows.Forms.Label();
             this.openFileDialogTerritoryNotes = new System.Windows.Forms.OpenFileDialog();
+            this.label25 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label15
@@ -74,7 +75,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label15.ForeColor = System.Drawing.Color.Coral;
-            this.label15.Location = new System.Drawing.Point(298, 118);
+            this.label15.Location = new System.Drawing.Point(298, 112);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(115, 19);
             this.label15.TabIndex = 74;
@@ -85,7 +86,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label14.ForeColor = System.Drawing.Color.Coral;
-            this.label14.Location = new System.Drawing.Point(12, 175);
+            this.label14.Location = new System.Drawing.Point(12, 169);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(174, 19);
             this.label14.TabIndex = 73;
@@ -96,7 +97,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.ForeColor = System.Drawing.Color.Coral;
-            this.label13.Location = new System.Drawing.Point(12, 156);
+            this.label13.Location = new System.Drawing.Point(12, 150);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(226, 19);
             this.label13.TabIndex = 72;
@@ -107,7 +108,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(298, 86);
+            this.label12.Location = new System.Drawing.Point(298, 80);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 32);
             this.label12.TabIndex = 71;
@@ -118,7 +119,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(12, 86);
+            this.label11.Location = new System.Drawing.Point(12, 80);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(80, 32);
             this.label11.TabIndex = 70;
@@ -162,7 +163,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.Coral;
-            this.label3.Location = new System.Drawing.Point(12, 137);
+            this.label3.Location = new System.Drawing.Point(12, 131);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 19);
             this.label3.TabIndex = 76;
@@ -173,7 +174,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.Coral;
-            this.label4.Location = new System.Drawing.Point(12, 118);
+            this.label4.Location = new System.Drawing.Point(12, 112);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(197, 19);
             this.label4.TabIndex = 75;
@@ -184,7 +185,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.Color.Coral;
-            this.label5.Location = new System.Drawing.Point(12, 213);
+            this.label5.Location = new System.Drawing.Point(12, 207);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(274, 19);
             this.label5.TabIndex = 80;
@@ -195,7 +196,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Coral;
-            this.label6.Location = new System.Drawing.Point(12, 194);
+            this.label6.Location = new System.Drawing.Point(12, 188);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(226, 19);
             this.label6.TabIndex = 79;
@@ -442,7 +443,7 @@
             this.btnRunGetAtoZDatabaseRecords.Location = new System.Drawing.Point(149, 1148);
             this.btnRunGetAtoZDatabaseRecords.Name = "btnRunGetAtoZDatabaseRecords";
             this.btnRunGetAtoZDatabaseRecords.Size = new System.Drawing.Size(261, 64);
-            this.btnRunGetAtoZDatabaseRecords.TabIndex = 7;
+            this.btnRunGetAtoZDatabaseRecords.TabIndex = 8;
             this.btnRunGetAtoZDatabaseRecords.Text = "Run Get A to Z Addresses";
             this.btnRunGetAtoZDatabaseRecords.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRunGetAtoZDatabaseRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -490,7 +491,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label23.ForeColor = System.Drawing.Color.Coral;
-            this.label23.Location = new System.Drawing.Point(298, 137);
+            this.label23.Location = new System.Drawing.Point(298, 131);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(135, 19);
             this.label23.TabIndex = 98;
@@ -509,7 +510,7 @@
             this.btnGetTerritoryNotes.Location = new System.Drawing.Point(18, 985);
             this.btnGetTerritoryNotes.Name = "btnGetTerritoryNotes";
             this.btnGetTerritoryNotes.Size = new System.Drawing.Size(191, 33);
-            this.btnGetTerritoryNotes.TabIndex = 99;
+            this.btnGetTerritoryNotes.TabIndex = 7;
             this.btnGetTerritoryNotes.Text = "Get Territory Notes";
             this.btnGetTerritoryNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGetTerritoryNotes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -533,6 +534,17 @@
             // 
             this.openFileDialogTerritoryNotes.FileName = "openFileDialog1";
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label25.ForeColor = System.Drawing.Color.Coral;
+            this.label25.Location = new System.Drawing.Point(12, 227);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(142, 19);
+            this.label25.TabIndex = 101;
+            this.label25.Text = "•TerritoryHelperNotes";
+            // 
             // FormSearchAtoZDatabase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -540,6 +552,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.label25);
             this.Controls.Add(this.btnGetTerritoryNotes);
             this.Controls.Add(this.label24);
             this.Controls.Add(this.label23);
@@ -620,5 +633,6 @@
         private FontAwesome.Sharp.IconButton btnGetTerritoryNotes;
         private Label label24;
         private OpenFileDialog openFileDialogTerritoryNotes;
+        private Label label25;
     }
 }
