@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerritoryHelperTestClassLib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerritoryHelperTestConsole", "TerritoryHelperTestConsole\TerritoryHelperTestConsole.csproj", "{54E8A44A-5C9D-4133-B7C9-7FED3BF70293}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerritoryHelperSolutionsWinForm", "TerritoryHelperSolutionsWinForm\TerritoryHelperSolutionsWinForm.csproj", "{CB20103A-AC1A-41C2-9C71-C5A780A291CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerritoryHelperSolutionsWinForm", "TerritoryHelperSolutionsWinForm\TerritoryHelperSolutionsWinForm.csproj", "{CB20103A-AC1A-41C2-9C71-C5A780A291CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

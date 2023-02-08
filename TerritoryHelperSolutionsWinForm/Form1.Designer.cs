@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(panelSideMenu));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnHelp = new FontAwesome.Sharp.IconButton();
             this.btnUpdateCensusTerritories = new FontAwesome.Sharp.IconButton();
             this.btnSearchAToZDB = new FontAwesome.Sharp.IconButton();
@@ -43,6 +44,7 @@
             this.panelBottom = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panelDesktop = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
             this.lblMinimize = new System.Windows.Forms.Label();
             this.lblMaximize = new System.Windows.Forms.Label();
@@ -50,7 +52,8 @@
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnOutputFolder = new FontAwesome.Sharp.IconButton();
+            this.openFileDialogOutput = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -63,6 +66,7 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btnHelp);
             this.panel1.Controls.Add(this.btnUpdateCensusTerritories);
             this.panel1.Controls.Add(this.btnSearchAToZDB);
@@ -77,6 +81,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 561);
             this.panel1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(12, 254);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 37);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Scripts";
             // 
             // btnHelp
             // 
@@ -110,7 +124,7 @@
             this.btnUpdateCensusTerritories.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnUpdateCensusTerritories.IconSize = 40;
             this.btnUpdateCensusTerritories.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpdateCensusTerritories.Location = new System.Drawing.Point(0, 405);
+            this.btnUpdateCensusTerritories.Location = new System.Drawing.Point(0, 437);
             this.btnUpdateCensusTerritories.Name = "btnUpdateCensusTerritories";
             this.btnUpdateCensusTerritories.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnUpdateCensusTerritories.Size = new System.Drawing.Size(250, 45);
@@ -131,7 +145,7 @@
             this.btnSearchAToZDB.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSearchAToZDB.IconSize = 40;
             this.btnSearchAToZDB.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearchAToZDB.Location = new System.Drawing.Point(0, 360);
+            this.btnSearchAToZDB.Location = new System.Drawing.Point(0, 392);
             this.btnSearchAToZDB.Name = "btnSearchAToZDB";
             this.btnSearchAToZDB.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnSearchAToZDB.Size = new System.Drawing.Size(250, 45);
@@ -152,7 +166,7 @@
             this.btnSaveTerritoryInformation.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnSaveTerritoryInformation.IconSize = 40;
             this.btnSaveTerritoryInformation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveTerritoryInformation.Location = new System.Drawing.Point(0, 315);
+            this.btnSaveTerritoryInformation.Location = new System.Drawing.Point(0, 347);
             this.btnSaveTerritoryInformation.Name = "btnSaveTerritoryInformation";
             this.btnSaveTerritoryInformation.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnSaveTerritoryInformation.Size = new System.Drawing.Size(250, 45);
@@ -173,7 +187,7 @@
             this.btnGetTerritoryInformation.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btnGetTerritoryInformation.IconSize = 40;
             this.btnGetTerritoryInformation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGetTerritoryInformation.Location = new System.Drawing.Point(0, 270);
+            this.btnGetTerritoryInformation.Location = new System.Drawing.Point(0, 302);
             this.btnGetTerritoryInformation.Name = "btnGetTerritoryInformation";
             this.btnGetTerritoryInformation.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
             this.btnGetTerritoryInformation.Size = new System.Drawing.Size(250, 45);
@@ -294,9 +308,20 @@
             this.panelDesktop.Size = new System.Drawing.Size(684, 521);
             this.panelDesktop.TabIndex = 2;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Coral;
+            this.label2.Location = new System.Drawing.Point(200, 100);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(332, 25);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Welcome To Territory Helper Scripts";
+            // 
             // panelTitleBar
             // 
             this.panelTitleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
+            this.panelTitleBar.Controls.Add(this.btnOutputFolder);
             this.panelTitleBar.Controls.Add(this.lblMinimize);
             this.panelTitleBar.Controls.Add(this.lblMaximize);
             this.panelTitleBar.Controls.Add(this.lblExit);
@@ -383,15 +408,27 @@
             this.iconSplitButton1.Size = new System.Drawing.Size(23, 23);
             this.iconSplitButton1.Text = "iconSplitButton1";
             // 
-            // label2
+            // btnOutputFolder
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Coral;
-            this.label2.Location = new System.Drawing.Point(200, 100);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(332, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Welcome To Territory Helper Scripts";
+            this.btnOutputFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutputFolder.ForeColor = System.Drawing.Color.Coral;
+            this.btnOutputFolder.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnOutputFolder.IconColor = System.Drawing.Color.Coral;
+            this.btnOutputFolder.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnOutputFolder.IconSize = 18;
+            this.btnOutputFolder.Location = new System.Drawing.Point(269, 4);
+            this.btnOutputFolder.Name = "btnOutputFolder";
+            this.btnOutputFolder.Size = new System.Drawing.Size(192, 30);
+            this.btnOutputFolder.TabIndex = 5;
+            this.btnOutputFolder.Text = "Output Folder";
+            this.btnOutputFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOutputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOutputFolder.UseVisualStyleBackColor = true;
+            this.btnOutputFolder.Click += new System.EventHandler(this.btnOutputFolder_Click);
+            // 
+            // openFileDialogOutput
+            // 
+            this.openFileDialogOutput.FileName = "openFileDialog1";
             // 
             // panelSideMenu
             // 
@@ -406,6 +443,7 @@
             this.Name = "panelSideMenu";
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             this.panelBottom.ResumeLayout(false);
@@ -443,5 +481,8 @@
         private Label lblMaximize;
         private Label label1;
         private Label label2;
+        private Label label3;
+        private FontAwesome.Sharp.IconButton btnOutputFolder;
+        private OpenFileDialog openFileDialogOutput;
     }
 }

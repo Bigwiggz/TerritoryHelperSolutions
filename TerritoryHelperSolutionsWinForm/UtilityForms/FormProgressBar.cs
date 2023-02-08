@@ -1,4 +1,5 @@
 ﻿using ExcelMigration.ExcelInterop;
+using ExcelMigration.Models.UtilityModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,6 +41,12 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
 
             Progress<LowerLeverProgressReportModel> lowerProgress = new Progress<LowerLeverProgressReportModel>();
             lowerProgress.ProgressChanged += LowerReportProgress;
+
+            Progress<ExcelTopReportModel> excelTopProgress=new Progress<ExcelTopReportModel>();
+            excelTopProgress.ProgressChanged += ExcelTopProgress;
+
+            Progress<ExcelProgressReportModel> excelProgress = new Progress<ExcelProgressReportModel>();
+            excelProgress.ProgressChanged += ExcelReportProgress;
 
             //Get Territory Information Script
             if (_scriptName==ScriptName.GetTerritoryInformation)
@@ -83,16 +90,8 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
                 //Run xls to xlsx converter
                 await Task.Run(()=>
                 { 
-                    
-                    IProgress<ProgressReportModel> testProgress=new Progress<ProgressReportModel>();
-                    ProgressReportModel report = new ProgressReportModel();
-                    report.TopLevelProgressMessage = "Converting xls files to xlsx (This may take some time)...";
-                    report.TopLevelPercentComplete = 5;
-                    testProgress.Report(report);
-                    
-                    //TODO: Add in Progress Reporting
                     var excelInteropService = new ExcelInteropConverterService();
-                    excelInteropService.ConverterExcelService(panelSideMenu.territoryHelperConfiguration.AtoZDatbaseFilesPath, panelSideMenu.territoryHelperConfiguration.AtoZXLSXFilesPath);
+                    excelInteropService.ConverterExcelService(panelSideMenu.territoryHelperConfiguration.AtoZDatbaseFilesPath, panelSideMenu.territoryHelperConfiguration.AtoZXLSXFilesPath,excelTopProgress,excelProgress);
                 });
 
                 //Run main program
@@ -126,6 +125,20 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
 
                 stopWatch.Stop();
             }
+        }
+
+        private void ExcelTopProgress(object? sender, ExcelTopReportModel e)
+        {
+            progressBar.Value = e.ExcelTopLevelPercentComplete;
+            lblStatus.Text = $"Main Task Processing...{e.ExcelTopLevelPercentComplete}%";
+            lblWorkLabel.Text = $"{e.ExcelTopLevelProgressMessage}";
+        }
+
+        private void ExcelReportProgress(object? sender, ExcelProgressReportModel e)
+        {
+            progressBarSubTask.Value = e.ExcelProcessPercentComplete;
+            lblSubTaskProcessing.Text = $"Sub Task Processing...{e.ExcelProcessPercentComplete}%";
+            lblSubTaskMessage.Text = $"{e.ExcelProcessMessage}";
         }
 
         private void LowerReportProgress(object? sender, LowerLeverProgressReportModel e)

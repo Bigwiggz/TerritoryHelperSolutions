@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExcelInterop\ExcelInteropConverterService.cs" />
+    <Compile Include="Models\UtilityModels\ExcelProgressReportModel.cs" />
+    <Compile Include="Models\UtilityModels\ExcelTopReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -69,7 +69,6 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 else
                 {
 
-
                     string errorList = "THERE WERE SOME ERROR(S): \r\n \r\n";
                     foreach (var failure in validatedResult.Errors)
                     {

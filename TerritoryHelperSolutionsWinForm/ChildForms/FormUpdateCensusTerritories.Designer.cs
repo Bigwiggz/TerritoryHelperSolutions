@@ -54,11 +54,11 @@
             this.lblTerritoryHelperEmail = new System.Windows.Forms.Label();
             this.tbTerritoryHelperEmail = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.openFileDialogMasterAddressList = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogGetTerritoriesList = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialogGetTerritorySpecialNotes = new System.Windows.Forms.OpenFileDialog();
+            this.label20 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label19
@@ -66,7 +66,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label19.ForeColor = System.Drawing.Color.Coral;
-            this.label19.Location = new System.Drawing.Point(23, 156);
+            this.label19.Location = new System.Drawing.Point(23, 166);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(151, 19);
             this.label19.TabIndex = 119;
@@ -149,7 +149,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label7.ForeColor = System.Drawing.Color.Coral;
-            this.label7.Location = new System.Drawing.Point(309, 137);
+            this.label7.Location = new System.Drawing.Point(309, 147);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(140, 19);
             this.label7.TabIndex = 115;
@@ -160,7 +160,7 @@
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label15.ForeColor = System.Drawing.Color.Coral;
-            this.label15.Location = new System.Drawing.Point(309, 118);
+            this.label15.Location = new System.Drawing.Point(309, 128);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(241, 19);
             this.label15.TabIndex = 114;
@@ -171,7 +171,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label14.ForeColor = System.Drawing.Color.Coral;
-            this.label14.Location = new System.Drawing.Point(23, 137);
+            this.label14.Location = new System.Drawing.Point(23, 147);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(174, 19);
             this.label14.TabIndex = 113;
@@ -182,7 +182,7 @@
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label13.ForeColor = System.Drawing.Color.Coral;
-            this.label13.Location = new System.Drawing.Point(23, 118);
+            this.label13.Location = new System.Drawing.Point(23, 128);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(176, 19);
             this.label13.TabIndex = 112;
@@ -193,7 +193,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(309, 86);
+            this.label12.Location = new System.Drawing.Point(309, 96);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 32);
             this.label12.TabIndex = 111;
@@ -204,7 +204,7 @@
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(23, 86);
+            this.label11.Location = new System.Drawing.Point(23, 96);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(80, 32);
             this.label11.TabIndex = 110;
@@ -303,10 +303,10 @@
             this.label4.Location = new System.Drawing.Point(23, 271);
             this.label4.MaximumSize = new System.Drawing.Size(600, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(571, 38);
+            this.label4.Size = new System.Drawing.Size(585, 38);
             this.label4.TabIndex = 106;
-            this.label4.Text = "2) Put in your user name (email) and password to the main Territory Helper Accoun" +
-    "t for the congregation below.";
+            this.label4.Text = "2) Put in your user name (email) and password to the CENSO Territory Helper Accou" +
+    "nt for the congregation below.";
             // 
             // label6
             // 
@@ -374,18 +374,6 @@
             this.label1.TabIndex = 101;
             this.label1.Text = "Steps";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.Coral;
-            this.label8.Location = new System.Drawing.Point(28, 58);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(578, 19);
-            this.label8.TabIndex = 100;
-            this.label8.Text = "This script is designed to save all terrtiory records from an excel master list t" +
-    "o Territory Helper";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -409,6 +397,19 @@
             // 
             this.openFileDialogGetTerritorySpecialNotes.FileName = "openFileDialog1";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label20.ForeColor = System.Drawing.Color.Coral;
+            this.label20.Location = new System.Drawing.Point(31, 52);
+            this.label20.MaximumSize = new System.Drawing.Size(600, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(555, 38);
+            this.label20.TabIndex = 120;
+            this.label20.Text = "This script is designed to save all terrtiory records from an excel master list t" +
+    "o the CENSO Territory Helper account";
+            // 
             // FormUpdateCensusTerritories
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -416,6 +417,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(668, 482);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.btnTerritorySpecialNotes);
             this.Controls.Add(this.label18);
@@ -441,7 +443,6 @@
             this.Controls.Add(this.lblTerritoryHelperEmail);
             this.Controls.Add(this.tbTerritoryHelperEmail);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Name = "FormUpdateCensusTerritories";
             this.Text = "FormUpdateCensusTerritories";
@@ -477,10 +478,10 @@
         private Label lblTerritoryHelperEmail;
         private TextBox tbTerritoryHelperEmail;
         private Label label1;
-        private Label label8;
         private Label label9;
         private OpenFileDialog openFileDialogMasterAddressList;
         private OpenFileDialog openFileDialogGetTerritoriesList;
         private OpenFileDialog openFileDialogGetTerritorySpecialNotes;
+        private Label label20;
     }
 }

@@ -169,11 +169,26 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 var validatedResult = searchAtoZDatabaseValidator.Validate(panelSideMenu.territoryHelperConfiguration);
                 if (validatedResult.IsValid)
                 {
-                    //Create Necessary Directories
+                    //TODO:Sort this out with the files
                     CreateMapFileDirectoriesandPaths();
 
-                    FormProgressBar formProgresssBar = new FormProgressBar(ScriptName.SearchAToZDatabaseInformation);
-                    formProgresssBar.Show();
+                    SearchAtoZDatabaseFolderValidator searchFolderValidator = new SearchAtoZDatabaseFolderValidator();
+                    var validateResult = searchFolderValidator.Validate(panelSideMenu.territoryHelperConfiguration);
+                    if (validateResult.IsValid)
+                    {
+                        FormProgressBar formProgresssBar = new FormProgressBar(ScriptName.SearchAToZDatabaseInformation);
+                        formProgresssBar.Show();
+                    }
+                    else
+                    {
+                        string errorList = "THERE WERE SOME ERROR(S): \r\n \r\n";
+                        foreach (var failure in validatedResult.Errors)
+                        {
+                            errorList = $"{errorList} •{failure} \r\n \r\n";
+                        }
+
+                        MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -233,13 +248,40 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             {
                 Directory.Move(oldName, mapPath);
             }
-            
+
+            //Create other folders
+            var jsPath = Path.Combine(mapPath, "js");
+            if (!Directory.Exists(jsPath))
+            {
+                Directory.CreateDirectory(jsPath);
+            }
+            var informationPath = Path.Combine(jsPath, "information");
+            if (!Directory.Exists(informationPath))
+            {
+                Directory.CreateDirectory(informationPath);
+            }
+            var addressPath = Path.Combine(informationPath, "Addresses");
+            if (!Directory.Exists(addressPath))
+            {
+                Directory.CreateDirectory(addressPath);
+            }
+            var territoriesPath = Path.Combine(informationPath, "Territories");
+            if (!Directory.Exists(territoriesPath))
+            {
+                Directory.CreateDirectory(territoriesPath);
+            }
+
+            var newAddressFilePath= Path.Combine(mapPath, "js", "information", "Addresses"); 
+            var existingAddressFilePath= Path.Combine(mapPath, "js", "information", "Addresses"); 
+            var territoriesFilePath= Path.Combine(mapPath, "js", "information", "Territories");
+
             //Create Address Directory Paths for generated files
-            panelSideMenu.territoryHelperConfiguration.AtoZExistingAddressesJSFilePath = Path.Combine(mapPath,"js","information","Addresses", "existingAddresses.js");
-            panelSideMenu.territoryHelperConfiguration.AtoZExistingAddressesJSFilePath = Path.Combine(mapPath, "js", "information", "Addresses", "newAddresses.js"); 
+
+            panelSideMenu.territoryHelperConfiguration.AtoZExistingAddressesJSFilePath = Path.Combine(existingAddressFilePath, "existingAddresses.js");
+            panelSideMenu.territoryHelperConfiguration.AtoZNewAddressesJSFilePath = Path.Combine(newAddressFilePath, "newAddresses.js");
 
             //Create Territory Directory Path for generated files
-            panelSideMenu.territoryHelperConfiguration.AtoZTerritoriesJSFilePath = Path.Combine(mapPath,"js","information","Territories", "territories.js");
+            panelSideMenu.territoryHelperConfiguration.AtoZTerritoriesJSFilePath = Path.Combine(territoriesFilePath, "territories.js");
         }
 
         private void CopyFilesRecursively(string sourcePath, string targetPath)
@@ -256,7 +298,5 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
         }
-
-        
     }
 }

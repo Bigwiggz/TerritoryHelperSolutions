@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.TopLevelServices.Import;
 using TerritoryHelperSolutionsWinForm.ChildForms;
+using TerritoryHelperSolutionsWinForm.Validators;
 
 namespace TerritoryHelperSolutionsWinForm
 {
@@ -198,6 +199,34 @@ namespace TerritoryHelperSolutionsWinForm
         private void lblMinimize_Click(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnOutputFolder_Click(object sender, EventArgs e)
+        {
+            MainPageOutputFolderValidator mainPageOutputFolderValidator = new MainPageOutputFolderValidator();
+            var validationResult = mainPageOutputFolderValidator.Validate(panelSideMenu.territoryHelperConfiguration);
+            if (validationResult.IsValid)
+            {
+                openFileDialogOutput.Filter = null;
+                openFileDialogOutput.FilterIndex = 1;
+                openFileDialogOutput.InitialDirectory = panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation;
+                openFileDialogOutput.Multiselect = false;
+                if (openFileDialogOutput.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+            }
+            else
+            {
+                string errorList = "THERE WERE SOME ERROR(S): \r\n \r\n";
+                foreach (var failure in validationResult.Errors)
+                {
+                    errorList = $"{errorList} •{failure} \r\n \r\n";
+                }
+
+                MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
