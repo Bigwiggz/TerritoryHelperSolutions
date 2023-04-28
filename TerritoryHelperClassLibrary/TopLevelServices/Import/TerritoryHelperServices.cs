@@ -478,7 +478,7 @@ public class TerritoryHelperServices
 
         //Report
         report.TopLevelPercentComplete = 90;
-        report.TopLevelProgressMessage = "Creating Excel Spreadsheets and interactive maps....";
+        report.TopLevelProgressMessage = "Creating Excel Spreadsheets....";
         progress.Report(report);
 
         //Save address list to spreadsheet
@@ -490,6 +490,11 @@ public class TerritoryHelperServices
 
         await excelFileProcessing.SaveExcelMasterFile(finalModelList, territoryHelperImportRecordsList, outputExcelFile);
 
+        //Report
+        report.TopLevelPercentComplete = 95;
+        report.TopLevelProgressMessage = "Creating interactive maps....";
+        progress.Report(report);
+
         //Save all results
         FileInfo congregationTerritoriesFile = new FileInfo(config.TerritoriesFilePath);
 
@@ -497,6 +502,10 @@ public class TerritoryHelperServices
         var newSpanishAddressGeoJSON = FileServices.CreateNewAddressGeoJSON(boundaryFilteredMasterList);
         await FileServices.CreateJavascriptTerritoriesAndLocationsFiles(config, newSpanishAddressGeoJSON, existingSpanishAddressGeoJSON, congregationTerritoriesFile);
 
+        //Report
+        report.TopLevelPercentComplete = 100;
+        report.TopLevelProgressMessage = "Complete";
+        progress.Report(report);
 
         Console.WriteLine("End Program");
     }

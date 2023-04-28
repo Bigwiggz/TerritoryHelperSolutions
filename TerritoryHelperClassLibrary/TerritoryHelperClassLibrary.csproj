@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Maps.Routing" Version="1.0.0-beta.1" />
     <PackageReference Include="EPPlus" Version="6.1.0" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.46" />
     <PackageReference Include="NetTopologySuite" Version="2.5.0" />
     <PackageReference Include="NetTopologySuite.IO.GeoJSON" Version="2.0.4" />
@@ -19,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BaseServices\FileTransformations\" />
     <Folder Include="BaseServices\WebScraping\WebDriver\" />
     <Folder Include="TopLevelServices\Import\" />
   </ItemGroup>

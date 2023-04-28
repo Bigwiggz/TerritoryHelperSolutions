@@ -46,14 +46,15 @@
             this.panelDesktop = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.panelTitleBar = new System.Windows.Forms.Panel();
+            this.btnOutputFolder = new FontAwesome.Sharp.IconButton();
             this.lblMinimize = new System.Windows.Forms.Label();
             this.lblMaximize = new System.Windows.Forms.Label();
             this.lblExit = new System.Windows.Forms.Label();
             this.lblTitleChildForm = new System.Windows.Forms.Label();
             this.iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             this.iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
-            this.btnOutputFolder = new FontAwesome.Sharp.IconButton();
             this.openFileDialogOutput = new System.Windows.Forms.OpenFileDialog();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panelLogo.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -299,6 +300,7 @@
             // panelDesktop
             // 
             this.panelDesktop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
+            this.panelDesktop.Controls.Add(this.label4);
             this.panelDesktop.Controls.Add(this.label2);
             this.panelDesktop.Controls.Add(this.panelTitleBar);
             this.panelDesktop.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -333,6 +335,25 @@
             this.panelTitleBar.Size = new System.Drawing.Size(684, 40);
             this.panelTitleBar.TabIndex = 2;
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
+            // 
+            // btnOutputFolder
+            // 
+            this.btnOutputFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOutputFolder.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnOutputFolder.ForeColor = System.Drawing.Color.Coral;
+            this.btnOutputFolder.IconChar = FontAwesome.Sharp.IconChar.Folder;
+            this.btnOutputFolder.IconColor = System.Drawing.Color.Coral;
+            this.btnOutputFolder.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnOutputFolder.IconSize = 18;
+            this.btnOutputFolder.Location = new System.Drawing.Point(269, 4);
+            this.btnOutputFolder.Name = "btnOutputFolder";
+            this.btnOutputFolder.Size = new System.Drawing.Size(192, 30);
+            this.btnOutputFolder.TabIndex = 5;
+            this.btnOutputFolder.Text = "Output Folder";
+            this.btnOutputFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOutputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnOutputFolder.UseVisualStyleBackColor = true;
+            this.btnOutputFolder.Click += new System.EventHandler(this.btnOutputFolder_Click);
             // 
             // lblMinimize
             // 
@@ -408,27 +429,22 @@
             this.iconSplitButton1.Size = new System.Drawing.Size(23, 23);
             this.iconSplitButton1.Text = "iconSplitButton1";
             // 
-            // btnOutputFolder
-            // 
-            this.btnOutputFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOutputFolder.ForeColor = System.Drawing.Color.Coral;
-            this.btnOutputFolder.IconChar = FontAwesome.Sharp.IconChar.Folder;
-            this.btnOutputFolder.IconColor = System.Drawing.Color.Coral;
-            this.btnOutputFolder.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnOutputFolder.IconSize = 18;
-            this.btnOutputFolder.Location = new System.Drawing.Point(269, 4);
-            this.btnOutputFolder.Name = "btnOutputFolder";
-            this.btnOutputFolder.Size = new System.Drawing.Size(192, 30);
-            this.btnOutputFolder.TabIndex = 5;
-            this.btnOutputFolder.Text = "Output Folder";
-            this.btnOutputFolder.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnOutputFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnOutputFolder.UseVisualStyleBackColor = true;
-            this.btnOutputFolder.Click += new System.EventHandler(this.btnOutputFolder_Click);
-            // 
             // openFileDialogOutput
             // 
             this.openFileDialogOutput.FileName = "openFileDialog1";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.Coral;
+            this.label4.Location = new System.Drawing.Point(42, 159);
+            this.label4.MaximumSize = new System.Drawing.Size(600, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(587, 38);
+            this.label4.TabIndex = 53;
+            this.label4.Text = "This is an application to run Territory Helper Scripts.  Please run review the in" +
+    "structions section before running the scripts below.";
             // 
             // panelSideMenu
             // 
@@ -484,5 +500,6 @@
         private Label label3;
         private FontAwesome.Sharp.IconButton btnOutputFolder;
         private OpenFileDialog openFileDialogOutput;
+        private Label label4;
     }
 }

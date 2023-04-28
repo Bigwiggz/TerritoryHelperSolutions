@@ -222,6 +222,7 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                     file.Delete();
                 }
             }
+
             //Grab all files and subfolders and copy to another directory
             var sourcePath = Path.Combine(AppContext.BaseDirectory, "StaticContents");
             var targetPath = panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation;
@@ -229,7 +230,7 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
 
             //Rename Map Directory
             var oldName = Path.Combine(targetPath, "Map");
-            var mapPath = Path.Combine(targetPath, $"Map-{DateTime.Now.ToString("MM-dd-yyyy")}");
+            var mapPath = Path.Combine(targetPath, $"Map-{DateTime.Now.ToString("MM-dd-yyyy-hh-mm-ss")}");
             if (Directory.Exists(mapPath))
             {
                 //If files already exists delete them
@@ -276,7 +277,6 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             var territoriesFilePath= Path.Combine(mapPath, "js", "information", "Territories");
 
             //Create Address Directory Paths for generated files
-
             panelSideMenu.territoryHelperConfiguration.AtoZExistingAddressesJSFilePath = Path.Combine(existingAddressFilePath, "existingAddresses.js");
             panelSideMenu.territoryHelperConfiguration.AtoZNewAddressesJSFilePath = Path.Combine(newAddressFilePath, "newAddresses.js");
 
