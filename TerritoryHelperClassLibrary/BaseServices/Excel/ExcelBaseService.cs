@@ -506,4 +506,28 @@ public class ExcelBaseService
 
         await package.SaveAsync();
     }
+
+    public async Task ExportAnyListToExcel<T>(List<T> exportedList, FileInfo file)
+    {
+        if (file.Exists)
+        {
+            file.Delete();
+        }
+
+        using var package = new ExcelPackage(file);
+
+        //First Worksheet: All Records
+        var ws = package.Workbook.Worksheets.Add("AllRecords");
+
+        var range = ws.Cells["A1"].LoadFromCollection(exportedList, true);
+        range.AutoFitColumns();
+
+        // Formats the header
+        ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        ws.Row(1).Style.Font.Size = 11;
+        ws.Row(1).Style.Font.Bold = true;
+
+        await package.SaveAsync();
+
+    }
 }

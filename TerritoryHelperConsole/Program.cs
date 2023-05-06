@@ -1,10 +1,15 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ExcelMigration.ExcelInterop;
 using System.Diagnostics;
+using TerritoryHelperClassLibrary.BaseServices.AddressScanner;
+using TerritoryHelperClassLibrary.BaseServices.Excel;
 using TerritoryHelperClassLibrary.BaseServices.GeoMapping;
+using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.Models.UtilityModels;
 using TerritoryHelperClassLibrary.TopLevelServices.Import;
+using TerritoryHelperClassLibrary.Extensions;
+using TerritoryHelperClassLibrary.Models.AddressScanner;
 
 Console.WriteLine("Hello, World!");
 
@@ -57,13 +62,15 @@ var westColumbiaTerritoryHelperConfig = new TerritoryHelperConfiguration
     //Azure Maps Primary Security Key
     MicrosoftAzureMapsPrimarySecurityKey= "[MS Azure Maps Key Here]"
 };
-
+/*
 //Call Progress
 var progress = new Progress<ProgressReportModel>();
 var lowerProgress = new Progress<LowerLeverProgressReportModel>();
 
 //Call your Top level services here
 var territoryHelperService = new TerritoryHelperServices();
+*/
+
 
 /*
  IMPORT ALL RECORDS FROM TERRITORY HELPER
@@ -81,7 +88,7 @@ var territoryHelperService = new TerritoryHelperServices();
  * EXPORT ALL RECORDS TO TERRITORY HELPER TO CENSO
  */
 //Call this service to export all changes to Territory Helper CENSO
-await territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig, progress, lowerProgress);
+//await territoryHelperService.UpdateCENSOTerritoryHelperUsingMasterRecord(westColumbiaTerritoryHelperConfig, progress, lowerProgress);
 
 /*
  * IMPORT ALL RECORDS FROM ATOZ DATABASE
@@ -114,3 +121,31 @@ TimeSpan ts = stopWatch.Elapsed;
 string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",ts.Hours, ts.Minutes, ts.Seconds,ts.Milliseconds / 10);
 Console.WriteLine("RunTime " + elapsedTime);
 */
+
+//TEST ADDRESS SCRUBBER
+
+
+var excelService = new ExcelBaseService();
+FileInfo fileInfo = new FileInfo(westColumbiaTerritoryHelperConfig.ExistingSpanishAddressesFilePath);
+var masterAddressList = await excelService.LoadExistingSpanishAddreessesExcelFile(fileInfo);
+
+var territoryHelperAddressList=new List<TerritoryHelperAddress>();
+
+foreach(var masterTerritory in masterAddressList)
+{
+    var territoryAddress = new TerritoryHelperAddress();
+    PropertyCopyService.CopyProperties(masterTerritory, territoryAddress);
+
+    territoryHelperAddressList.Add(territoryAddress);
+}
+
+var addressScrubberService = new AddressScannerService();
+var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList);
+
+var archiveDirectory = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Archive\";
+
+var excelFilePath = Path.Combine(archiveDirectory, @$"AddressErrorRecords-{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx");
+
+FileInfo addressErrorListFile = new FileInfo(excelFilePath);
+
+await excelService.ExportAnyListToExcel<CompleteAddressError>(addressErrorList, addressErrorListFile);

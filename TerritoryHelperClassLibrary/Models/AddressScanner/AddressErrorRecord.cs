@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TerritoryHelperClassLibrary.Models.AddressScanner
 {
-    public class AddressErrorRecord : TerritoryHelperAddress, IAddressError
+    public class AddressErrorRecord : IAddressError
     {
-        public int AddressErrorId {get; set;}
+        public string AddressErrorId {get; set;}
+        public string AddressErrorSeverity { get; set;}
         public string AddressErrorTitle { get; set;}
         public string AddressErrorMessage { get; set;}
     }

@@ -8,7 +8,8 @@ namespace TerritoryHelperClassLibrary.Models.AddressScanner
 {
     public interface IAddressError
     {
-        public int AddressErrorId  {get;set;}
+        public string AddressErrorId  {get;set;}
+        public string AddressErrorSeverity { get;set;}
         public string AddressErrorTitle { get; set; }
         public string AddressErrorMessage { get; set; }
     }
