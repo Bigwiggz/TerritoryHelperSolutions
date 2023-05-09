@@ -142,10 +142,13 @@ foreach(var masterTerritory in masterAddressList)
 var addressScrubberService = new AddressScannerService();
 var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList);
 
+addressErrorList=addressErrorList.Where(x=>x.HasError==true).ToList();
+
 var archiveDirectory = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Archive\";
 
 var excelFilePath = Path.Combine(archiveDirectory, @$"AddressErrorRecords-{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx");
 
 FileInfo addressErrorListFile = new FileInfo(excelFilePath);
 
-await excelService.ExportAnyListToExcel<CompleteAddressError>(addressErrorList, addressErrorListFile);
+await excelService.ExportCompleteAddressErrorListToExcel(addressErrorList, addressErrorListFile);
+

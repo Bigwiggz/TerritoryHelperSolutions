@@ -60,9 +60,11 @@ namespace TerritoryHelperClassLibrary.BaseServices.AddressScanner
 
                             addressErrorList.Add(addressErrorRecord);
                         }
-
+                        addressError.HasError = true;
                         addressError.AddressErrorRecords=addressErrorList;
                     }
+
+                    addressErrorRecordList.Add(addressError);
                 }
             }
 

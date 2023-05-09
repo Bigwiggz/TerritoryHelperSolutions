@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.Models;
+using TerritoryHelperClassLibrary.Models.AddressScanner;
 using TerritoryHelperClassLibrary.Models.AtoZDatabaseModels;
 
 namespace TerritoryHelperClassLibrary.BaseServices.Excel;
@@ -529,5 +531,83 @@ public class ExcelBaseService
 
         await package.SaveAsync();
 
+    }
+
+    //Temporary Complete Address Error Export flattened file
+    public async Task ExportCompleteAddressErrorListToExcel(List<CompleteAddressError> exportedAddressErrorList, FileInfo file)
+    {
+        if (file.Exists)
+        {
+            file.Delete();
+        }
+
+        using var package = new ExcelPackage(file);
+
+        //First Worksheet: All Records
+        var ws = package.Workbook.Worksheets.Add("AllRecords");
+
+        // Formats the header
+        ws.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        ws.Row(1).Style.Font.Size = 11;
+        ws.Row(1).Style.Font.Bold = true;
+
+        //Write Table
+        int row = 2;
+        int col = 1;
+
+        //Write Header Names
+        ws.Cells[1, col].Value = nameof(CompleteAddressError.TerritoryType);
+        ws.Cells[1, col + 2].Value = nameof(CompleteAddressError.TerritoryNumber);
+        ws.Cells[1, col + 3].Value = nameof(CompleteAddressError.LocationType);
+        ws.Cells[1, col + 4].Value = nameof(CompleteAddressError.Status);
+        ws.Cells[1, col + 5].Value = nameof(CompleteAddressError.Latitude);
+        ws.Cells[1, col + 6].Value = nameof(CompleteAddressError.Longitude);
+        ws.Cells[1, col + 7].Value = nameof(CompleteAddressError.CompleteAddress);
+        ws.Cells[1, col + 8].Value = nameof(CompleteAddressError.Number);
+        ws.Cells[1, col + 9].Value = nameof(CompleteAddressError.Street);
+        ws.Cells[1, col + 10].Value = nameof(CompleteAddressError.Apartment);
+        ws.Cells[1, col + 11].Value = nameof(CompleteAddressError.Floor);
+        ws.Cells[1, col + 12].Value = nameof(CompleteAddressError.City);
+        ws.Cells[1, col + 13].Value = nameof(CompleteAddressError.County);
+        ws.Cells[1, col + 14].Value = nameof(CompleteAddressError.PostalCode);
+        ws.Cells[1, col + 15].Value = nameof(CompleteAddressError.State);
+        ws.Cells[1, col + 16].Value = nameof(CompleteAddressError.CountryCode);
+        ws.Cells[1, col + 17].Value = nameof(CompleteAddressError.HasError);
+        ws.Cells[1, col + 18].Value = nameof(AddressErrorRecord.AddressErrorId);
+        ws.Cells[1, col + 19].Value = nameof(AddressErrorRecord.AddressErrorSeverity);
+        ws.Cells[1, col + 20].Value = nameof(AddressErrorRecord.AddressErrorTitle);
+        ws.Cells[1, col + 21].Value = nameof(AddressErrorRecord.AddressErrorMessage);
+
+
+        foreach (var address in exportedAddressErrorList)
+        {
+            foreach(var error in address.AddressErrorRecords)
+            {
+                ws.Cells[row,col].Value= address.TerritoryType;
+                ws.Cells[row,col+2].Value= address.TerritoryNumber;
+                ws.Cells[row,col+3].Value= address.LocationType;
+                ws.Cells[row,col+4].Value= address.Status;
+                ws.Cells[row,col+5].Value= address.Latitude;
+                ws.Cells[row,col+6].Value= address.Longitude;
+                ws.Cells[row,col+7].Value= address.CompleteAddress;
+                ws.Cells[row,col+8].Value= address.Number;
+                ws.Cells[row,col+9].Value= address.Street;
+                ws.Cells[row,col+10].Value= address.Apartment;
+                ws.Cells[row,col+11].Value= address.Floor;
+                ws.Cells[row,col+12].Value= address.City;
+                ws.Cells[row,col+13].Value= address.County;
+                ws.Cells[row,col+14].Value= address.PostalCode;
+                ws.Cells[row,col+15].Value= address.State;
+                ws.Cells[row,col+16].Value= address.CountryCode;
+                ws.Cells[row,col+17].Value = address.HasError;
+                ws.Cells[row,col+18].Value = error.AddressErrorId;
+                ws.Cells[row,col+19].Value = error.AddressErrorSeverity;
+                ws.Cells[row,col+20].Value = error.AddressErrorTitle;
+                ws.Cells[row,col+21].Value = error.AddressErrorMessage;
+                row++;
+            }
+        }
+
+        await package.SaveAsync();
     }
 }

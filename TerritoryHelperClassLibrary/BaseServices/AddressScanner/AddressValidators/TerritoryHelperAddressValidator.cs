@@ -30,11 +30,11 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Have Country At End Of Address
         RuleFor(x => x.CompleteAddress)
             .Must(HaveCountryAtEndOfAddress).WithMessage("The Full Address Field does not contain ', United States'.").WithErrorCode("Country Code Warning").WithSeverity(Severity.Warning);
-
+        /*
         //Not Have Invalid Formatted Postal Address
         RuleFor(x=>new {x.CompleteAddress,x.PostalCode}).NotNull().WithMessage("The Postal Code or Full Address Field must not be null.").WithErrorCode("Full Address or Postal Code Null").WithSeverity(Severity.Error)
             .Must(x=>NotHaveInvalidFormattedPostalAddress(x.CompleteAddress, x.PostalCode)).WithMessage("Either the Full Address or Postal Code field has an incorrectly formatted zip code.").WithErrorCode("Zip Code Error").WithSeverity(Severity.Error);
-
+        */
         //Not Have Inconsistent Location Types
         RuleFor(x => new {x.CompleteAddress,x.LocationType }).NotNull().WithMessage("The Location Type or Full Address Field must not be null.").WithErrorCode("Full Address or Location Type Null").WithSeverity(Severity.Error)
             .Must(x=> NotHaveInconsistentLocationTypes(x.CompleteAddress,x.LocationType)).WithMessage("The location type of Mobile Home/Apartment does not have the correct Lot/Apt in the full address field.").WithErrorCode("Location Type Error").WithSeverity(Severity.Error);
@@ -42,18 +42,19 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Have Correct State Code
         RuleFor(x=> new {x.CompleteAddress, x.State }).NotNull().WithMessage("The State or Full Address Field must not be null.").WithErrorCode("Full Address or State Null").WithSeverity(Severity.Error)
             .Must(x => HaveCorrectStateCode(x.CompleteAddress, x.State)).WithMessage("The State Abbreviation is not correct.").WithErrorCode("State Abbreviation Error").WithSeverity(Severity.Error);
-
+        /*
         //Not Have Misplaced Or Missing Commas
         RuleFor(x => new { x.CompleteAddress,x.State, x.City})
             .Must(x=> NotHaveMisplacedOrMissingCommas(x.CompleteAddress,x.State, x.City)).WithMessage("The commas are incorrectly placed.").WithErrorCode("Comma Placement Warning").WithSeverity(Severity.Warning);
-
+        
         //Must Be Correctly Partitioned Address
         RuleFor(x=>x)
             .Must(BeCorrectlyPartitionedAddress).WithMessage("The address is not correctly partitioned.").WithErrorCode("Partitioned Address Error").WithSeverity(Severity.Error);
-
+        
         //Must Have Correct Abbreviation Suffix for the Roads
         RuleFor(x=>new {x.CompleteAddress,x.State })
             .Must(x=> HaveCorrectAbbreviationSuffix(x.CompleteAddress,x.State, addressSuffixRecordList)).WithMessage("The address has the wrong abbreviation.").WithErrorCode("Street Abbreviation Error").WithSeverity(Severity.Error);
+        */
     }
 
     protected bool NotHaveInvalidCharacters(string fullAddress)
@@ -94,19 +95,19 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
 
     protected bool NotHaveInconsistentLocationTypes(string completeAddress, string locationType)
     {
-        bool notHaveInconsistentLocationTypes = false;
+        bool notHaveInconsistentLocationTypes = true;
 
-        if (locationType == "Mobile home" || locationType == "Casa móvil" && completeAddress.Contains("Lot"))
+        if (locationType.Trim() == "Mobile home" || locationType.Trim() == "Casa móvil" && completeAddress.Contains("Lot"))
         {
-            notHaveInconsistentLocationTypes = true;
+            notHaveInconsistentLocationTypes = false;
         }
-        if (locationType == "Apartment" || locationType == "Apartamentos" && completeAddress.Contains("Apt"))
+        if (locationType.Trim() == "Apartment" || locationType.Trim() == "Apartamentos" && completeAddress.Contains("Apt"))
         {
-            notHaveInconsistentLocationTypes = true;
+            notHaveInconsistentLocationTypes = false;
         }
-        if (locationType == "House" || locationType == "Casa" && completeAddress.Contains("Apt") == false && !completeAddress.Contains("Lot") == false)
+        if (locationType.Trim() == "House" || locationType.Trim() == "Casa" && completeAddress.Contains("Apt") == false && !completeAddress.Contains("Lot") == false)
         {
-            notHaveInconsistentLocationTypes = true;
+            notHaveInconsistentLocationTypes = false;
         }
 
         return notHaveInconsistentLocationTypes;
