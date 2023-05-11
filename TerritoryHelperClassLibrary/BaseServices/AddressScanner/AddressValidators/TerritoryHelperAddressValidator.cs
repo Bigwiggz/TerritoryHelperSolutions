@@ -18,6 +18,7 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         AddressSuffixRecordService addressSuffixRecordService = new AddressSuffixRecordService();
 
         var addressSuffixRecordList = addressSuffixRecordService.AddressSuffixRecordList;
+        var uniqueAddressSuffixRecordList = addressSuffixRecordService.UniqueAddressSuffixAbbreviationsList;
 
         //Not Have Invalid Characters
         RuleFor(x => x.CompleteAddress).NotNull().WithMessage("The Full Address Field must not be null.").WithErrorCode("Full Address Null").WithSeverity(Severity.Error)
@@ -30,11 +31,11 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Have Country At End Of Address
         RuleFor(x => x.CompleteAddress)
             .Must(HaveCountryAtEndOfAddress).WithMessage("The Full Address Field does not contain ', United States'.").WithErrorCode("Country Code Warning").WithSeverity(Severity.Warning);
-        /*
+        
         //Not Have Invalid Formatted Postal Address
         RuleFor(x=>new {x.CompleteAddress,x.PostalCode}).NotNull().WithMessage("The Postal Code or Full Address Field must not be null.").WithErrorCode("Full Address or Postal Code Null").WithSeverity(Severity.Error)
             .Must(x=>NotHaveInvalidFormattedPostalAddress(x.CompleteAddress, x.PostalCode)).WithMessage("Either the Full Address or Postal Code field has an incorrectly formatted zip code.").WithErrorCode("Zip Code Error").WithSeverity(Severity.Error);
-        */
+        
         //Not Have Inconsistent Location Types
         RuleFor(x => new {x.CompleteAddress,x.LocationType }).NotNull().WithMessage("The Location Type or Full Address Field must not be null.").WithErrorCode("Full Address or Location Type Null").WithSeverity(Severity.Error)
             .Must(x=> NotHaveInconsistentLocationTypes(x.CompleteAddress,x.LocationType)).WithMessage("The location type of Mobile Home/Apartment does not have the correct Lot/Apt in the full address field.").WithErrorCode("Location Type Error").WithSeverity(Severity.Error);
@@ -50,11 +51,11 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Must Be Correctly Partitioned Address
         RuleFor(x=>x)
             .Must(BeCorrectlyPartitionedAddress).WithMessage("The address is not correctly partitioned.").WithErrorCode("Partitioned Address Error").WithSeverity(Severity.Error);
-        
-        //Must Have Correct Abbreviation Suffix for the Roads
-        RuleFor(x=>new {x.CompleteAddress,x.State })
-            .Must(x=> HaveCorrectAbbreviationSuffix(x.CompleteAddress,x.State, addressSuffixRecordList)).WithMessage("The address has the wrong abbreviation.").WithErrorCode("Street Abbreviation Error").WithSeverity(Severity.Error);
         */
+        //Must Have Correct Abbreviation Suffix for the Roads
+        RuleFor(x=>new {x.CompleteAddress,x.Street})
+            .Must(x=> HaveCorrectAbbreviationSuffix(x.CompleteAddress,x.Street, uniqueAddressSuffixRecordList)).WithMessage("The address has the wrong abbreviation.").WithErrorCode("Street Abbreviation Error").WithSeverity(Severity.Error);
+        
     }
 
     protected bool NotHaveInvalidCharacters(string fullAddress)
@@ -95,19 +96,19 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
 
     protected bool NotHaveInconsistentLocationTypes(string completeAddress, string locationType)
     {
-        bool notHaveInconsistentLocationTypes = true;
+        bool notHaveInconsistentLocationTypes = false;
 
         if (locationType.Trim() == "Mobile home" || locationType.Trim() == "Casa móvil" && completeAddress.Contains("Lot"))
         {
-            notHaveInconsistentLocationTypes = false;
+            notHaveInconsistentLocationTypes = true;
         }
         if (locationType.Trim() == "Apartment" || locationType.Trim() == "Apartamentos" && completeAddress.Contains("Apt"))
         {
-            notHaveInconsistentLocationTypes = false;
+            notHaveInconsistentLocationTypes = true;
         }
-        if (locationType.Trim() == "House" || locationType.Trim() == "Casa" && completeAddress.Contains("Apt") == false && !completeAddress.Contains("Lot") == false)
+        if (locationType.Trim() == "House" || locationType.Trim() == "Casa" && completeAddress.Contains("Apt") == false && completeAddress.Contains("Lot") == false)
         {
-            notHaveInconsistentLocationTypes = false;
+            notHaveInconsistentLocationTypes = true;
         }
 
         return notHaveInconsistentLocationTypes;
@@ -206,15 +207,21 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         return beCorrectlyPartitionedAddress;
     }
 
-    public bool HaveCorrectAbbreviationSuffix(string completeAddress, string street, List<AddressSuffixRecord> addressSuffixRecordsList)
+    public bool HaveCorrectAbbreviationSuffix(string completeAddress, string street, List<string> uniqueAddressSuffixRecordList)
     {
         //TODO: Finish adding HaveCorrectAbbrieviation
+        bool hasCorrectAbbreviationSuffix = false;
+       
         if (completeAddress.Contains(street))
         {
-
+            foreach(var addressAbbreviation in uniqueAddressSuffixRecordList)
+            {
+                if(completeAddress.ToUpper().Contains($" {addressAbbreviation}"))
+                {
+                    hasCorrectAbbreviationSuffix = true;
+                }
+            }
         }
-        bool hasCorrectAbbreviationSuffix = false;
-        bool hasIncorrectSuffix = addressSuffixRecordsList.Any(x => x.CommonAbbreviation == "testSuffix");
 
         return hasCorrectAbbreviationSuffix;
     }
