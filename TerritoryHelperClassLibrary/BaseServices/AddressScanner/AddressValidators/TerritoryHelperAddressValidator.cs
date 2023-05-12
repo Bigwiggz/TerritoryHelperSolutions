@@ -47,15 +47,21 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Not Have Misplaced Or Missing Commas
         RuleFor(x => new { x.CompleteAddress,x.State, x.City})
             .Must(x=> NotHaveMisplacedOrMissingCommas(x.CompleteAddress,x.State, x.City)).WithMessage("The commas are incorrectly placed.").WithErrorCode("Comma Placement Warning").WithSeverity(Severity.Warning);
-        
+        */
+
         //Must Be Correctly Partitioned Address
         RuleFor(x=>x)
             .Must(BeCorrectlyPartitionedAddress).WithMessage("The address is not correctly partitioned.").WithErrorCode("Partitioned Address Error").WithSeverity(Severity.Error);
-        */
+        
+
+        //Must Have Corresponding Street and Complete Address
+        RuleFor(x => new { x.CompleteAddress, x.Street })
+            .Must(x => HasSameStreetNameAndCompleteAddress(x.CompleteAddress, x.Street)).WithMessage(x => $"The street address and complete address does not match").WithErrorCode("Street-Complete Address Error").WithSeverity(Severity.Error);
+
         //Must Have Correct Abbreviation Suffix for the Roads
         RuleFor(x=>new {x.CompleteAddress,x.Street})
-            .Must(x=> HaveCorrectAbbreviationSuffix(x.CompleteAddress,x.Street, uniqueAddressSuffixRecordList)).WithMessage("The address has the wrong abbreviation.").WithErrorCode("Street Abbreviation Error").WithSeverity(Severity.Error);
-        
+            .Must(x=> HaveCorrectAbbreviationSuffix(x.CompleteAddress,x.Street, uniqueAddressSuffixRecordList)).WithMessage(x=>$"The address has the wrong abbreviation. Please try {SuggestedAbbreviation(x.CompleteAddress, addressSuffixRecordList)}").WithErrorCode("Street Abbreviation Error").WithSeverity(Severity.Error);
+
     }
 
     protected bool NotHaveInvalidCharacters(string fullAddress)
@@ -191,13 +197,13 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         {
             concatenatedAddress = $"{address.Street} Apt {address.Number}, {address.City}, {address.State} {address.PostalCode}, United States";
         }
-        else
+        else if(address.LocationType =="Casa" || address.LocationType=="House")
         {
             concatenatedAddress = $"{address.Number} {address.Street}, {address.City}, {address.State} {address.PostalCode}, United States";
         }
 
-        concatenatedAddress = concatenatedAddress.Replace(", United States","").ToLower();
-        var completeAddress = address.CompleteAddress.Replace(", United States", "").ToLower();
+        concatenatedAddress = concatenatedAddress.Replace(", United States","").Replace(",","").ToLower();
+        var completeAddress = address.CompleteAddress.Replace(", United States", "").Replace(",", "").ToLower();
 
         if (concatenatedAddress == completeAddress)
         {
@@ -207,23 +213,41 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         return beCorrectlyPartitionedAddress;
     }
 
-    public bool HaveCorrectAbbreviationSuffix(string completeAddress, string street, List<string> uniqueAddressSuffixRecordList)
+    protected bool HasSameStreetNameAndCompleteAddress(string completeAddress, string street)
+    {
+        bool hasCorrectStreetNameAndCompleteAddress = false;
+        if (completeAddress.Contains(street))
+        {
+            hasCorrectStreetNameAndCompleteAddress = true;
+        }
+        return hasCorrectStreetNameAndCompleteAddress;
+    }
+
+    protected bool HaveCorrectAbbreviationSuffix(string completeAddress, string street, List<string> uniqueAddressSuffixRecordList)
     {
         //TODO: Finish adding HaveCorrectAbbrieviation
         bool hasCorrectAbbreviationSuffix = false;
-       
-        if (completeAddress.Contains(street))
+
+        foreach(var addressAbbreviation in uniqueAddressSuffixRecordList)
         {
-            foreach(var addressAbbreviation in uniqueAddressSuffixRecordList)
+            if(completeAddress.ToUpper().Contains($" {addressAbbreviation}"))
             {
-                if(completeAddress.ToUpper().Contains($" {addressAbbreviation}"))
-                {
-                    hasCorrectAbbreviationSuffix = true;
-                }
+                hasCorrectAbbreviationSuffix = true;
             }
         }
-
+        
         return hasCorrectAbbreviationSuffix;
+    }
+
+    protected string SuggestedAbbreviation(string completeAddress, List<AddressSuffixRecord> addressSuffixRecordList)
+    {
+        string recommendedSuggestionAbbreviation = "a valid abbreviation";
+
+        var recommendedAbbreviation=addressSuffixRecordList
+            .Where(x=> completeAddress.ToUpper().Contains($" {x.CommonAbbreviation}"))
+            .Select(x=>x.RecommendedAbbreviation).FirstOrDefault("a valid abbreviation");
+
+        return recommendedSuggestionAbbreviation;
     }
 
 }
