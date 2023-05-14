@@ -15,18 +15,18 @@ namespace TerritoryHelperSolutionsWinForm
         private Form currentChildForm;
 
         //Data Fields
-        public static TerritoryHelperConfiguration territoryHelperConfiguration=new TerritoryHelperConfiguration();
-        public static TerritoryHelperServices territoryHelperService=new TerritoryHelperServices();
+        public static TerritoryHelperConfiguration territoryHelperConfiguration = new TerritoryHelperConfiguration();
+        public static TerritoryHelperServices territoryHelperService = new TerritoryHelperServices();
 
         public panelSideMenu()
         {
             InitializeComponent();
 
             //Form
-            this.Text=string.Empty;
+            this.Text = string.Empty;
             this.ControlBox = false;
-            this.DoubleBuffered= true;
-            this.MaximizedBounds=Screen.FromHandle(this.Handle).WorkingArea;
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
 
         //https://www.youtube.com/watch?v=JP5rgXO_5Sk&ab_channel=RJCodeAdvanceEN
@@ -38,7 +38,7 @@ namespace TerritoryHelperSolutionsWinForm
             public static Color color1 = Color.FromArgb(172, 126, 241);
             public static Color color2 = Color.FromArgb(249, 118, 176);
             public static Color color3 = Color.FromArgb(253, 138, 114);
-            public static Color color4= Color.FromArgb(95, 77, 221);
+            public static Color color4 = Color.FromArgb(95, 77, 221);
             public static Color color5 = Color.FromArgb(249, 88, 155);
             public static Color color6 = Color.FromArgb(24, 161, 251);
         }
@@ -59,7 +59,7 @@ namespace TerritoryHelperSolutionsWinForm
         //Method
         private void ActivateButton(object senderBtn, Color color)
         {
-            if(senderBtn!=null)
+            if (senderBtn != null)
             {
                 DisableButton();
                 currentBtn = (IconButton)senderBtn;
@@ -71,17 +71,17 @@ namespace TerritoryHelperSolutionsWinForm
                 currentBtn.ImageAlign = ContentAlignment.MiddleRight;
 
                 //change icon
-                iconCurrentChildForm.IconChar=currentBtn.IconChar;
+                iconCurrentChildForm.IconChar = currentBtn.IconChar;
                 iconCurrentChildForm.IconColor = RBGColors.color1;
 
                 //Change text
-                lblTitleChildForm.Text=currentBtn.Text;
+                lblTitleChildForm.Text = currentBtn.Text;
             }
         }
 
         private void OpenChildForm(Form childForm)
         {
-            if(currentChildForm!=null)
+            if (currentChildForm != null)
             {
                 //open only form
                 currentChildForm.Close();
@@ -90,10 +90,10 @@ namespace TerritoryHelperSolutionsWinForm
             currentChildForm = childForm;
             childForm.TopLevel = false;
             childForm.TopMost = true;
-            childForm.FormBorderStyle=FormBorderStyle.None;
+            childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.Dock = DockStyle.Fill;
             panelDesktop.Controls.Add(childForm);
-            panelDesktop.Tag=childForm;
+            panelDesktop.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
         }
@@ -125,19 +125,25 @@ namespace TerritoryHelperSolutionsWinForm
         private void btnSearchAToZDB_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
-            OpenChildForm(new FormSearchAtoZDatabase());    
+            OpenChildForm(new FormSearchAtoZDatabase());
         }
 
         private void btnUpdateCensusTerritories_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
-            OpenChildForm(new FormUpdateCensusTerritories());   
+            OpenChildForm(new FormUpdateCensusTerritories());
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RBGColors.color1);
             OpenChildForm(new FormHelpConfiguration());
+        }
+
+        private void btnAddressErrorScanner_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RBGColors.color1);
+            OpenChildForm(new FormAddressErrorScanner());
         }
 
         private void btnHome2_Click(object sender, EventArgs e)
@@ -183,7 +189,7 @@ namespace TerritoryHelperSolutionsWinForm
         {
             if (WindowState == FormWindowState.Normal)
             {
-                WindowState=FormWindowState.Maximized;
+                WindowState = FormWindowState.Maximized;
             }
             else
             {
@@ -226,7 +232,7 @@ namespace TerritoryHelperSolutionsWinForm
 
                 MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
     }
 }

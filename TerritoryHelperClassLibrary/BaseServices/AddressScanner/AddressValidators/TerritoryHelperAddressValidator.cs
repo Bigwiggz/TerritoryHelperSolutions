@@ -43,17 +43,15 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //Have Correct State Code
         RuleFor(x=> new {x.CompleteAddress, x.State }).NotNull().WithMessage("The State or Full Address Field must not be null.").WithErrorCode("Full Address or State Null").WithSeverity(Severity.Error)
             .Must(x => HaveCorrectStateCode(x.CompleteAddress, x.State)).WithMessage("The State Abbreviation is not correct.").WithErrorCode("State Abbreviation Error").WithSeverity(Severity.Error);
-        /*
+        
         //Not Have Misplaced Or Missing Commas
         RuleFor(x => new { x.CompleteAddress,x.State, x.City})
             .Must(x=> NotHaveMisplacedOrMissingCommas(x.CompleteAddress,x.State, x.City)).WithMessage("The commas are incorrectly placed.").WithErrorCode("Comma Placement Warning").WithSeverity(Severity.Warning);
-        */
 
         //Must Be Correctly Partitioned Address
         RuleFor(x=>x)
             .Must(BeCorrectlyPartitionedAddress).WithMessage("The address is not correctly partitioned.").WithErrorCode("Partitioned Address Error").WithSeverity(Severity.Error);
         
-
         //Must Have Corresponding Street and Complete Address
         RuleFor(x => new { x.CompleteAddress, x.Street })
             .Must(x => HasSameStreetNameAndCompleteAddress(x.CompleteAddress, x.Street)).WithMessage(x => $"The street address and complete address does not match").WithErrorCode("Street-Complete Address Error").WithSeverity(Severity.Error);
@@ -146,7 +144,7 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         bool hasCityComma = false;
         bool hasStateComma = false;
         bool hasZipComma = false;
-        if (state is not null)
+        if (state is not null && state.Length==2)
         {
             //City Comma
             var indexOfCityComma = completeAddress.LastIndexOf(city) - 2;
@@ -228,9 +226,13 @@ public class TerritoryHelperAddressValidator:AbstractValidator<TerritoryHelperAd
         //TODO: Finish adding HaveCorrectAbbrieviation
         bool hasCorrectAbbreviationSuffix = false;
 
-        foreach(var addressAbbreviation in uniqueAddressSuffixRecordList)
+        var streetAbbreviationArray = street.Split(' ');
+        var currentStreetAbbreviation = streetAbbreviationArray[streetAbbreviationArray.Length - 1] ?? "";
+        Console.WriteLine($"{completeAddress}: {currentStreetAbbreviation}");
+
+        foreach (var addressAbbreviation in uniqueAddressSuffixRecordList)
         {
-            if(completeAddress.ToUpper().Contains($" {addressAbbreviation}"))
+            if (currentStreetAbbreviation.ToUpper()==addressAbbreviation)
             {
                 hasCorrectAbbreviationSuffix = true;
             }

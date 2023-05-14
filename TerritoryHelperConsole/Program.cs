@@ -139,6 +139,28 @@ foreach(var masterTerritory in masterAddressList)
     territoryHelperAddressList.Add(territoryAddress);
 }
 
+var testTerritoryAddress = new TerritoryHelperAddress 
+{
+     TerritoryType ="G123-",
+     TerritoryNumber ="78",
+     LocationType ="Casa",
+     Status ="Desconocido",
+     Latitude =30M,
+     Longitude =-80M,
+     CompleteAddress ="172 Indigo Court, West Columbia SC, 29172, United States",
+     Number ="172",
+     Street ="Indigo Court",
+     Apartment ="",
+     Floor ="",
+     City ="West Columbia",
+     County ="Lexington",
+     PostalCode ="29172",
+     State ="SC",
+     CountryCode ="US"
+};
+
+territoryHelperAddressList.Add(testTerritoryAddress);
+
 var addressScrubberService = new AddressScannerService();
 var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList);
 

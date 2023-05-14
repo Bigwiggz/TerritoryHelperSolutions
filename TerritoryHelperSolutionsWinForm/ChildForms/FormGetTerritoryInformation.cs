@@ -63,8 +63,6 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
 
                     FormProgressBar formProgresssBar=new FormProgressBar(ScriptName.GetTerritoryInformation);
                     formProgresssBar.Show();
-
-
                 }
                 else
                 {

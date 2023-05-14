@@ -13,4 +13,5 @@ public static class ScriptName
     public const string SaveTerritoryInformation = "SaveTerritoryInformation";
     public const string SearchAToZDatabaseInformation = "SearchAToZDatabaseInformation";
     public const string UpdateCensusTerritoryInformation = "UpdateCensusTerritoryInformation";
+    public const string AddressErrorScanner = "AddressErrorScanner";
 }
