@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(panelSideMenu));
             panel1 = new Panel();
+            btnAddressErrorScanner = new FontAwesome.Sharp.IconButton();
             label3 = new Label();
             btnHelp = new FontAwesome.Sharp.IconButton();
             btnUpdateCensusTerritories = new FontAwesome.Sharp.IconButton();
@@ -55,7 +56,6 @@
             iconCurrentChildForm = new FontAwesome.Sharp.IconPictureBox();
             iconSplitButton1 = new FontAwesome.Sharp.IconSplitButton();
             openFileDialogOutput = new OpenFileDialog();
-            btnAddressErrorScanner = new FontAwesome.Sharp.IconButton();
             panel1.SuspendLayout();
             panelLogo.SuspendLayout();
             panelBottom.SuspendLayout();
@@ -84,6 +84,27 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(250, 561);
             panel1.TabIndex = 0;
+            // 
+            // btnAddressErrorScanner
+            // 
+            btnAddressErrorScanner.FlatAppearance.BorderSize = 0;
+            btnAddressErrorScanner.FlatStyle = FlatStyle.Flat;
+            btnAddressErrorScanner.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddressErrorScanner.IconChar = FontAwesome.Sharp.IconChar.Satellite;
+            btnAddressErrorScanner.IconColor = Color.White;
+            btnAddressErrorScanner.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnAddressErrorScanner.IconSize = 40;
+            btnAddressErrorScanner.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAddressErrorScanner.Location = new Point(0, 303);
+            btnAddressErrorScanner.Name = "btnAddressErrorScanner";
+            btnAddressErrorScanner.Padding = new Padding(10, 0, 20, 0);
+            btnAddressErrorScanner.Size = new Size(250, 45);
+            btnAddressErrorScanner.TabIndex = 10;
+            btnAddressErrorScanner.Text = "Address Error Scanner";
+            btnAddressErrorScanner.TextAlign = ContentAlignment.MiddleLeft;
+            btnAddressErrorScanner.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnAddressErrorScanner.UseVisualStyleBackColor = true;
+            btnAddressErrorScanner.Click += btnAddressErrorScanner_Click;
             // 
             // label3
             // 
@@ -297,7 +318,7 @@
             label1.Name = "label1";
             label1.Size = new Size(78, 15);
             label1.TabIndex = 3;
-            label1.Text = "Version:  1.0.0";
+            label1.Text = "Version:  1.0.1";
             // 
             // panelDesktop
             // 
@@ -446,27 +467,6 @@
             // openFileDialogOutput
             // 
             openFileDialogOutput.FileName = "openFileDialog1";
-            // 
-            // btnAddressErrorScanner
-            // 
-            btnAddressErrorScanner.FlatAppearance.BorderSize = 0;
-            btnAddressErrorScanner.FlatStyle = FlatStyle.Flat;
-            btnAddressErrorScanner.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAddressErrorScanner.IconChar = FontAwesome.Sharp.IconChar.Satellite;
-            btnAddressErrorScanner.IconColor = Color.White;
-            btnAddressErrorScanner.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAddressErrorScanner.IconSize = 40;
-            btnAddressErrorScanner.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAddressErrorScanner.Location = new Point(0, 303);
-            btnAddressErrorScanner.Name = "btnAddressErrorScanner";
-            btnAddressErrorScanner.Padding = new Padding(10, 0, 20, 0);
-            btnAddressErrorScanner.Size = new Size(250, 45);
-            btnAddressErrorScanner.TabIndex = 10;
-            btnAddressErrorScanner.Text = "Address Error Scanner";
-            btnAddressErrorScanner.TextAlign = ContentAlignment.MiddleLeft;
-            btnAddressErrorScanner.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnAddressErrorScanner.UseVisualStyleBackColor = true;
-            btnAddressErrorScanner.Click += btnAddressErrorScanner_Click;
             // 
             // panelSideMenu
             // 

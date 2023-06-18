@@ -162,9 +162,9 @@ var testTerritoryAddress = new TerritoryHelperAddress
 territoryHelperAddressList.Add(testTerritoryAddress);
 
 var addressScrubberService = new AddressScannerService();
-var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList);
+//var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList);
 
-addressErrorList=addressErrorList.Where(x=>x.HasError==true).ToList();
+//addressErrorList=addressErrorList.Where(x=>x.HasError==true).ToList();
 
 var archiveDirectory = @"D:\Documents\Programming\Web Programs\TerritoryHelperSolutions\TerritoryHelperConsole\Archive\";
 
@@ -172,5 +172,5 @@ var excelFilePath = Path.Combine(archiveDirectory, @$"AddressErrorRecords-{DateT
 
 FileInfo addressErrorListFile = new FileInfo(excelFilePath);
 
-await excelService.ExportCompleteAddressErrorListToExcel(addressErrorList, addressErrorListFile);
+//await excelService.ExportCompleteAddressErrorListToExcel(addressErrorList, addressErrorListFile);
 

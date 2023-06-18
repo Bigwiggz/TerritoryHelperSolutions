@@ -48,6 +48,24 @@ namespace TerritoryHelperSolutionsWinForm.UtilityForms
             Progress<ExcelProgressReportModel> excelProgress = new Progress<ExcelProgressReportModel>();
             excelProgress.ProgressChanged += ExcelReportProgress;
 
+            //Run Address Scanner
+            if(_scriptName==ScriptName.AddressErrorScanner)
+            {
+                await panelSideMenu.territoryHelperService.RunAddressScanner(panelSideMenu.territoryHelperConfiguration, progress, lowerProgress);
+
+                openFileDialogOutput.Filter = "Excel Files|*.xlsx;";
+                openFileDialogOutput.FilterIndex = 1;
+                openFileDialogOutput.InitialDirectory = panelSideMenu.territoryHelperConfiguration.FileSavedOutputLocation;
+                openFileDialogOutput.Multiselect = false;
+                if (openFileDialogOutput.ShowDialog() == DialogResult.OK)
+                {
+
+                }
+
+                stopWatch.Stop();
+
+            }
+
             //Get Territory Information Script
             if (_scriptName==ScriptName.GetTerritoryInformation)
             {

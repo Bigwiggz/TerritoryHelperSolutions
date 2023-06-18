@@ -15,6 +15,8 @@ using TerritoryHelperClassLibrary.Models.Configuration;
 using TerritoryHelperClassLibrary.BaseServices.RoutePlanner;
 using TerritoryHelperClassLibrary.Models.UtilityModels;
 using TerritoryHelperClassLibrary.BaseServices.Parsing;
+using TerritoryHelperClassLibrary.Extensions;
+using TerritoryHelperClassLibrary.BaseServices.AddressScanner;
 
 namespace TerritoryHelperClassLibrary.TopLevelServices.Import;
 
@@ -511,4 +513,44 @@ public class TerritoryHelperServices
     }
 
     //TODO: Add Address Scanner Service
+    public async Task RunAddressScanner(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
+    {
+        var excelService = new ExcelBaseService();
+        FileInfo fileInfo = new FileInfo(config.ExistingSpanishAddressesFilePath);
+
+        //Report
+        report.TopLevelPercentComplete = 10;
+        report.TopLevelProgressMessage = "Loading Existing Spanish Address File";
+        progress.Report(report);
+
+        var masterAddressList = await excelService.LoadExistingSpanishAddreessesExcelFile(fileInfo);
+
+        var territoryHelperAddressList = new List<TerritoryHelperAddress>();
+
+        foreach (var masterTerritory in masterAddressList)
+        {
+            var territoryAddress = new TerritoryHelperAddress();
+            PropertyCopyService.CopyProperties(masterTerritory, territoryAddress);
+
+            territoryHelperAddressList.Add(territoryAddress);
+        }
+
+        var addressScrubberService = new AddressScannerService();
+        var addressErrorList = addressScrubberService.GetListOfAddressesWithErrors(territoryHelperAddressList, lowerProgress);
+
+        addressErrorList = addressErrorList.Where(x => x.HasError == true).ToList();
+
+        var archiveDirectory = config.FileSavedOutputLocation;
+
+        var excelFilePath = Path.Combine(archiveDirectory, @$"AddressErrorRecords-{DateTime.Now.ToString("MM-dd-yyyy")}.xlsx");
+
+        FileInfo addressErrorListFile = new FileInfo(excelFilePath);
+
+        await excelService.ExportCompleteAddressErrorListToExcel(addressErrorList, addressErrorListFile);
+
+        //Report
+        report.TopLevelPercentComplete = 100;
+        report.TopLevelProgressMessage = "Complete";
+        progress.Report(report);
+    }
 }

@@ -49,9 +49,9 @@
             label15.ForeColor = Color.Coral;
             label15.Location = new Point(298, 118);
             label15.Name = "label15";
-            label15.Size = new Size(115, 19);
+            label15.Size = new Size(182, 19);
             label15.TabIndex = 74;
-            label15.Text = "•Master Excel File";
+            label15.Text = "•Excel File With List of Errors";
             // 
             // label13
             // 
@@ -104,9 +104,9 @@
             label8.ForeColor = Color.Coral;
             label8.Location = new Point(12, 52);
             label8.Name = "label8";
-            label8.Size = new Size(441, 19);
+            label8.Size = new Size(411, 19);
             label8.TabIndex = 67;
-            label8.Text = "This script is designed to save all territory records to a master excel file.";
+            label8.Text = "This script is designed to find POSSIBLE errors in the address field.";
             // 
             // label9
             // 

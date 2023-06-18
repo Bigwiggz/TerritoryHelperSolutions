@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NetTopologySuite.Index.HPRtree;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -7,12 +8,21 @@ using System.Threading.Tasks;
 using TerritoryHelperClassLibrary.BaseServices.AddressScanner.AddressValidators;
 using TerritoryHelperClassLibrary.Models;
 using TerritoryHelperClassLibrary.Models.AddressScanner;
+using TerritoryHelperClassLibrary.Models.UtilityModels;
 
 namespace TerritoryHelperClassLibrary.BaseServices.AddressScanner
 {
     public class AddressScannerService
     {
-        public List<CompleteAddressError> GetListOfAddressesWithErrors(List<TerritoryHelperAddress> territoryHelperAddressList)
+        //Fields
+        public LowerLeverProgressReportModel lowerReport;
+
+        public AddressScannerService()
+        {
+            lowerReport = new LowerLeverProgressReportModel();
+        }
+
+        public List<CompleteAddressError> GetListOfAddressesWithErrors(List<TerritoryHelperAddress> territoryHelperAddressList, IProgress<LowerLeverProgressReportModel> lowerProgress)
         {
             List<CompleteAddressError> addressErrorRecordList = new();
 
@@ -20,8 +30,17 @@ namespace TerritoryHelperClassLibrary.BaseServices.AddressScanner
 
             if(territoryHelperAddressList != null && territoryHelperAddressList.Count>0)
             {
-                foreach(var address in territoryHelperAddressList)
+                //Grab Excel file with information
+                int i = 0;
+
+                foreach (var address in territoryHelperAddressList)
                 {
+                    //Report
+                    int reportCount = i + 1;
+                    lowerReport.LowerLevelProcessPercentComplete = reportCount * 100 / territoryHelperAddressList.Count;
+                    lowerReport.LowerLevelProcessMessage = $"Processing Address Verification: {address.CompleteAddress}; Record {reportCount} of {territoryHelperAddressList.Count}";
+                    lowerProgress.Report(lowerReport);
+
                     CompleteAddressError addressError = new CompleteAddressError 
                     {
                         TerritoryType = address.TerritoryType,

@@ -12,15 +12,6 @@ public class GetTerritoryInformationValidator:AbstractValidator<TerritoryHelperC
 {
 	public GetTerritoryInformationValidator()
 	{
-		RuleFor(config => config.UserName)
-			.Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper email cannot be null")
-			.NotEmpty().WithMessage("Territory Helper email cannot be empty")
-			.EmailAddress().WithMessage("Territory Helper email must be a valid email address");
-
-        RuleFor(config => config.Password)
-            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper password cannot be null")
-            .NotEmpty().WithMessage("Territory Helper password cannot be empty");
-
 		RuleFor(config=>config.ExistingSpanishAddressesFilePath)
 			.Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper address file.")
             .NotEmpty().WithMessage("Please select a Territory Helper address file.");

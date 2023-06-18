@@ -29,13 +29,13 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
         {
             try
             {
-                openFileDialogInput.Filter= "Excel Files|*.xlsx;*.xls;*.xlsm";
+                openFileDialogInput.Filter = "Excel Files|*.xlsx;*.xls;*.xlsm";
                 openFileDialogInput.FilterIndex = 1;
                 openFileDialogInput.InitialDirectory = "c:\\";
                 openFileDialogInput.Multiselect = false;
-                if(openFileDialogInput.ShowDialog()==DialogResult.OK )
+                if (openFileDialogInput.ShowDialog() == DialogResult.OK)
                 {
-                    panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath=openFileDialogInput.FileName;
+                    panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath = openFileDialogInput.FileName;
                     MessageBox.Show($"{openFileDialogInput.FileName} path \n\r saved successfully", "ExcelFilePath");
                 }
             }
@@ -48,20 +48,20 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
         private async void btnRunGetTerritoryInformationScript_Click(object sender, EventArgs e)
         {
             try
-            { 
+            {
                 //Information Validation
-                panelSideMenu.territoryHelperConfiguration.UserName=tbTerritoryHelperEmail.Text;
-                panelSideMenu.territoryHelperConfiguration.Password=mTBTerritoryHelperPassword.Text;
+                panelSideMenu.territoryHelperConfiguration.UserName = tbTerritoryHelperEmail.Text;
+                panelSideMenu.territoryHelperConfiguration.Password = mTBTerritoryHelperPassword.Text;
 
-                GetTerritoryInformationValidator getTerritoryInformationValidator= new GetTerritoryInformationValidator();
-                var validatedResult=getTerritoryInformationValidator.Validate(panelSideMenu.territoryHelperConfiguration);
+                GetTerritoryInformationValidator getTerritoryInformationValidator = new GetTerritoryInformationValidator();
+                var validatedResult = getTerritoryInformationValidator.Validate(panelSideMenu.territoryHelperConfiguration);
                 if (validatedResult.IsValid)
                 {
                     var existingAddressesFile = new FileInfo(panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath);
 
                     panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath = existingAddressesFile.FullName;
 
-                    FormProgressBar formProgresssBar=new FormProgressBar(ScriptName.GetTerritoryInformation);
+                    FormProgressBar formProgresssBar = new FormProgressBar(ScriptName.GetTerritoryInformation);
                     formProgresssBar.Show();
                 }
                 else
@@ -73,21 +73,21 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                         errorList = $"{errorList} •{failure} \r\n \r\n";
                     }
 
-                    MessageBox.Show(errorList,"ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace, ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
         }
 
         private void FormGetTerritoryInformation_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnGetTerritoriesList_Click(object sender, EventArgs e)

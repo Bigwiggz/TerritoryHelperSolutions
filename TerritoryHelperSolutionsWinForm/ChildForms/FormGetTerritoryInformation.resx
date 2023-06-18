@@ -63,9 +63,6 @@
   <metadata name="openFileDialogInput.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>343, 17</value>
   </metadata>
-  <data name="label16.Text" xml:space="preserve">
-    <value>4) Then download the Territory JSON file and log out.  This step is important if you have more than one Territory Helper Account since it will move this account to the top option for the script.  Once you have downloaded the file, select it using the button below.</value>
-  </data>
   <metadata name="openFileTerritoriesDialogInput.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>505, 17</value>
   </metadata>

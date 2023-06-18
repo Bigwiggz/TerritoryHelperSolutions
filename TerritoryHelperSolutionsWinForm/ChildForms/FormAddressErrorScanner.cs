@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TerritoryHelperSolutionsWinForm.Models;
+using TerritoryHelperSolutionsWinForm.UtilityForms;
 using TerritoryHelperSolutionsWinForm.Validators;
 
 namespace TerritoryHelperSolutionsWinForm.ChildForms
@@ -44,11 +46,12 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             {
                 var addressErrorScannerValidator = new AddressScannerValidator();
                 var validatedResult = addressErrorScannerValidator.Validate(panelSideMenu.territoryHelperConfiguration);
-                if(validatedResult.IsValid)
+                if (validatedResult.IsValid)
                 {
                     var existingAddressesFile = new FileInfo(panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath);
                     panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath = existingAddressesFile.FullName;
-
+                    FormProgressBar formProgresssBar = new FormProgressBar(ScriptName.AddressErrorScanner);
+                    formProgresssBar.Show();
                 }
                 else
                 {
@@ -62,7 +65,7 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                     MessageBox.Show(errorList, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
