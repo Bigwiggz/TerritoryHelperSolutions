@@ -12,21 +12,15 @@ public class SaveTerritoryInformationValidator:AbstractValidator<TerritoryHelper
 {
 	public SaveTerritoryInformationValidator()
 	{
-        RuleFor(config => config.UserName)
-            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper email cannot be null")
-            .NotEmpty().WithMessage("Territory Helper email cannot be empty")
-            .EmailAddress().WithMessage("Territory Helper email must be a valid email address");
-
-        RuleFor(config => config.Password)
-            .Cascade(CascadeMode.Stop).NotNull().WithMessage("Territory Helper password cannot be null")
-            .NotEmpty().WithMessage("Territory Helper password cannot be empty");
+        RuleFor(config => config.EditedTerritoryHelperMasterAddressForImportFilePath)
+           .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper Master Address file.")
+           .NotEmpty().WithMessage("Please select a Territory Helper Master Address File.");
 
         RuleFor(config => config.TerritoryNotesPath)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper territory notes file.")
             .NotEmpty().WithMessage("Please select a Territory Helper territory notes file.");
 
-
-        RuleFor(config => config.EditedTerritoryHelperMasterAddressForImportFilePath)
+        RuleFor(config => config.ExistingSpanishAddressesFilePath)
             .Cascade(CascadeMode.Stop).NotNull().WithMessage("Please select a Territory Helper address file.")
             .NotEmpty().WithMessage("Please select a Territory Helper address file.");
 

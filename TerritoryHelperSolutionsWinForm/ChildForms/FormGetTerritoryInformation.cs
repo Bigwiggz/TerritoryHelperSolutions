@@ -50,8 +50,6 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             try
             {
                 //Information Validation
-                panelSideMenu.territoryHelperConfiguration.UserName = tbTerritoryHelperEmail.Text;
-                panelSideMenu.territoryHelperConfiguration.Password = mTBTerritoryHelperPassword.Text;
 
                 GetTerritoryInformationValidator getTerritoryInformationValidator = new GetTerritoryInformationValidator();
                 var validatedResult = getTerritoryInformationValidator.Validate(panelSideMenu.territoryHelperConfiguration);

@@ -156,7 +156,7 @@ public class TerritoryHelperServices
         progress.Report(report);
     }
 
-    //TODO: Add auto sorting based on addresses
+    //TODO: finish territory helper master record updating functionality
     public async Task UpdateTerritoryHelperUsingMasterRecord(TerritoryHelperConfiguration config, IProgress<ProgressReportModel> progress, IProgress<LowerLeverProgressReportModel> lowerProgress)
     {
         //1) Verify all addresses are in
@@ -165,7 +165,7 @@ public class TerritoryHelperServices
         Console.WriteLine("2) Are you sure the order of the territory database information/hard file has not changed and was downloaded in ENGLISH? (Y/N)");
         Console.WriteLine("3) Is everything in the correct file with the correct name? (Y/N)");
         Console.WriteLine("4) Did you export the territory helper addresses and put it in the folder Input/CurrentTerritoryHelperAddresses with the name \"TerritoryHelperAddresses.xlsx\"? (Y/N)");
-        Console.WriteLine("5) Did you check to make sure all existing territory notes are");
+        Console.WriteLine("5) Did you check to make sure all existing territory notes are correct");
 
         //Report
         report.TopLevelPercentComplete = 5;

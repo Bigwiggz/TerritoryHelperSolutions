@@ -30,13 +30,13 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 openFileAddressesDialogInput.Multiselect = false;
                 if (openFileAddressesDialogInput.ShowDialog() == DialogResult.OK)
                 {
-                    panelSideMenu.territoryHelperConfiguration.EditedTerritoryHelperMasterAddressForImportFilePath = openFileAddressesDialogInput.FileName;
+                    panelSideMenu.territoryHelperConfiguration.ExistingSpanishAddressesFilePath = openFileAddressesDialogInput.FileName;
                     MessageBox.Show($"{openFileAddressesDialogInput.SafeFileName} path \n\r saved successfully", "Excel File Path");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace, ex.Message,MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -65,8 +65,6 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
             try
             {
                 //Information Validation
-                panelSideMenu.territoryHelperConfiguration.UserName = tbTerritoryHelperEmail.Text;
-                panelSideMenu.territoryHelperConfiguration.Password = mTBTerritoryHelperPassword.Text;
 
 
                 SaveTerritoryInformationValidator saveTerritoryInformationValidator = new SaveTerritoryInformationValidator();
@@ -108,6 +106,26 @@ namespace TerritoryHelperSolutionsWinForm.ChildForms
                 {
                     panelSideMenu.territoryHelperConfiguration.TerritoryNotesPath = openFileTerritorySpecialNotesInput.FileName;
                     MessageBox.Show($"{openFileTerritorySpecialNotesInput.SafeFileName} path \n\r saved successfully", "Territories File Path");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSelectMasterAddressFile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileMasterAddressDialogInput.Filter = "Excel Files|*.xlsx";
+                openFileMasterAddressDialogInput.FilterIndex = 1;
+                openFileMasterAddressDialogInput.InitialDirectory = "c:\\";
+                openFileMasterAddressDialogInput.Multiselect = false;
+                if (openFileMasterAddressDialogInput.ShowDialog() == DialogResult.OK)
+                {
+                    panelSideMenu.territoryHelperConfiguration.EditedTerritoryHelperMasterAddressForImportFilePath = openFileMasterAddressDialogInput.FileName;
+                    MessageBox.Show($"{openFileMasterAddressDialogInput.SafeFileName} path \n\r saved successfully", "Excel File Path");
                 }
             }
             catch (Exception ex)

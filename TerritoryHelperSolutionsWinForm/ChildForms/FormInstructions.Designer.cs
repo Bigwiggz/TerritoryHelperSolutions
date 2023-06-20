@@ -28,206 +28,227 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblInstructions = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label1 = new Label();
+            lblInstructions = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            label10 = new Label();
+            label11 = new Label();
+            label12 = new Label();
+            label13 = new Label();
+            label14 = new Label();
+            label15 = new Label();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 32);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Instructions";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(137, 32);
+            label1.TabIndex = 4;
+            label1.Text = "Instructions";
             // 
             // lblInstructions
             // 
-            this.lblInstructions.AutoSize = true;
-            this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblInstructions.ForeColor = System.Drawing.Color.Coral;
-            this.lblInstructions.Location = new System.Drawing.Point(12, 62);
-            this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(596, 15);
-            this.lblInstructions.TabIndex = 5;
-            this.lblInstructions.Text = "Welcome to Territory Helper Solutions.  Below is a list explaining how to use the" +
-    " scripts and what each one does.";
+            lblInstructions.AutoSize = true;
+            lblInstructions.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblInstructions.ForeColor = Color.Coral;
+            lblInstructions.Location = new Point(12, 62);
+            lblInstructions.Name = "lblInstructions";
+            lblInstructions.Size = new Size(596, 15);
+            lblInstructions.TabIndex = 5;
+            lblInstructions.Text = "Welcome to Territory Helper Solutions.  Below is a list explaining how to use the scripts and what each one does.";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 193);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(212, 32);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Script Descriptions";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(12, 193);
+            label2.Name = "label2";
+            label2.Size = new Size(212, 32);
+            label2.TabIndex = 6;
+            label2.Text = "Script Descriptions";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.Coral;
-            this.label3.Location = new System.Drawing.Point(12, 94);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(482, 15);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "1) Please setup the Configuration under the Configurations tab before running any" +
-    " scripts.";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.Coral;
+            label3.Location = new Point(12, 94);
+            label3.Name = "label3";
+            label3.Size = new Size(482, 15);
+            label3.TabIndex = 7;
+            label3.Text = "1) Please setup the Configuration under the Configurations tab before running any scripts.";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.Coral;
-            this.label4.Location = new System.Drawing.Point(12, 123);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(365, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "2) Once the Configuration is setup \"Lock\" the configuration settings";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = Color.Coral;
+            label4.Location = new Point(12, 123);
+            label4.Name = "label4";
+            label4.Size = new Size(365, 15);
+            label4.TabIndex = 8;
+            label4.Text = "2) Once the Configuration is setup \"Lock\" the configuration settings";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.Coral;
-            this.label5.Location = new System.Drawing.Point(12, 154);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(216, 15);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "3) Then run whatever script you need to";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = Color.Coral;
+            label5.Location = new Point(12, 154);
+            label5.Name = "label5";
+            label5.Size = new Size(216, 15);
+            label5.TabIndex = 9;
+            label5.Text = "3) Then run whatever script you need to";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.Coral;
-            this.label6.Location = new System.Drawing.Point(12, 246);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(220, 25);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Get Territory Information";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = Color.Coral;
+            label6.Location = new Point(12, 303);
+            label6.Name = "label6";
+            label6.Size = new Size(220, 25);
+            label6.TabIndex = 10;
+            label6.Text = "Get Territory Information";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.ForeColor = System.Drawing.Color.Coral;
-            this.label7.Location = new System.Drawing.Point(12, 314);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(217, 25);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Set Territory Information";
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label7.ForeColor = Color.Coral;
+            label7.Location = new Point(12, 371);
+            label7.Name = "label7";
+            label7.Size = new Size(217, 25);
+            label7.TabIndex = 11;
+            label7.Text = "Set Territory Information";
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.Coral;
-            this.label8.Location = new System.Drawing.Point(12, 283);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(378, 15);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "This script is designed to save all territory records to a master excel file.";
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.ForeColor = Color.Coral;
+            label8.Location = new Point(12, 340);
+            label8.Name = "label8";
+            label8.Size = new Size(378, 15);
+            label8.TabIndex = 12;
+            label8.Text = "This script is designed to save all territory records to a master excel file.";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.ForeColor = System.Drawing.Color.Coral;
-            this.label9.Location = new System.Drawing.Point(12, 354);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(505, 15);
-            this.label9.TabIndex = 13;
-            this.label9.Text = "This script is designed to upload all territory records from a master excel file " +
-    "to Territory Helper.";
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label9.ForeColor = Color.Coral;
+            label9.Location = new Point(12, 411);
+            label9.Name = "label9";
+            label9.Size = new Size(505, 15);
+            label9.TabIndex = 13;
+            label9.Text = "This script is designed to upload all territory records from a master excel file to Territory Helper.";
             // 
             // label10
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.ForeColor = System.Drawing.Color.Coral;
-            this.label10.Location = new System.Drawing.Point(12, 495);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(349, 15);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "This script is designed to update Census notes in Territory Helper.";
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label10.ForeColor = Color.Coral;
+            label10.Location = new Point(12, 552);
+            label10.Name = "label10";
+            label10.Size = new Size(349, 15);
+            label10.TabIndex = 17;
+            label10.Text = "This script is designed to update Census notes in Territory Helper.";
             // 
             // label11
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.ForeColor = System.Drawing.Color.Coral;
-            this.label11.Location = new System.Drawing.Point(12, 424);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(450, 15);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "This script is designed to search and filter A to Z database records for new addr" +
-    "esses.";
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label11.ForeColor = Color.Coral;
+            label11.Location = new Point(12, 481);
+            label11.Name = "label11";
+            label11.Size = new Size(450, 15);
+            label11.TabIndex = 16;
+            label11.Text = "This script is designed to search and filter A to Z database records for new addresses.";
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label12.ForeColor = System.Drawing.Color.Coral;
-            this.label12.Location = new System.Drawing.Point(12, 455);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(227, 25);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "Update Census Territories";
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label12.ForeColor = Color.Coral;
+            label12.Location = new Point(12, 512);
+            label12.Name = "label12";
+            label12.Size = new Size(227, 25);
+            label12.TabIndex = 15;
+            label12.Text = "Update Census Territories";
             // 
             // label13
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.ForeColor = System.Drawing.Color.Coral;
-            this.label13.Location = new System.Drawing.Point(12, 387);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(153, 25);
-            this.label13.TabIndex = 14;
-            this.label13.Text = "Search A to Z Db";
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label13.ForeColor = Color.Coral;
+            label13.Location = new Point(12, 444);
+            label13.Name = "label13";
+            label13.Size = new Size(153, 25);
+            label13.TabIndex = 14;
+            label13.Text = "Search A to Z Db";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.ForeColor = Color.Coral;
+            label14.Location = new Point(12, 276);
+            label14.Name = "label14";
+            label14.Size = new Size(346, 15);
+            label14.TabIndex = 19;
+            label14.Text = "This script is designed to check for common errors in addresses. ";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label15.ForeColor = Color.Coral;
+            label15.Location = new Point(12, 239);
+            label15.Name = "label15";
+            label15.Size = new Size(199, 25);
+            label15.TabIndex = 18;
+            label15.Text = "Address Error Scanner";
             // 
             // FormInstructions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
-            this.ClientSize = new System.Drawing.Size(668, 482);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblInstructions);
-            this.Controls.Add(this.label1);
-            this.Name = "FormInstructions";
-            this.Text = "FormInstructions";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            AutoScroll = true;
+            BackColor = Color.FromArgb(32, 30, 45);
+            ClientSize = new Size(668, 482);
+            Controls.Add(label14);
+            Controls.Add(label15);
+            Controls.Add(label10);
+            Controls.Add(label11);
+            Controls.Add(label12);
+            Controls.Add(label13);
+            Controls.Add(label9);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(lblInstructions);
+            Controls.Add(label1);
+            Name = "FormInstructions";
+            Text = "FormInstructions";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -245,5 +266,7 @@
         private Label label11;
         private Label label12;
         private Label label13;
+        private Label label14;
+        private Label label15;
     }
 }
